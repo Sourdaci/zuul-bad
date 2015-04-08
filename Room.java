@@ -16,9 +16,13 @@ public class Room
 {
     public String description;
     public Room northExit;
-    public Room southExit;
+    public Room neExit;
     public Room eastExit;
+    public Room seExit;
+    public Room southExit;
+    public Room swExit;
     public Room westExit;
+    public Room nwExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -39,16 +43,25 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
+    public void setExits(Room north, Room diagonalNE, Room east, Room diagonalSE, 
+                        Room south, Room diagonalSW, Room west, Room diagonalNW) 
     {
         if(north != null)
             northExit = north;
+        if(diagonalNE != null)
+            neExit = diagonalNE;
         if(east != null)
             eastExit = east;
+        if(diagonalSE != null)
+            seExit = diagonalSE;
         if(south != null)
             southExit = south;
+        if(diagonalSW != null)
+            swExit = diagonalSW;
         if(west != null)
             westExit = west;
+        if(diagonalNW != null)
+            nwExit = diagonalNW;
     }
 
     /**

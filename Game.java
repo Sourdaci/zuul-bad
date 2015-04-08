@@ -34,14 +34,15 @@ public class Game
      */
     private void createRooms()
     {
-        Room recibidor, pasillo, dormServicio, salaEstar, biblioteca, cocina, comedor, 
-            servEmpleados, pasilloTrasero, dormPadres, servPadres, dormGreg, servGreg;
+        Room recibidor, pasillo, dormServicio, salaEstar, barSecreto, biblioteca, cocina, comedor, 
+            servEmpleados, pasilloTrasero, dormPadres, servPadres, secretosCuero, dormGreg, servGreg;
       
         // create the rooms
         recibidor = new Room("Entrada de la Casa");
         pasillo = new Room("Pasillo Delantero");
         dormServicio = new Room("Habitaciones de los Empleados");
         salaEstar = new Room("Salon");
+        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...\nSalida por northwest");
         biblioteca = new Room("Biblioteca. Muchos libros");
         cocina = new Room("Cocina. La cena huele bien...");
         comedor = new Room("Comedor. Estan preparando la mesa para cenar");
@@ -49,23 +50,26 @@ public class Game
         pasilloTrasero = new Room("Pasillo Trasero");
         dormPadres = new Room("Dormitorio de los padres de Greg");
         servPadres = new Room("Servicio de los padres de Greg");
+        secretosCuero = new Room("Una habitacion negra con luces rojas\nHuele a sudor\nTodo es de cuero: ropa, mascaras, latigos, columpios....\nSalida por northwest");
         dormGreg = new Room("Dormitorio de Greg");
         servGreg = new Room("Servicio de Greg");
         
         // initialise room exits
-        recibidor.setExits(pasillo, null, null, null);
-        pasillo.setExits(comedor, salaEstar, recibidor, dormServicio);
-        dormServicio.setExits(cocina, pasillo, null, null);
-        salaEstar.setExits(biblioteca, null, null, pasillo);
-        biblioteca.setExits(null, null, salaEstar, null);
-        cocina.setExits(servEmpleados, comedor, dormServicio, null);
-        comedor.setExits(pasilloTrasero, null, pasillo, cocina);
-        servEmpleados.setExits(null, null, cocina, null);
-        pasilloTrasero.setExits(dormGreg, dormPadres, comedor, null);
-        dormPadres.setExits(null, null, servPadres, pasilloTrasero);
-        servPadres.setExits(dormPadres, null, null, null);
-        dormGreg.setExits(null, null, pasilloTrasero, servGreg);
-        servGreg.setExits(null, dormGreg, null, null);
+        recibidor.setExits(pasillo, null, null, null, null, null, null, null);
+        pasillo.setExits(comedor, null, salaEstar, null, recibidor, null, dormServicio, null);
+        dormServicio.setExits(cocina, null, pasillo, null, null, null, null, null);
+        salaEstar.setExits(biblioteca, null, null, barSecreto, null, null, pasillo, null);
+        barSecreto.setExits(null, null, null, null, null, null, null, salaEstar);
+        biblioteca.setExits(null, null, null, null, salaEstar, null, null, null);
+        cocina.setExits(servEmpleados, null, comedor, null, dormServicio, null, null, null);
+        comedor.setExits(pasilloTrasero, null, null, null, pasillo, null, cocina, null);
+        servEmpleados.setExits(null, null, null, null, cocina, null, null, null);
+        pasilloTrasero.setExits(dormGreg, null, dormPadres, null, comedor, null, null, null);
+        dormPadres.setExits(null, null, null, null, servPadres, null, pasilloTrasero, null);
+        servPadres.setExits(dormPadres, null, null, secretosCuero, null, null, null, null);
+        secretosCuero.setExits(null, null, null, null, null, null, null, servPadres);
+        dormGreg.setExits(null, null, null, null, pasilloTrasero, null, servGreg, null);
+        servGreg.setExits(null, null, dormGreg, null, null, null, null, null);
 
         currentRoom = recibidor;  // start game outside
     }
@@ -164,14 +168,26 @@ public class Game
         if(direction.equals("north")) {
             nextRoom = currentRoom.northExit;
         }
+        if(direction.equals("northeast")) {
+            nextRoom = currentRoom.neExit;
+        }
         if(direction.equals("east")) {
             nextRoom = currentRoom.eastExit;
+        }
+        if(direction.equals("southeast")) {
+            nextRoom = currentRoom.seExit;
         }
         if(direction.equals("south")) {
             nextRoom = currentRoom.southExit;
         }
+        if(direction.equals("southwest")) {
+            nextRoom = currentRoom.swExit;
+        }
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
+        }
+        if(direction.equals("northwest")) {
+            nextRoom = currentRoom.nwExit;
         }
 
         if (nextRoom == null) {
