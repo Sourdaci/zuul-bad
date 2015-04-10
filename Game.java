@@ -164,8 +164,7 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
-        nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("No atraviesas paredes ni abres ventanas, listo...");
