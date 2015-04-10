@@ -35,7 +35,7 @@ public class Game
     private void createRooms()
     {
         Room recibidor, pasillo, dormServicio, salaEstar, barSecreto, biblioteca, cocina, comedor, 
-            servEmpleados, pasilloTrasero, dormPadres, servPadres, secretosCuero, dormGreg, servGreg;
+            servEmpleados, pasilloTrasero, dormPadres, servPadres, dormGreg, servGreg;
       
         // create the rooms
         recibidor = new Room("Entrada de la Casa");
@@ -50,26 +50,38 @@ public class Game
         pasilloTrasero = new Room("Pasillo Trasero");
         dormPadres = new Room("Dormitorio de los padres de Greg");
         servPadres = new Room("Servicio de los padres de Greg");
-        secretosCuero = new Room("Una habitacion negra con luces rojas\nHuele a sudor\nTodo es de cuero: ropa, mascaras, latigos, columpios...");
         dormGreg = new Room("Dormitorio de Greg");
         servGreg = new Room("Servicio de Greg");
         
         // initialise room exits
-        recibidor.setExits(pasillo, null, null, null, null, null, null, null);
-        pasillo.setExits(comedor, null, salaEstar, null, recibidor, null, dormServicio, null);
-        dormServicio.setExits(cocina, null, pasillo, null, null, null, null, null);
-        salaEstar.setExits(biblioteca, null, null, barSecreto, null, null, pasillo, null);
-        barSecreto.setExits(null, null, null, null, null, null, null, salaEstar);
-        biblioteca.setExits(null, null, null, null, salaEstar, null, null, null);
-        cocina.setExits(servEmpleados, null, comedor, null, dormServicio, null, null, null);
-        comedor.setExits(pasilloTrasero, null, null, null, pasillo, null, cocina, null);
-        servEmpleados.setExits(null, null, null, null, cocina, null, null, null);
-        pasilloTrasero.setExits(dormGreg, null, dormPadres, null, comedor, null, null, null);
-        dormPadres.setExits(null, null, null, null, servPadres, null, pasilloTrasero, null);
-        servPadres.setExits(dormPadres, null, null, secretosCuero, null, null, null, null);
-        secretosCuero.setExits(null, null, null, null, null, null, null, servPadres);
-        dormGreg.setExits(null, null, null, null, pasilloTrasero, null, servGreg, null);
-        servGreg.setExits(null, null, dormGreg, null, null, null, null, null);
+        recibidor.setExit("north", pasillo);
+        pasillo.setExit("north", comedor);
+        pasillo.setExit("east", salaEstar);
+        pasillo.setExit("south", recibidor);
+        pasillo.setExit("west", dormServicio);
+        dormServicio.setExit("north", cocina);
+        dormServicio.setExit("east", pasillo);
+        salaEstar.setExit("north", biblioteca);
+        salaEstar.setExit("southeast", barSecreto);
+        salaEstar.setExit("west", pasillo);
+        barSecreto.setExit("northwest", salaEstar);
+        biblioteca.setExit("south", salaEstar);
+        cocina.setExit("north", servEmpleados);
+        cocina.setExit("east", comedor);
+        cocina.setExit("south", dormServicio);
+        comedor.setExit("north", pasilloTrasero);
+        comedor.setExit("south", pasillo);
+        comedor.setExit("west", cocina);
+        servEmpleados.setExit("south", cocina);
+        pasilloTrasero.setExit("north", dormGreg);
+        pasilloTrasero.setExit("east", dormPadres);
+        pasilloTrasero.setExit("south", comedor);
+        dormPadres.setExit("south", servPadres);
+        dormPadres.setExit("west", pasilloTrasero);
+        servPadres.setExit("north", dormPadres);
+        dormGreg.setExit("south", pasilloTrasero);
+        dormGreg.setExit("west", servGreg);
+        servGreg.setExit("east", dormGreg);
 
         currentRoom = recibidor;  // start game outside
     }
