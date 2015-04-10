@@ -207,8 +207,7 @@ public class Game
      * Muestra por pantalla la sala actual del mapa y sus direcciones disponibles
      */
     private void printLocationInfo(){
-        System.out.println("Estas en: " + currentRoom.getDescription());
-        System.out.println(currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
 }
