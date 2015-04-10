@@ -14,15 +14,15 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room neExit;
-    public Room eastExit;
-    public Room seExit;
-    public Room southExit;
-    public Room swExit;
-    public Room westExit;
-    public Room nwExit;
+    private String description;
+    private Room northExit;
+    private Room neExit;
+    private Room eastExit;
+    private Room seExit;
+    private Room southExit;
+    private Room swExit;
+    private Room westExit;
+    private Room nwExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -63,7 +63,43 @@ public class Room
         if(diagonalNW != null)
             nwExit = diagonalNW;
     }
-
+    
+    /**
+     * Devuelve la habitacion a la que se desea ir
+     * 
+     * @return Room a la que desplazarse, o null
+     */
+    public Room getExit(String direccion){
+        Room siguiente = null;
+        switch (direccion){
+            case "north":
+                siguiente = northExit;
+                break;
+            case "northeast":
+                siguiente = neExit;
+                break;
+            case "east":
+                siguiente = eastExit;
+                break;
+            case "southeast":
+                siguiente = seExit;
+                break;
+            case "south":
+                siguiente = southExit;
+                break;
+            case "southwest":
+                siguiente = swExit;
+                break;
+            case "west":
+                siguiente = westExit;
+                break;
+            case "northwest":
+                siguiente = nwExit;
+                break;
+        }
+        return siguiente;
+    }
+    
     /**
      * @return The description of the room.
      */
