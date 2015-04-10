@@ -42,7 +42,7 @@ public class Game
         pasillo = new Room("Pasillo Delantero");
         dormServicio = new Room("Habitaciones de los Empleados");
         salaEstar = new Room("Salon");
-        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...\nSalida por northwest");
+        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...");
         biblioteca = new Room("Biblioteca. Muchos libros");
         cocina = new Room("Cocina. La cena huele bien...");
         comedor = new Room("Comedor. Estan preparando la mesa para cenar");
@@ -50,7 +50,7 @@ public class Game
         pasilloTrasero = new Room("Pasillo Trasero");
         dormPadres = new Room("Dormitorio de los padres de Greg");
         servPadres = new Room("Servicio de los padres de Greg");
-        secretosCuero = new Room("Una habitacion negra con luces rojas\nHuele a sudor\nTodo es de cuero: ropa, mascaras, latigos, columpios....\nSalida por northwest");
+        secretosCuero = new Room("Una habitacion negra con luces rojas\nHuele a sudor\nTodo es de cuero: ropa, mascaras, latigos, columpios...");
         dormGreg = new Room("Dormitorio de Greg");
         servGreg = new Room("Servicio de Greg");
         
@@ -196,19 +196,7 @@ public class Game
      */
     private void printLocationInfo(){
         System.out.println("Estas en: " + currentRoom.getDescription());
-        System.out.print("Direcciones disponibles: ");
-        if(currentRoom.getExit("north") != null) {
-            System.out.print("north ");
-        }
-        if(currentRoom.getExit("east") != null) {
-            System.out.print("east ");
-        }
-        if(currentRoom.getExit("south") != null) {
-            System.out.print("south ");
-        }
-        if(currentRoom.getExit("west") != null) {
-            System.out.print("west ");
-        }
+        System.out.println(currentRoom.getExitString());
         System.out.println();
     }
 }

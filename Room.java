@@ -101,6 +101,35 @@ public class Room
     }
     
     /**
+     * Return a description of the room's exits.
+     * For example: "Exits: north east west"
+     *
+     * @ return A description of the available exits.
+     */
+    public String getExitString(){
+        String salidas = "Direcciones disponibles:";
+        
+        if(northExit != null)
+            salidas += " north";
+        if(neExit != null)
+            salidas += " northeast";
+        if(eastExit != null)
+            salidas += " east";
+        if(seExit != null)
+            salidas += " southeast";
+        if(southExit != null)
+            salidas += " south";
+        if(swExit != null)
+            salidas += " southwest";
+        if(westExit != null)
+            salidas += " west";
+        if(nwExit != null)
+            salidas += " northwest";
+        
+        return salidas;
+    }
+    
+    /**
      * @return The description of the room.
      */
     public String getDescription()
