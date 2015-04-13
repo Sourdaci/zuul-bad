@@ -44,7 +44,7 @@ public class Game
         salaEstar = new Room("Salon");
         barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...");
         biblioteca = new Room("Biblioteca. Muchos libros");
-        cocina = new Room("Cocina. La cena huele bien...");
+        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE");
         comedor = new Room("Comedor. Estan preparando la mesa para cenar");
         servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho");
         pasilloTrasero = new Room("Pasillo Trasero");
@@ -134,14 +134,17 @@ public class Game
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
             printHelp();
-        }
-        else if (commandWord.equals("go")) {
+        }else if (commandWord.equals("go")) {
             goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
+        }else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }else if (commandWord.equals("look")){
             printLocationInfo();
+        }else if (commandWord.equals("eat")){
+            if(currentRoom.getDescription().startsWith("Cocina.")){
+                System.out.print("ENSERIO: ");
+            }
+            System.out.println("Con las necesidades que tienes, comer puede esperar");
         }
 
         return wantToQuit;
