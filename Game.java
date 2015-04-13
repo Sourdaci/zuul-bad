@@ -159,8 +159,7 @@ public class Game
         System.out.println("Necesitas encontrar un servicio en condiciones");
         System.out.println("en casa de tu colega Greg urgentemente.");
         System.out.println();
-        System.out.println("Tus acciones disponibles son:");
-        System.out.println("   go quit help");
+        parser.getCommandObject().showAll();
     }
 
     /** 

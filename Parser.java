@@ -62,4 +62,13 @@ public class Parser
             return new Command(null, word2); 
         }
     }
+    
+    /**
+     * Devuelve el objeto CommandWords que usa esta clase para trabajar
+     * 
+     * @return Objeto de clase CommandWords
+     */
+    public CommandWords getCommandObject(){
+        return commands;
+    }
 }
