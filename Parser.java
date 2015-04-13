@@ -64,11 +64,10 @@ public class Parser
     }
     
     /**
-     * Devuelve el objeto CommandWords que usa esta clase para trabajar
+     * Pide al objeto CommandWords con el que trabaja que muestre los comandos disponibles
      * 
-     * @return Objeto de clase CommandWords
      */
-    public CommandWords getCommandObject(){
-        return commands;
+    public void getValidCommandWords(){
+        commands.showAll();
     }
 }

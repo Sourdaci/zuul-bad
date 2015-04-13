@@ -159,7 +159,7 @@ public class Game
         System.out.println("Necesitas encontrar un servicio en condiciones");
         System.out.println("en casa de tu colega Greg urgentemente.");
         System.out.println();
-        parser.getCommandObject().showAll();
+        parser.getValidCommandWords();
     }
 
     /** 
