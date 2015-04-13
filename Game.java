@@ -38,20 +38,20 @@ public class Game
             servEmpleados, pasilloTrasero, dormPadres, servPadres, dormGreg, servGreg;
       
         // create the rooms
-        recibidor = new Room("Entrada de la Casa");
-        pasillo = new Room("Pasillo Delantero");
-        dormServicio = new Room("Habitaciones de los Empleados");
-        salaEstar = new Room("Salon");
-        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...");
-        biblioteca = new Room("Biblioteca. Muchos libros");
-        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE");
-        comedor = new Room("Comedor. Estan preparando la mesa para cenar");
-        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho");
-        pasilloTrasero = new Room("Pasillo Trasero");
-        dormPadres = new Room("Dormitorio de los padres de Greg");
-        servPadres = new Room("Servicio de los padres de Greg");
-        dormGreg = new Room("Dormitorio de Greg");
-        servGreg = new Room("Servicio de Greg");
+        recibidor = new Room("Entrada de la Casa", null, 0);
+        pasillo = new Room("Pasillo Delantero", null, 0);
+        dormServicio = new Room("Habitaciones de los Empleados", null, 0);
+        salaEstar = new Room("Salon", null, 0);
+        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...", null, 0);
+        biblioteca = new Room("Biblioteca. Muchos libros", "Kleenex", 0.006F);
+        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE", null, 0);
+        comedor = new Room("Comedor. Estan preparando la mesa para cenar", null, 0);
+        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho", "Papel higienico de una capa", 0.02F);
+        pasilloTrasero = new Room("Pasillo Trasero", null, 0);
+        dormPadres = new Room("Dormitorio de los padres de Greg", null, 0);
+        servPadres = new Room("Servicio de los padres de Greg", "Papel higienico triple capa", 0.04F);
+        dormGreg = new Room("Dormitorio de Greg", null, 0);
+        servGreg = new Room("Servicio de Greg", null, 0);
         
         // initialise room exits
         recibidor.setExit("north", pasillo);
