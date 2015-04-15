@@ -18,8 +18,8 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> salidasDisponibles;
-    private String descripcionObjeto;
-    private float pesoObjeto;
+    private HashMap<Integer, CollectableItem> objetos;
+    private int indiceObjeto;
 
     /**
      * Create a room described "description". Initially, it has
@@ -27,12 +27,12 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, String descObj, float pesoObj) 
+    public Room(String description) 
     {
         this.description = description;
         salidasDisponibles = new HashMap<String, Room>();
-        descripcionObjeto = descObj;
-        pesoObjeto = pesoObj;
+        objetos = new HashMap<Integer, CollectableItem>();
+        indiceObjeto = 1;
     }
     
     /**
@@ -51,6 +51,11 @@ public class Room
      */
     public Room getExit(String direccion){
         return salidasDisponibles.get(direccion);
+    }
+    
+    public void addItem(String descripcion, float peso){
+        objetos.put(indiceObjeto, new CollectableItem(descripcion, peso));
+        indiceObjeto++;
     }
     
     /**
@@ -84,8 +89,11 @@ public class Room
      */
     public String getLongDescription(){
         String descripcion = ("Estas en: " + description + "\n");
-        if (descripcionObjeto != null){
-            descripcion += String.format("Objeto disponible: %s, peso %f Kg\n", descripcionObjeto, pesoObjeto);
+        if (objetos.size() != 0){
+            Set<Integer> index = objetos.keySet();
+            for(int indice : index){
+                descripcion += indice + objetos.get(indice).toString() + "\n";
+            }
         }else{
             descripcion += "No ves objetos aprovechables para ti\n";
         }
