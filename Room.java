@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 /**
@@ -18,8 +19,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> salidasDisponibles;
-    private HashMap<Integer, CollectableItem> objetos;
-    private int indiceObjeto;
+    private ArrayList<CollectableItem> objetos;
 
     /**
      * Create a room described "description". Initially, it has
@@ -31,8 +31,7 @@ public class Room
     {
         this.description = description;
         salidasDisponibles = new HashMap<String, Room>();
-        objetos = new HashMap<Integer, CollectableItem>();
-        indiceObjeto = 1;
+        objetos = new ArrayList<CollectableItem>();
     }
     
     /**
@@ -54,8 +53,7 @@ public class Room
     }
     
     public void addItem(String descripcion, float peso){
-        objetos.put(indiceObjeto, new CollectableItem(descripcion, peso));
-        indiceObjeto++;
+        objetos.add(new CollectableItem(descripcion, peso));
     }
     
     /**
@@ -90,9 +88,8 @@ public class Room
     public String getLongDescription(){
         String descripcion = ("Estas en: " + description + "\n");
         if (objetos.size() != 0){
-            Set<Integer> index = objetos.keySet();
-            for(int indice : index){
-                descripcion += indice + objetos.get(indice).toString() + "\n";
+            for(int i=0;i < objetos.size(); i++){
+                descripcion += (i+1) + objetos.get(i).toString() + "\n";
             }
         }else{
             descripcion += "No ves objetos aprovechables para ti\n";
