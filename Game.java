@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room lastRoom;
         
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        lastRoom = null;
     }
 
     /**
@@ -151,6 +153,14 @@ public class Game
                 System.out.print("ENSERIO: ");
             }
             System.out.println("Con las necesidades que tienes, comer puede esperar");
+        }else if (commandWord.equals("back")){
+            if(lastRoom != null){
+                currentRoom = lastRoom;
+                lastRoom = null;
+            }else{
+                System.out.println("No puedes volver atras...");
+            }
+            printLocationInfo();
         }
 
         return wantToQuit;
@@ -192,6 +202,7 @@ public class Game
             System.out.println("No atraviesas paredes ni abres ventanas, listo...");
         }
         else {
+            lastRoom = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
         }
