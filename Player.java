@@ -14,18 +14,41 @@ public class Player
     /**
      * Constructor for objects of class Player
      */
-    public Player(){
+    public Player(Room startRoom){
+        currentRoom = startRoom;
         lastRoom = new Stack<Room>();
     }
 
     /**
-     * Indica al jugador la habitacion en la que se encuentra
+     * Mueve al jugador a una nueva habitacion
      * 
      * @param newRoom Habitacion a la que se mueve el jugador
      */
-    public void setCurrentRoom(Room newRoom)
-    {
-        currentRoom = newRoom;
+    public void goRoom(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Si no indicas donde, no te vas a mover");
+            return;
+        }
+
+        String direction = command.getSecondWord();
+        // Try to leave current room.
+        Room nextRoom = currentRoom.getExit(direction);
+        
+        if (nextRoom == null) {
+            System.out.println("No atraviesas paredes ni abres ventanas, listo...");
+        }else{
+            lastRoom.push(currentRoom);
+            currentRoom = nextRoom;
+        }
+    }
+    
+    public void goBack(){
+        if(!lastRoom.empty()){
+            currentRoom = lastRoom.pop();
+        }else{
+            System.out.println("No puedes volver atras...");
+        }
     }
     
     /**

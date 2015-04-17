@@ -1,4 +1,3 @@
-import java.util.Stack;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,8 +18,7 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room> lastRoom;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
@@ -29,7 +27,6 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        lastRoom = new Stack<Room>();
     }
 
     /**
@@ -92,7 +89,8 @@ public class Game
         dormGreg.setExit("west", servGreg);
         servGreg.setExit("east", dormGreg);
 
-        currentRoom = recibidor;  // start game outside
+        // Create Player
+        Player player = new Player(recibidor);
     }
 
     /**
@@ -155,18 +153,13 @@ public class Game
                 printLocationInfo();
                 break;
             case "eat":
-                if(currentRoom.getDescription().startsWith("Cocina.")){
+                if(player.getCurrentRoom().getDescription().startsWith("Cocina.")){
                     System.out.print("ENSERIO: ");
                 }
                 System.out.println("Con las necesidades que tienes, comer puede esperar");
                 printLocationInfo();
                 break;
             case "back":
-                if(!lastRoom.empty()){
-                    currentRoom = lastRoom.pop();
-                }else{
-                    System.out.println("No puedes volver atras...");
-                }
                 printLocationInfo();
                 break;
             }
@@ -195,25 +188,7 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Si no indicas donde, no te vas a mover");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("No atraviesas paredes ni abres ventanas, listo...");
-        }
-        else {
-            lastRoom.push(currentRoom);
-            currentRoom = nextRoom;
-            printLocationInfo();
-        }
+        printLocationInfo();
     }
 
     /** 
@@ -236,7 +211,7 @@ public class Game
      * Muestra por pantalla la sala actual del mapa y sus direcciones disponibles
      */
     private void printLocationInfo(){
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
         System.out.println();
     }
 }
