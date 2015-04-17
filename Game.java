@@ -28,7 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        player = new Player(startRoom);
+        player = new Player(startRoom, 0.15F);
     }
 
     /**
@@ -56,10 +56,12 @@ public class Game
         servGreg = new Room("Servicio de Greg");
         
         // add objects to rooms
-        biblioteca.addItem("Kleenex", 0.006F);
-        biblioteca.addItem("Caza y Pesca 1664", 0.095F);
-        servEmpleados.addItem("Papel higienico de una capa", 0.02F);
-        servPadres.addItem("Papel higienico triple capa", 0.04F);
+        barSecreto.addItem("Tamiz-Molecular", 0.01F, false);
+        biblioteca.addItem("Kleenex", 0.006F, true);
+        biblioteca.addItem("CazaPesca-1664", 0.095F, true);
+        servEmpleados.addItem("Papel-higienico-barato", 0.02F, true);
+        pasilloTrasero.addItem("Estatua-Marmol", 402.79F, true);
+        servPadres.addItem("Papel-higienico-Deluxe", 0.04F, true);
         
         // initialise room exits
         recibidor.setExit("north", pasillo);
@@ -162,6 +164,12 @@ public class Game
                 player.goBack();
                 player.lookRoom();
                 break;
+            case "items":
+                player.listItems();
+                break;
+            case "take":
+                takeItem(command);
+                break;
             }
 
         return wantToQuit;
@@ -196,6 +204,16 @@ public class Game
         }
         player.goRoom(direction);
         player.lookRoom();
+    }
+    
+    private void takeItem(Command command){
+        String item;
+        if(!command.hasSecondWord()) {
+            item = null;
+        }else{
+            item = command.getSecondWord();
+        }
+        player.takeItem(item);
     }
 
     /** 

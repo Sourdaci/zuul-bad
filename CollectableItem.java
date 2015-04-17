@@ -35,6 +35,13 @@ public class CollectableItem
     }
     
     /**
+     * Devuelve la descripcion del objeto
+     */
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
+    /**
      * Indica si el objeto puede recogerse
      * 
      * @return true si se puede, false si NO se puede

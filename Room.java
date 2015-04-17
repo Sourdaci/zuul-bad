@@ -52,8 +52,29 @@ public class Room
         return salidasDisponibles.get(direccion);
     }
     
-    public void addItem(String descripcion, float peso){
-        objetos.add(new CollectableItem(descripcion, peso));
+    /**
+     * Coloca objetos en la habitacion
+     * 
+     * @param descripcion Texto del objeto
+     * @param peso Peso del objeto
+     * @param collect Si el objeto puede cogerse o no
+     */
+    public void addItem(String descripcion, float peso, boolean collect){
+        objetos.add(new CollectableItem(descripcion, peso, collect));
+    }
+    
+    public CollectableItem takeItem(String item){
+        CollectableItem obj = null;
+        for (int i=0; i < objetos.size() && obj == null; i++){
+            if(item.equals(objetos.get(i).getDescripcion())){
+                obj = objetos.get(i);
+            }
+        }
+        return obj;
+    }
+    
+    public void deleteItem(CollectableItem item){
+        objetos.remove(item);
     }
     
     /**
