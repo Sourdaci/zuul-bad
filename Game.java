@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Player player;
+    private Room startRoom;
         
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        player = new Player(startRoom);
     }
 
     /**
@@ -88,9 +90,9 @@ public class Game
         dormGreg.setExit("south", pasilloTrasero);
         dormGreg.setExit("west", servGreg);
         servGreg.setExit("east", dormGreg);
-
-        // Create Player
-        player = new Player(recibidor);
+        
+        // Set initial room
+        startRoom = recibidor;
     }
 
     /**
@@ -121,7 +123,7 @@ public class Game
         System.out.println("No te ha dicho donde esta, solo que no entres en otro servicio de la casa");
         System.out.println("Escribe 'help' si andas perdido");
         System.out.println();
-        printLocationInfo();
+        player.lookRoom();
     }
 
     /**
@@ -150,15 +152,15 @@ public class Game
                 wantToQuit = quit(command);
                 break;
             case "look":
-                printLocationInfo();
+                player.lookRoom();
                 break;
             case "eat":
                 player.eat();
-                printLocationInfo();
+                player.lookRoom();
                 break;
             case "back":
                 player.goBack();
-                printLocationInfo();
+                player.lookRoom();
                 break;
             }
 
@@ -193,7 +195,7 @@ public class Game
             direction = command.getSecondWord();
         }
         player.goRoom(direction);
-        printLocationInfo();
+        player.lookRoom();
     }
 
     /** 
@@ -206,16 +208,8 @@ public class Game
         if(command.hasSecondWord()) {
             System.out.println("No te rindas, aun puedes llegar...");
             return false;
-        }
-        else {
+        }else{
             return true;  // signal that we want to quit
         }
-    }
-    
-    /**
-     * Muestra por pantalla la sala actual del mapa y sus direcciones disponibles
-     */
-    private void printLocationInfo(){
-        player.lookRoom();
     }
 }

@@ -18,7 +18,7 @@ public class Player
         currentRoom = startRoom;
         lastRoom = new Stack<Room>();
     }
-
+    
     /**
      * Mueve al jugador a una nueva habitacion
      * 
