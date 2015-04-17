@@ -170,6 +170,9 @@ public class Game
             case "take":
                 takeItem(command);
                 break;
+            case "drop":
+                dropItem(command);
+                break;
             }
 
         return wantToQuit;
@@ -214,6 +217,16 @@ public class Game
             item = command.getSecondWord();
         }
         player.takeItem(item);
+    }
+    
+    private void dropItem(Command command){
+        String item;
+        if(!command.hasSecondWord()) {
+            item = null;
+        }else{
+            item = command.getSecondWord();
+        }
+        player.dropItem(item);
     }
 
     /** 

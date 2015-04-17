@@ -116,6 +116,26 @@ public class Player
         }
     }
     
+    public void dropItem(String item){
+        if (item != null){
+            CollectableItem obj = null;
+            for (int i=0; i < objetos.size() && obj == null; i++){
+                if(item.equals(objetos.get(i).getDescripcion())){
+                    obj = objetos.get(i);
+                }
+            }
+            if(obj == null){
+                System.out.println("Intentas dejar algo que no tienes. Simplemente brillante...");
+            }else{
+                System.out.println("Dejas en la habitacion " + obj.toString());
+                currentRoom.addItemToRoom(obj);
+                objetos.remove(obj);
+            }
+        }else{
+            System.out.println("Soltar... ¿que? ¿Que dejas?");
+        }
+    }
+    
     /**
      * Calcula el peso de los objetos que lleva el jugador en el inventario
      */

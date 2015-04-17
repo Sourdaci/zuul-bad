@@ -77,6 +77,10 @@ public class Room
         objetos.remove(item);
     }
     
+    public void addItemToRoom(CollectableItem item){
+        objetos.add(item);
+    }
+    
     /**
      * Return a description of the room's exits.
      * For example: "Exits: north east west"
