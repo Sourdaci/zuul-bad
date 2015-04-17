@@ -43,20 +43,31 @@ public class Player
         }
     }
     
+    /**
+     * Indica al jugador que mire en la habitacion actual
+     */
+    public void lookRoom(){
+        System.out.println(currentRoom.getLongDescription() + "\n");
+    }
+    
+    /**
+     * Indica al jugador que coma algo
+     */
+    public void eat(){
+        if(currentRoom.getDescription().startsWith("Cocina.")){
+            System.out.print("ENSERIO: ");
+        }
+        System.out.println("Con las necesidades que tienes, comer puede esperar");
+    }
+    
+    /**
+     * Indica al jugador que vuelva a la habitacion anterior si puede
+     */
     public void goBack(){
         if(!lastRoom.empty()){
             currentRoom = lastRoom.pop();
         }else{
             System.out.println("No puedes volver atras...");
         }
-    }
-    
-    /**
-     * Indica de en que habitacion se encuentra el jugador
-     * 
-     * @return Habitacion en la que esta el jugador
-     */
-    public Room getCurrentRoom(){
-        return currentRoom;
     }
 }

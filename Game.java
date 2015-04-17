@@ -90,7 +90,7 @@ public class Game
         servGreg.setExit("east", dormGreg);
 
         // Create Player
-        Player player = new Player(recibidor);
+        player = new Player(recibidor);
     }
 
     /**
@@ -153,13 +153,11 @@ public class Game
                 printLocationInfo();
                 break;
             case "eat":
-                if(player.getCurrentRoom().getDescription().startsWith("Cocina.")){
-                    System.out.print("ENSERIO: ");
-                }
-                System.out.println("Con las necesidades que tienes, comer puede esperar");
+                player.eat();
                 printLocationInfo();
                 break;
             case "back":
+                player.goBack();
                 printLocationInfo();
                 break;
             }
@@ -188,6 +186,7 @@ public class Game
      */
     private void goRoom(Command command) 
     {
+        player.goRoom(command);
         printLocationInfo();
     }
 
@@ -211,7 +210,6 @@ public class Game
      * Muestra por pantalla la sala actual del mapa y sus direcciones disponibles
      */
     private void printLocationInfo(){
-        System.out.println(player.getCurrentRoom().getLongDescription());
-        System.out.println();
+        player.lookRoom();
     }
 }
