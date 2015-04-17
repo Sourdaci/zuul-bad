@@ -113,8 +113,8 @@ public class Room
     public String getLongDescription(){
         String descripcion = ("Estas en: " + description + "\n");
         if (objetos.size() != 0){
-            for(int i=0;i < objetos.size(); i++){
-                descripcion += (i+1) + objetos.get(i).toString() + "\n";
+            for(CollectableItem item : objetos){
+                descripcion += item.toString() + "\n";
             }
         }else{
             descripcion += "No ves objetos aprovechables para ti\n";
