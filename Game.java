@@ -186,7 +186,13 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        player.goRoom(command);
+        String direction;
+        if(!command.hasSecondWord()) {
+            direction = null;
+        }else{
+            direction = command.getSecondWord();
+        }
+        player.goRoom(direction);
         printLocationInfo();
     }
 

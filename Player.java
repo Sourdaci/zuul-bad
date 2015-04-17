@@ -22,24 +22,22 @@ public class Player
     /**
      * Mueve al jugador a una nueva habitacion
      * 
-     * @param newRoom Habitacion a la que se mueve el jugador
+     * @param direction Hacia que puerta/direccion se mueve el jugador
      */
-    public void goRoom(Command command){
-        if(!command.hasSecondWord()) {
+    public void goRoom(String direction){
+        if(direction == null){
             // if there is no second word, we don't know where to go...
             System.out.println("Si no indicas donde, no te vas a mover");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-        
-        if (nextRoom == null) {
-            System.out.println("No atraviesas paredes ni abres ventanas, listo...");
         }else{
-            lastRoom.push(currentRoom);
-            currentRoom = nextRoom;
+            // Try to leave current room.
+            Room nextRoom = currentRoom.getExit(direction);
+            
+            if (nextRoom == null) {
+                System.out.println("No atraviesas paredes ni abres ventanas, listo...");
+            }else{
+                lastRoom.push(currentRoom);
+                currentRoom = nextRoom;
+            }
         }
     }
     
