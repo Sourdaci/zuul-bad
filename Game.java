@@ -141,27 +141,35 @@ public class Game
         }
 
         String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
-            printHelp();
-        }else if (commandWord.equals("go")) {
-            goRoom(command);
-        }else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
-        }else if (commandWord.equals("look")){
-            printLocationInfo();
-        }else if (commandWord.equals("eat")){
-            if(currentRoom.getDescription().startsWith("Cocina.")){
-                System.out.print("ENSERIO: ");
+        switch (commandWord){
+            case "help":
+                printHelp();
+                break;
+            case "go":
+                goRoom(command);
+                break;
+            case "quit":
+                wantToQuit = quit(command);
+                break;
+            case "look":
+                printLocationInfo();
+                break;
+            case "eat":
+                if(currentRoom.getDescription().startsWith("Cocina.")){
+                    System.out.print("ENSERIO: ");
+                }
+                System.out.println("Con las necesidades que tienes, comer puede esperar");
+                printLocationInfo();
+                break;
+            case "back":
+                if(!lastRoom.empty()){
+                    currentRoom = lastRoom.pop();
+                }else{
+                    System.out.println("No puedes volver atras...");
+                }
+                printLocationInfo();
+                break;
             }
-            System.out.println("Con las necesidades que tienes, comer puede esperar");
-        }else if (commandWord.equals("back")){
-            if(!lastRoom.empty()){
-                currentRoom = lastRoom.pop();
-            }else{
-                System.out.println("No puedes volver atras...");
-            }
-            printLocationInfo();
-        }
 
         return wantToQuit;
     }
