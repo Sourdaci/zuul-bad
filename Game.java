@@ -192,6 +192,22 @@ public class Game
         System.out.println();
         parser.getValidCommandWords();
     }
+
+    /**
+     * Cuando se procesa un comando en un metodo de jugador, devuelve la segunda palabra si existe
+     * 
+     * @param command Los comandos introducidos por el jugador
+     * @return Segundo comando del jugador, null si NO hay segundo comando
+     */
+    private String secondWord(Command command){
+        String orden;
+        if(!command.hasSecondWord()) {
+            orden = null;
+        }else{
+            orden = command.getSecondWord();
+        }
+        return orden;
+    }
     
     /** 
      * Try to go in one direction. If there is an exit, enter
@@ -201,13 +217,7 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        String direction;
-        if(!command.hasSecondWord()) {
-            direction = null;
-        }else{
-            direction = command.getSecondWord();
-        }
-        player.goRoom(direction);
+        player.goRoom(secondWord(command));
         player.lookRoom();
     }
     
@@ -218,13 +228,7 @@ public class Game
      * @param command Los comandos introducidos, el primero es 'take'
      */
     private void takeItem(Command command){
-        String item;
-        if(!command.hasSecondWord()) {
-            item = null;
-        }else{
-            item = command.getSecondWord();
-        }
-        player.takeItem(item);
+        player.takeItem(secondWord(command));
     }
     
     /**
@@ -234,13 +238,7 @@ public class Game
      * @param command Los comandos introducidos, el primero es 'drop'
      */
     private void dropItem(Command command){
-        String item;
-        if(!command.hasSecondWord()) {
-            item = null;
-        }else{
-            item = command.getSecondWord();
-        }
-        player.dropItem(item);
+        player.dropItem(secondWord(command));
     }
 
     /** 
