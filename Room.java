@@ -63,6 +63,12 @@ public class Room
         objetos.add(new CollectableItem(descripcion, peso, collect));
     }
     
+    /**
+     * Busca en la habitacion un objeto y lo entrega al jugador
+     * 
+     * @param item Nombre del objeto que quiere coger el jugador
+     * @return El objeto si existe, null si NO existe
+     */
     public CollectableItem takeItem(String item){
         CollectableItem obj = null;
         for (int i=0; i < objetos.size() && obj == null; i++){
@@ -73,10 +79,20 @@ public class Room
         return obj;
     }
     
+    /**
+     * Elimina de la habitacion el objeto que le indique el jugador
+     * 
+     * @param item El objeto CollectableItem que debe borrar de la habitacion
+     */
     public void deleteItem(CollectableItem item){
         objetos.remove(item);
     }
     
+    /**
+     * Deja en la habitacion el objeto que le indique el jugador
+     * 
+     * @param item El objeto CollectableItem que se deja en la habitacion
+     */
     public void addItemToRoom(CollectableItem item){
         objetos.add(item);
     }

@@ -192,10 +192,12 @@ public class Game
         System.out.println();
         parser.getValidCommandWords();
     }
-
+    
     /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
+     * 
+     * @param command Los comandos introducidos, el primero es 'go'
      */
     private void goRoom(Command command) 
     {
@@ -209,6 +211,12 @@ public class Game
         player.lookRoom();
     }
     
+    /**
+     * El jugador intenta coger un objeto de la habitacion. Se le indica 
+     * el nombre de ese objeto.
+     * 
+     * @param command Los comandos introducidos, el primero es 'take'
+     */
     private void takeItem(Command command){
         String item;
         if(!command.hasSecondWord()) {
@@ -219,6 +227,12 @@ public class Game
         player.takeItem(item);
     }
     
+    /**
+     * El jugador intenta dejar un objeto en la habitacion. Se le indica 
+     * el nombre de ese objeto.
+     * 
+     * @param command Los comandos introducidos, el primero es 'drop'
+     */
     private void dropItem(Command command){
         String item;
         if(!command.hasSecondWord()) {

@@ -116,6 +116,11 @@ public class Player
         }
     }
     
+    /**
+     * El jugador intenta dejar un objeto en la habitacion
+     * 
+     * @param item El nombre del objeto que intenta dejar en la habitacion
+     */
     public void dropItem(String item){
         if (item != null){
             CollectableItem obj = null;
