@@ -1,4 +1,3 @@
-import java.util.Stack;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,8 +18,8 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room> lastRoom;
+    private Player player;
+    private Room startRoom;
         
     /**
      * Create the game and initialise its internal map.
@@ -29,7 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        lastRoom = new Stack<Room>();
+        player = new Player(startRoom, 0.15F);
     }
 
     /**
@@ -57,10 +56,12 @@ public class Game
         servGreg = new Room("Servicio de Greg");
         
         // add objects to rooms
-        biblioteca.addItem("Kleenex", 0.006F);
-        biblioteca.addItem("Caza y Pesca 1664", 0.095F);
-        servEmpleados.addItem("Papel higienico de una capa", 0.02F);
-        servPadres.addItem("Papel higienico triple capa", 0.04F);
+        barSecreto.addItem("Tamiz-Molecular", 0.01F, false);
+        biblioteca.addItem("Kleenex", 0.006F, true);
+        biblioteca.addItem("CazaPesca-1664", 0.095F, true);
+        servEmpleados.addItem("Papel-higienico-barato", 0.02F, true);
+        pasilloTrasero.addItem("Estatua-Marmol", 402.79F, true);
+        servPadres.addItem("Papel-higienico-Deluxe", 0.04F, true);
         
         // initialise room exits
         recibidor.setExit("north", pasillo);
@@ -91,8 +92,9 @@ public class Game
         dormGreg.setExit("south", pasilloTrasero);
         dormGreg.setExit("west", servGreg);
         servGreg.setExit("east", dormGreg);
-
-        currentRoom = recibidor;  // start game outside
+        
+        // Set initial room
+        startRoom = recibidor;
     }
 
     /**
@@ -123,7 +125,7 @@ public class Game
         System.out.println("No te ha dicho donde esta, solo que no entres en otro servicio de la casa");
         System.out.println("Escribe 'help' si andas perdido");
         System.out.println();
-        printLocationInfo();
+        player.lookRoom();
     }
 
     /**
@@ -152,22 +154,24 @@ public class Game
                 wantToQuit = quit(command);
                 break;
             case "look":
-                printLocationInfo();
+                player.lookRoom();
                 break;
             case "eat":
-                if(currentRoom.getDescription().startsWith("Cocina.")){
-                    System.out.print("ENSERIO: ");
-                }
-                System.out.println("Con las necesidades que tienes, comer puede esperar");
-                printLocationInfo();
+                player.eat();
+                player.lookRoom();
                 break;
             case "back":
-                if(!lastRoom.empty()){
-                    currentRoom = lastRoom.pop();
-                }else{
-                    System.out.println("No puedes volver atras...");
-                }
-                printLocationInfo();
+                player.goBack();
+                player.lookRoom();
+                break;
+            case "items":
+                player.listItems();
+                break;
+            case "take":
+                takeItem(command);
+                break;
+            case "drop":
+                dropItem(command);
                 break;
             }
 
@@ -189,31 +193,52 @@ public class Game
         parser.getValidCommandWords();
     }
 
+    /**
+     * Cuando se procesa un comando en un metodo de jugador, devuelve la segunda palabra si existe
+     * 
+     * @param command Los comandos introducidos por el jugador
+     * @return Segundo comando del jugador, null si NO hay segundo comando
+     */
+    private String secondWord(Command command){
+        String orden;
+        if(!command.hasSecondWord()) {
+            orden = null;
+        }else{
+            orden = command.getSecondWord();
+        }
+        return orden;
+    }
+    
     /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
+     * 
+     * @param command Los comandos introducidos, el primero es 'go'
      */
     private void goRoom(Command command) 
     {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Si no indicas donde, no te vas a mover");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("No atraviesas paredes ni abres ventanas, listo...");
-        }
-        else {
-            lastRoom.push(currentRoom);
-            currentRoom = nextRoom;
-            printLocationInfo();
-        }
+        player.goRoom(secondWord(command));
+        player.lookRoom();
+    }
+    
+    /**
+     * El jugador intenta coger un objeto de la habitacion. Se le indica 
+     * el nombre de ese objeto.
+     * 
+     * @param command Los comandos introducidos, el primero es 'take'
+     */
+    private void takeItem(Command command){
+        player.takeItem(secondWord(command));
+    }
+    
+    /**
+     * El jugador intenta dejar un objeto en la habitacion. Se le indica 
+     * el nombre de ese objeto.
+     * 
+     * @param command Los comandos introducidos, el primero es 'drop'
+     */
+    private void dropItem(Command command){
+        player.dropItem(secondWord(command));
     }
 
     /** 
@@ -226,17 +251,8 @@ public class Game
         if(command.hasSecondWord()) {
             System.out.println("No te rindas, aun puedes llegar...");
             return false;
-        }
-        else {
+        }else{
             return true;  // signal that we want to quit
         }
-    }
-    
-    /**
-     * Muestra por pantalla la sala actual del mapa y sus direcciones disponibles
-     */
-    private void printLocationInfo(){
-        System.out.println(currentRoom.getLongDescription());
-        System.out.println();
     }
 }
