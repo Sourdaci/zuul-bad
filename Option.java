@@ -7,5 +7,16 @@
  */
 public enum Option
 {
-    GO, QUIT, HELP, LOOK, EAT, BACK, ITEMS, TAKE, DROP, UNKNOWN;
+    GO ("ir"), QUIT ("salir"), HELP ("ayuda"), LOOK ("ver"), EAT ("comer"), 
+    BACK ("atras"), ITEMS ("objetos"), TAKE ("coger"), DROP ("soltar"), UNKNOWN ("Comando desconocido");
+    
+    private final String orden;
+    
+    Option (String cadena){
+        orden = cadena;
+    }
+    
+    public String getCommandOrder(){
+        return orden;
+    }
 }
