@@ -123,7 +123,7 @@ public class Game
         System.out.println();
         System.out.println("Estas en casa de tu amigo Greg. Quieres... no, NECESITAS ir al servicio");
         System.out.println("No te ha dicho donde esta, solo que no entres en otro servicio de la casa");
-        System.out.println("Escribe 'help' si andas perdido");
+        System.out.println("Escribe 'ayuda' si andas perdido");
         System.out.println();
         player.lookRoom();
     }
