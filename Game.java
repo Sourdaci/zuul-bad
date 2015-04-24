@@ -142,7 +142,7 @@ public class Game
             return false;
         }
 
-        String commandWord = command.getCommandWord();
+        String commandWord = command.getCommandWord().name().toLowerCase();
         switch (commandWord){
             case "help":
                 printHelp();
