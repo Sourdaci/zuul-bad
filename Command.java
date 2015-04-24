@@ -59,7 +59,7 @@ public class Command
      */
     public boolean isUnknown()
     {
-        return (commandWord.equals(Option.UNKNOWN));
+        return (commandWord.name().equals("UNKNOWN"));
     }
 
     /**

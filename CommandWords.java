@@ -66,7 +66,7 @@ public class CommandWords
         if(validCommands.containsKey(commandWord)){
             return validCommands.get(commandWord);
         }else{
-            return validCommands.get("UNKNOWN");
+            return comandos.UNKNOWN;
         }
     }
 }
