@@ -142,35 +142,35 @@ public class Game
             return false;
         }
 
-        String commandWord = command.getCommandWord().name().toLowerCase();
+        Option commandWord = command.getCommandWord();
         switch (commandWord){
-            case "help":
+            case HELP:
                 printHelp();
                 break;
-            case "go":
+            case GO:
                 goRoom(command);
                 break;
-            case "quit":
+            case QUIT:
                 wantToQuit = quit(command);
                 break;
-            case "look":
+            case LOOK:
                 player.lookRoom();
                 break;
-            case "eat":
+            case EAT:
                 player.eat();
                 player.lookRoom();
                 break;
-            case "back":
+            case BACK:
                 player.goBack();
                 player.lookRoom();
                 break;
-            case "items":
+            case ITEMS:
                 player.listItems();
                 break;
-            case "take":
+            case TAKE:
                 takeItem(command);
                 break;
-            case "drop":
+            case DROP:
                 dropItem(command);
                 break;
             }
