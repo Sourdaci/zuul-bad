@@ -56,12 +56,19 @@ public class Game
         servGreg = new Room("Servicio de Greg");
         
         // add objects to rooms
-        barSecreto.addItem("Tamiz-Molecular", 0.01F, false);
-        biblioteca.addItem("Kleenex", 0.006F, true);
-        biblioteca.addItem("CazaPesca-1664", 0.095F, true);
-        servEmpleados.addItem("Papel-higienico-barato", 0.02F, true);
-        pasilloTrasero.addItem("Estatua-Marmol", 402.79F, true);
-        servPadres.addItem("Papel-higienico-Deluxe", 0.04F, true);
+        dormServicio.addItem("Bolsa de 'Oregano'", 0.1F, false);
+        dormServicio.addItem("Poster de Jay y Bob el Silencioso", 0.05F, false);
+        barSecreto.addItem("Tamiz Molecular", 0.01F, false);
+        biblioteca.addItem("Paquete de Kleenex", 0.006F, true);
+        biblioteca.addItem("Caza y Pesca num 1664", 0.095F, true);
+        cocina.addItem("Caja de cerillas a medias", 0.095F, true);
+        comedor.addItem("Delicadas servilletas de seda", 0.009F, false);
+        servEmpleados.addItem("Papel higienico de 1 capa", 0.02F, true);
+        pasilloTrasero.addItem("Estatua de marmol macizo", 402.79F, true);
+        dormPadres.addItem("Espada de Juego de Tronos, numero 482 de 8000", 12.3F, false);
+        servPadres.addItem("Papel higienico Deluxe 4 capas", 0.04F, true);
+        dormGreg.addItem("Batman contra 'El tio del Monopoly'", 0.08F, true);
+        dormGreg.addItem("Cuadro de Sheldon Cooper: Ve al norte... estas en un bosque", 2.6F, false);
         
         // initialise room exits
         recibidor.setExit("north", pasillo);
