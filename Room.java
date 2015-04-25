@@ -69,10 +69,10 @@ public class Room
      * @param item Nombre del objeto que quiere coger el jugador
      * @return El objeto si existe, null si NO existe
      */
-    public CollectableItem takeItem(String item){
+    public CollectableItem takeItem(int item){
         CollectableItem obj = null;
         for (int i=0; i < objetos.size() && obj == null; i++){
-            if(item.equals(objetos.get(i).getDescripcion())){
+            if(item == objetos.get(i).getID()){
                 obj = objetos.get(i);
             }
         }

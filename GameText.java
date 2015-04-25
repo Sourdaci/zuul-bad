@@ -25,6 +25,7 @@ public enum GameText{
     PICKING_INEXISTENT_OBJECT ("Lo intentas coger y no puedes porque es un espejismo"),
     PICKING_OBJECT_AND_OVERWEIGHT ("Si coges eso tambien te partes la espalda"),
     PICKING_OBJECT_SUCCESSFULLY ("Has cogido"),
+    OBJECT_ID_NOT_NUMBER ("El id del objeto es un numero"),
     PICKING_UNPICKABLE_OBJECT ("Aunque eso fuera util... ¿Para que lo quieres?"),
     PICKING_OBJECT_WITHOUT_OBJECT ("Coger... ¿que? ¿Que coges?"),
     DROPPING_INEXISTENT_OBJECT ("Intentas dejar algo que no tienes. Simplemente brillante..."),

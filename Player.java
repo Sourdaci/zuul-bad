@@ -92,25 +92,29 @@ public class Player
     /**
      * El jugador intenta coger un objeto de la habitacion
      * 
-     * @param item Nombre del objeto que quieres coger de la habitacion
+     * @param item ID del objeto que quieres coger de la habitacion
      */
     public void takeItem(String item){
         if (item != null){
-            CollectableItem obj = currentRoom.takeItem(item);
-            if (obj == null){
-                System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
-            }else{
-                if(obj.isCollectable()){
-                    if(calcularCarga() + obj.getPeso() > cargaMax){
-                        System.out.println(GameText.PICKING_OBJECT_AND_OVERWEIGHT.getText());
-                    }else{
-                        objetos.add(obj);
-                        System.out.println(GameText.PICKING_OBJECT_SUCCESSFULLY.getText() + " " + obj.toString());
-                        currentRoom.deleteItem(obj);
-                    }
+            try{
+                CollectableItem obj = currentRoom.takeItem(Integer.parseInt(item));
+                if (obj == null){
+                    System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
                 }else{
-                    System.out.println(GameText.PICKING_UNPICKABLE_OBJECT.getText());
+                    if(obj.isCollectable()){
+                        if(calcularCarga() + obj.getPeso() > cargaMax){
+                            System.out.println(GameText.PICKING_OBJECT_AND_OVERWEIGHT.getText());
+                        }else{
+                            objetos.add(obj);
+                            System.out.println(GameText.PICKING_OBJECT_SUCCESSFULLY.getText() + " " + obj.toString());
+                            currentRoom.deleteItem(obj);
+                        }
+                    }else{
+                        System.out.println(GameText.PICKING_UNPICKABLE_OBJECT.getText());
+                    }
                 }
+            }catch (Exception ex){
+                System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
             }
         }else{
             System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
@@ -120,22 +124,27 @@ public class Player
     /**
      * El jugador intenta dejar un objeto en la habitacion
      * 
-     * @param item El nombre del objeto que intenta dejar en la habitacion
+     * @param item ID del objeto que intenta dejar en la habitacion
      */
     public void dropItem(String item){
         if (item != null){
             CollectableItem obj = null;
-            for (int i=0; i < objetos.size() && obj == null; i++){
-                if(item.equals(objetos.get(i).getDescripcion())){
-                    obj = objetos.get(i);
+            try{
+                int id = Integer.parseInt(item);
+                for (int i=0; i < objetos.size() && obj == null; i++){
+                    if(id == objetos.get(i).getID()){
+                        obj = objetos.get(i);
+                    }
                 }
-            }
-            if(obj == null){
-                System.out.println(GameText.DROPPING_INEXISTENT_OBJECT.getText());
-            }else{
-                System.out.println(GameText.DROPPING_OBJECT_SUCCESSFULLY.getText() + obj.toString());
-                currentRoom.addItemToRoom(obj);
-                objetos.remove(obj);
+                if(obj == null){
+                    System.out.println(GameText.DROPPING_INEXISTENT_OBJECT.getText());
+                }else{
+                    System.out.println(GameText.DROPPING_OBJECT_SUCCESSFULLY.getText() + obj.toString());
+                    currentRoom.addItemToRoom(obj);
+                    objetos.remove(obj);
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
             }
         }else{
             System.out.println(GameText.DROPPING_OBJECT_WITHOUT_OBJECT.getText());

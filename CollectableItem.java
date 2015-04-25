@@ -11,6 +11,8 @@ public class CollectableItem
     private String descripcion;
     private float peso;
     private boolean collectable;
+    private final int iD;
+    private static int currentID = 1;
 
     /**
      * Constructor for objects of class CollectableItem
@@ -23,6 +25,8 @@ public class CollectableItem
         descripcion = desc;
         this.peso = peso;
         collectable = collect;
+        iD = currentID;
+        currentID++;
     }
 
     /**
@@ -32,6 +36,13 @@ public class CollectableItem
      */
     public float getPeso(){
         return peso;
+    }
+    
+    /**
+     * Devuelve el ID del objeto
+     */
+    public int getID(){
+        return iD;
     }
     
     /**
@@ -57,6 +68,6 @@ public class CollectableItem
      */
     @Override
     public String toString(){
-        return ">> " + descripcion + ", " + peso + "Kg";
+        return String.format(">> (id %3d) %s, %f Kg", iD, descripcion, peso);
     }
 }
