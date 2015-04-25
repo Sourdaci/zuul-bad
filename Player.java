@@ -79,10 +79,11 @@ public class Player
      */
     public void listItems(){
         if(objetos.size() > 0){
-            System.out.println(GameText.INVENTORY_HEADER.getText());
+            System.out.println(GameText.INVENTORY_HEADER.getText() + ":");
             for (CollectableItem item : objetos){
                 System.out.println(item);
             }
+            System.out.println("-> " + GameText.INVENTORY_LOAD.getText() + ": " + calcularCarga() + " / " + cargaMax + " Kg");
         }else{
             System.out.println(GameText.INVENTORY_IS_EMPTY.getText());
         }
