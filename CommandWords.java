@@ -21,15 +21,11 @@ public class CommandWords
     public CommandWords()
     {
         validCommands = new HashMap<String, Option>();
-        validCommands.put(Option.GO.getCommandOrder(), Option.GO);
-        validCommands.put(Option.QUIT.getCommandOrder(), Option.QUIT);
-        validCommands.put(Option.HELP.getCommandOrder(), Option.HELP);
-        validCommands.put(Option.LOOK.getCommandOrder(), Option.LOOK);
-        validCommands.put(Option.EAT.getCommandOrder(), Option.EAT);
-        validCommands.put(Option.BACK.getCommandOrder(), Option.BACK);
-        validCommands.put(Option.ITEMS.getCommandOrder(), Option.ITEMS);
-        validCommands.put(Option.TAKE.getCommandOrder(), Option.TAKE);
-        validCommands.put(Option.DROP.getCommandOrder(), Option.DROP);
+        for (Option disponible : Option.values()){
+            if (!disponible.equals(Option.UNKNOWN)){
+                validCommands.put(disponible.getCommandOrder(), disponible);
+            }
+        }
     }
     
     /**

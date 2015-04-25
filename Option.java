@@ -8,7 +8,7 @@
 public enum Option
 {
     GO ("ir"), QUIT ("salir"), HELP ("ayuda"), LOOK ("ver"), EAT ("comer"), 
-    BACK ("atras"), ITEMS ("objetos"), TAKE ("coger"), DROP ("soltar"), UNKNOWN ("Comando desconocido");
+    BACK ("atras"), ITEMS ("objetos"), TAKE ("coger"), DROP ("soltar"), UNKNOWN ("Desconocido");
     
     private final String orden;
     
