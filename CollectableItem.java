@@ -27,6 +27,10 @@ public class CollectableItem
         collectable = collect;
         iD = currentID;
         currentID++;
+        // Manias persecutorias
+        if (currentID > 12 && currentID < 14){
+            currentID++;
+        }
     }
 
     /**
