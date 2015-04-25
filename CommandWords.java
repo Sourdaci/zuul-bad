@@ -32,7 +32,7 @@ public class CommandWords
      * Print all valid commands to System.out
      */
     public void showAll(){
-        String cadena = GameText.AVAILABLE_COMMANDS.getText();
+        String cadena = GameText.AVAILABLE_COMMANDS.getText() + ":";
         for (String valor : validCommands.keySet()){
             cadena += " " + valor;
         }

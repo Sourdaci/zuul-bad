@@ -7,11 +7,11 @@
  */
 public enum GameText{
     // CommandWords
-    AVAILABLE_COMMANDS ("Comandos disponibles:"),
+    AVAILABLE_COMMANDS ("Comandos disponibles"),
     
     // Room
-    AVAILABLE_DIRECTIONS ("Direcciones disponibles:"),
-    YOU_ARE_IN_PLACE ("Estas en: "),
+    AVAILABLE_DIRECTIONS ("Direcciones disponibles"),
+    YOU_ARE_IN_PLACE ("Estas en"),
     NOT_INTERESTING_OBJECTS ("No ves objetos que llamen la atencion"),
     
     // Player
@@ -24,7 +24,7 @@ public enum GameText{
     INVENTORY_IS_EMPTY ("Inventario vacio"),
     PICKING_INEXISTENT_OBJECT ("Lo intentas coger y no puedes porque es un espejismo"),
     PICKING_OBJECT_AND_OVERWEIGHT ("Si coges eso tambien te partes la espalda"),
-    PICKING_OBJECT_SUCCESSFULLY ("Has cogido "),
+    PICKING_OBJECT_SUCCESSFULLY ("Has cogido"),
     PICKING_UNPICKABLE_OBJECT ("Aunque eso fuera util... ¿Para que lo quieres?"),
     PICKING_OBJECT_WITHOUT_OBJECT ("Coger... ¿que? ¿Que coges?"),
     DROPPING_INEXISTENT_OBJECT ("Intentas dejar algo que no tienes. Simplemente brillante..."),
@@ -32,7 +32,7 @@ public enum GameText{
     DROPPING_OBJECT_WITHOUT_OBJECT ("Soltar... ¿que? ¿Que dejas?"),
     
     // Game
-    GOODBYE_MESSAGE ("Gracias por jugar. Hasta la proxima."),
+    GOODBYE_MESSAGE ("Gracias por jugar. Hasta la proxima"),
     WELCOME_MESSAGE_PART1 ("Estas en casa de tu amigo Greg. Quieres... no, NECESITAS ir al servicio"),
     WELCOME_MESSAGE_PART2 ("No te ha dicho donde esta, solo que no entres en otro servicio de la casa"),
     WELCOME_MESSAGE_PART3 ("Escribe '" + Option.HELP.getCommandOrder() + "' si andas perdido"),

@@ -105,7 +105,7 @@ public class Player
                         System.out.println(GameText.PICKING_OBJECT_AND_OVERWEIGHT.getText());
                     }else{
                         objetos.add(obj);
-                        System.out.println(GameText.PICKING_OBJECT_SUCCESSFULLY.getText() + obj.toString());
+                        System.out.println(GameText.PICKING_OBJECT_SUCCESSFULLY.getText() + " " + obj.toString());
                         currentRoom.deleteItem(obj);
                     }
                 }else{
