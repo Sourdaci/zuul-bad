@@ -32,13 +32,13 @@ public class Player
     public void goRoom(String direction){
         if(direction == null){
             // if there is no second word, we don't know where to go...
-            System.out.println("Si no indicas donde, no te vas a mover");
+            System.out.println(GameText.DIRECTION_NOT_INDICATED.getText());
         }else{
             // Try to leave current room.
             Room nextRoom = currentRoom.getExit(direction);
             
             if (nextRoom == null) {
-                System.out.println("No atraviesas paredes ni abres ventanas, listo...");
+                System.out.println(GameText.DIRECTION_INVALID.getText());
             }else{
                 lastRoom.push(currentRoom);
                 currentRoom = nextRoom;
@@ -60,7 +60,7 @@ public class Player
         if(currentRoom.getDescription().startsWith("Cocina.")){
             System.out.print("ENSERIO: ");
         }
-        System.out.println("Con las necesidades que tienes, comer puede esperar");
+        System.out.println(GameText.WHEN_PLAYER_EATS.getText());
     }
     
     /**
@@ -70,7 +70,7 @@ public class Player
         if(!lastRoom.empty()){
             currentRoom = lastRoom.pop();
         }else{
-            System.out.println("No puedes volver atras...");
+            System.out.println(GameText.WHEN_CANT_GO_BACK.getText());
         }
     }
     
@@ -79,12 +79,12 @@ public class Player
      */
     public void listItems(){
         if(objetos.size() > 0){
-            System.out.println("Objetos en el inventario:");
+            System.out.println(GameText.INVENTORY_HEADER.getText());
             for (CollectableItem item : objetos){
                 System.out.println(item);
             }
         }else{
-            System.out.println("Inventario vacio");
+            System.out.println(GameText.INVENTORY_IS_EMPTY.getText());
         }
     }
     
@@ -97,22 +97,22 @@ public class Player
         if (item != null){
             CollectableItem obj = currentRoom.takeItem(item);
             if (obj == null){
-                System.out.println("Lo intentas coger y no puedes porque es un espejismo");
+                System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
             }else{
                 if(obj.isCollectable()){
                     if(calcularCarga() + obj.getPeso() > cargaMax){
-                        System.out.println("Si coges eso tambien te partes la espalda");
+                        System.out.println(GameText.PICKING_OBJECT_AND_OVERWEIGHT.getText());
                     }else{
                         objetos.add(obj);
-                        System.out.println("Has cogido " + obj.toString());
+                        System.out.println(GameText.PICKING_OBJECT_SUCCESSFULLY.getText() + obj.toString());
                         currentRoom.deleteItem(obj);
                     }
                 }else{
-                    System.out.println("Aunque eso fuera util... ¿Para que lo quieres?");
+                    System.out.println(GameText.PICKING_UNPICKABLE_OBJECT.getText());
                 }
             }
         }else{
-            System.out.println("Coger... ¿que? ¿Que coges?");
+            System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
         }
     }
     
@@ -130,14 +130,14 @@ public class Player
                 }
             }
             if(obj == null){
-                System.out.println("Intentas dejar algo que no tienes. Simplemente brillante...");
+                System.out.println(GameText.DROPPING_INEXISTENT_OBJECT.getText());
             }else{
-                System.out.println("Dejas en la habitacion " + obj.toString());
+                System.out.println(GameText.DROPPING_OBJECT_SUCCESSFULLY.getText() + obj.toString());
                 currentRoom.addItemToRoom(obj);
                 objetos.remove(obj);
             }
         }else{
-            System.out.println("Soltar... ¿que? ¿Que dejas?");
+            System.out.println(GameText.DROPPING_OBJECT_WITHOUT_OBJECT.getText());
         }
     }
     

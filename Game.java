@@ -112,7 +112,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println(GameText.GOODBYE_MESSAGE.getText());
     }
 
     /**
@@ -120,11 +120,9 @@ public class Game
      */
     private void printWelcome()
     {
-        System.out.println();
-        System.out.println("Estas en casa de tu amigo Greg. Quieres... no, NECESITAS ir al servicio");
-        System.out.println("No te ha dicho donde esta, solo que no entres en otro servicio de la casa");
-        System.out.println("Escribe '" + Option.HELP.getCommandOrder() + "' si andas perdido");
-        System.out.println();
+        System.out.println("\n" + GameText.WELCOME_MESSAGE_PART1.getText());
+        System.out.println(GameText.WELCOME_MESSAGE_PART2.getText());
+        System.out.println(GameText.WELCOME_MESSAGE_PART3.getText() + "\n");
         player.lookRoom();
     }
 
@@ -138,7 +136,7 @@ public class Game
         boolean wantToQuit = false;
 
         if(command.isUnknown()) {
-            System.out.println("Te quedas en el sitio aguantando");
+            System.out.println(GameText.UNRECOGNIZED_COMMAND.getText());
             return false;
         }
 
@@ -187,9 +185,7 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("Necesitas encontrar un servicio en condiciones");
-        System.out.println("en casa de tu colega Greg urgentemente.");
-        System.out.println();
+        System.out.println(GameText.GAME_HELP.getText());
         parser.getValidCommandWords();
     }
 
@@ -249,7 +245,7 @@ public class Game
     private boolean quit(Command command) 
     {
         if(command.hasSecondWord()) {
-            System.out.println("No te rindas, aun puedes llegar...");
+            System.out.println(GameText.QUIT_WITH_WORDS.getText());
             return false;
         }else{
             return true;  // signal that we want to quit

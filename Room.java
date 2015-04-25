@@ -104,7 +104,7 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){
-        String salidas = "Direcciones disponibles:";
+        String salidas = GameText.AVAILABLE_DIRECTIONS.getText();
         Set<String> disponibles = salidasDisponibles.keySet();
         for (String posible : disponibles){
             salidas += (" " + posible);
@@ -127,13 +127,13 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-        String descripcion = ("Estas en: " + description + "\n");
+        String descripcion = (GameText.YOU_ARE_IN_PLACE.getText() + description + "\n");
         if (objetos.size() != 0){
             for(CollectableItem item : objetos){
                 descripcion += item.toString() + "\n";
             }
         }else{
-            descripcion += "No ves objetos aprovechables para ti\n";
+            descripcion += GameText.NOT_INTERESTING_OBJECTS.getText() + "\n";
         }
         descripcion += getExitString();
         return descripcion;
