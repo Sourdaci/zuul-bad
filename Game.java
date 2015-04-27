@@ -178,6 +178,12 @@ public class Game
             case DROP:
                 dropItem(command);
                 break;
+            case LOOK_CLOSELY:
+                lookItemOnRoom(command);
+                break;
+            case EXAMINE:
+                lookItemOnInventory(command);
+                break;
             }
 
         return wantToQuit;
@@ -226,7 +232,7 @@ public class Game
     
     /**
      * El jugador intenta coger un objeto de la habitacion. Se le indica 
-     * el nombre de ese objeto.
+     * el ID de ese objeto.
      * 
      * @param command Los comandos introducidos, el primero es 'take'
      */
@@ -236,14 +242,32 @@ public class Game
     
     /**
      * El jugador intenta dejar un objeto en la habitacion. Se le indica 
-     * el nombre de ese objeto.
+     * el ID de ese objeto.
      * 
      * @param command Los comandos introducidos, el primero es 'drop'
      */
     private void dropItem(Command command){
         player.dropItem(secondWord(command));
     }
-
+    
+    /**
+     * El jugador intenta observar un objeto de la habitacion. 
+     * Se le indica el ID de ese objeto
+     * 
+     */
+    private void lookItemOnRoom(Command command){
+        player.lookItemOnRoom(secondWord(command));
+    }
+    
+    /**
+     * El jugador intenta observar un objeto de su inventario. 
+     * Se le indica el ID de ese objeto
+     * 
+     */
+    private void lookItemOnInventory(Command command){
+        player.lookItemOnInventory(secondWord(command));
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
