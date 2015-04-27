@@ -157,20 +157,7 @@ public class Player
      * @param item ID del objeto que quieres ver de la habitacion
      */
     public void lookItemOnRoom(String item){
-        if (item != null){
-            try{
-                CollectableItem obj = currentRoom.takeItem(Integer.parseInt(item));
-                if (obj == null){
-                    System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
-                }else{
-                    System.out.println(obj.getDetails());
-                }
-            }catch (Exception ex){
-                System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
-            }
-        }else{
-            System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
-        }
+        currentRoom.lookItemOnRoom(item);
     }
     
     /**
@@ -179,25 +166,29 @@ public class Player
      * @param item ID del objeto que quieres ver del inventario
      */
     public void lookItemOnInventory(String item){
-        if (item != null){
-            try{
-                int indice = Integer.parseInt(item);
-                CollectableItem obj = null;
-                for (int i=0; i < objetos.size() && obj != null; i++){
-                    if(objetos.get(i).getID() == indice){
-                        obj = objetos.get(i);
+        if (objetos.size() > 0){
+            if (item != null){
+                try{
+                    int indice = Integer.parseInt(item);
+                    CollectableItem obj = null;
+                    for (int i=0; i < objetos.size() && obj != null; i++){
+                        if(objetos.get(i).getID() == indice){
+                            obj = objetos.get(i);
+                        }
                     }
+                    if (obj == null){
+                        System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
+                    }else{
+                        System.out.println(obj.getDetails());
+                    }
+                }catch (Exception ex){
+                    System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
                 }
-                if (obj == null){
-                    System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
-                }else{
-                    System.out.println(obj.getDetails());
-                }
-            }catch (Exception ex){
-                System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
+            }else{
+                System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
             }
         }else{
-            System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
+            System.out.println(GameText.INVENTORY_IS_EMPTY.getText());
         }
     }
     

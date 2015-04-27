@@ -98,6 +98,28 @@ public class Room
     }
     
     /**
+     * El jugador intenta observar un objeto de la habitacion
+     * 
+     * @param item ID del objeto que quieres ver de la habitacion
+     */
+    public void lookItemOnRoom(String item){
+        if (item != null){
+            try{
+                CollectableItem obj = takeItem(Integer.parseInt(item));
+                if (obj == null){
+                    System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
+                }else{
+                    System.out.println(obj.getDetails());
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
+        }
+    }
+    
+    /**
      * Return a description of the room's exits.
      * For example: "Exits: north east west"
      *
