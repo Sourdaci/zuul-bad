@@ -13,6 +13,7 @@ public class CollectableItem
     private boolean collectable;
     private final int iD;
     private static int currentID = 1;
+    private String detalle;
 
     /**
      * Constructor for objects of class CollectableItem
@@ -20,7 +21,7 @@ public class CollectableItem
      * @param desc Descripcion del objeto
      * @param peso Peso del objeto
      */
-    public CollectableItem(String desc, float peso, boolean collect)
+    public CollectableItem(String desc, float peso, boolean collect, String details)
     {
         descripcion = desc;
         this.peso = peso;
@@ -31,6 +32,7 @@ public class CollectableItem
         if (currentID > 12 && currentID < 14){
             currentID++;
         }
+        detalle = details;
     }
 
     /**
@@ -54,6 +56,18 @@ public class CollectableItem
      */
     public String getDescripcion(){
         return descripcion;
+    }
+    
+    /**
+     * Devuelve los detalles del objeto
+     * Utilizar cuando se examina un objeto
+     */
+    public String getDetails(){
+        String cadena = detalle;
+        if (detalle == null){
+            cadena = GameText.DESCRIPTION_UNAVAILABLE.getText();
+        }
+        return cadena;
     }
     
     /**

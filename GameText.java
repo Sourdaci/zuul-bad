@@ -12,6 +12,7 @@ public enum GameText{
     // Room
     AVAILABLE_DIRECTIONS ("Direcciones disponibles"),
     YOU_ARE_IN_PLACE ("Estas en"),
+    ROOM_WITHOUT_OBJECTS ("Esta habitacion no tiene objetos analizables"),
     NOT_INTERESTING_OBJECTS ("No ves objetos que llamen la atencion"),
     
     // Player
@@ -22,15 +23,12 @@ public enum GameText{
     INVENTORY_HEADER ("Objetos en el inventario"),
     INVENTORY_LOAD ("Carga actual"),
     INVENTORY_IS_EMPTY ("Inventario vacio"),
-    PICKING_INEXISTENT_OBJECT ("Lo intentas coger y no puedes porque es un espejismo"),
-    PICKING_OBJECT_AND_OVERWEIGHT ("Si coges eso tambien te partes la espalda"),
+    PICKING_OBJECT_AND_OVERWEIGHT ("Si coges eso, te sobrecargas"),
     PICKING_OBJECT_SUCCESSFULLY ("Has cogido"),
-    OBJECT_ID_NOT_NUMBER ("El id del objeto es un numero"),
     PICKING_UNPICKABLE_OBJECT ("Aunque eso fuera util... ¿Para que lo quieres?"),
-    PICKING_OBJECT_WITHOUT_OBJECT ("Coger... ¿que? ¿Que coges?"),
-    DROPPING_INEXISTENT_OBJECT ("Intentas dejar algo que no tienes. Simplemente brillante..."),
-    DROPPING_OBJECT_SUCCESSFULLY ("Dejas en la habitacion "),
-    DROPPING_OBJECT_WITHOUT_OBJECT ("Soltar... ¿que? ¿Que dejas?"),
+    DROPPING_INEXISTENT_OBJECT ("Intentas dejar un objeto que no tienes"),
+    DROPPING_OBJECT_SUCCESSFULLY ("Dejas en la habitacion"),
+    DROPPING_OBJECT_WITHOUT_OBJECT ("Soltar... ¿que? No has dicho que quieres soltar"),
     
     // Game
     GOODBYE_MESSAGE ("Gracias por jugar. Hasta la proxima"),
@@ -41,7 +39,13 @@ public enum GameText{
     GAME_HELP ("Necesitas encontrar un servicio en condiciones\nen casa de tu colega Greg urgentemente.\n"),
     QUIT_WITH_WORDS ("No te rindas, aun puedes llegar..."),
     
+    // CollectableItem
+    DESCRIPTION_UNAVAILABLE ("No hay detalles ampliables sobre el objeto"),
+    
     // Generic
+    PICKING_INEXISTENT_OBJECT ("Ese objeto no existe"),
+    OBJECT_ID_NOT_NUMBER ("El id del objeto es un numero"),
+    PICKING_OBJECT_WITHOUT_OBJECT ("Coger... ¿que? No has dicho que quieres coger"),
     WEIGHT_UNIT ("Kg");
     
     

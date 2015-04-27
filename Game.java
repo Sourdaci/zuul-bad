@@ -56,19 +56,19 @@ public class Game
         servGreg = new Room("Servicio de Greg");
         
         // add objects to rooms
-        dormServicio.addItem("Bolsa de 'Oregano'", 0.1F, false);
-        dormServicio.addItem("Poster de Jay y Bob el Silencioso", 0.05F, false);
-        barSecreto.addItem("Tamiz Molecular", 0.01F, false);
-        biblioteca.addItem("Paquete de Kleenex", 0.006F, true);
-        biblioteca.addItem("Caza y Pesca num 1664", 0.095F, true);
-        cocina.addItem("Caja de cerillas a medias", 0.095F, true);
-        comedor.addItem("Delicadas servilletas de seda", 0.009F, false);
-        servEmpleados.addItem("Papel higienico de 1 capa", 0.02F, true);
-        pasilloTrasero.addItem("Estatua de marmol macizo", 402.79F, true);
-        dormPadres.addItem("Espada de Juego de Tronos, numero 482 de 8000", 12.3F, false);
-        servPadres.addItem("Papel higienico Deluxe 4 capas", 0.04F, true);
-        dormGreg.addItem("Batman contra 'El tio del Monopoly'", 0.08F, true);
-        dormGreg.addItem("Cuadro de Sheldon Cooper: Ve al norte... estas en un bosque", 2.6F, false);
+        dormServicio.addItem("Bolsa de 'Oregano'", 0.1F, false, "Huele igual que la habitacion del conserje del instituto");
+        dormServicio.addItem("Poster de Jay y Bob el Silencioso", 0.05F, false, "Esas gabardinas, ese cinturon de Batman... que estilo");
+        barSecreto.addItem("Tamiz Molecular", 0.01F, false, "Hay residuos blancos. ¿Habran hecho magdalenas?");
+        biblioteca.addItem("Paquete de Kleenex", 0.006F, true, null);
+        biblioteca.addItem("Caza y Pesca num 1664", 0.095F, true, "Anuncian un fascinante articulo sobre pesca con mosca en el Artico");
+        cocina.addItem("Caja de cerillas", 0.095F, true, "Tiene 4 cerillas y bastante uso, pero parece funcionar");
+        comedor.addItem("Delicadas servilletas de seda", 0.009F, false, "Con bordados florales y las iniciales de la familia");
+        servEmpleados.addItem("Papel higienico de 1 capa", 0.02F, true, "El aspecto de papel de lija esta bien conseguido");
+        pasilloTrasero.addItem("Estatua de marmol macizo", 402.79F, true, null);
+        dormPadres.addItem("Espada de Juego de Tronos", 12.3F, false, "Numero 482. ¡Solo se han hecho 8000 de este modelo!");
+        servPadres.addItem("Papel higienico Deluxe 4 capas", 0.04F, true, "Es como acariciar una nube");
+        dormGreg.addItem("Batman contra 'El tio del Monopoly'", 0.08F, true, "Controvertido numero 922, Batman pierde al poker por no tener suficientes fondos");
+        dormGreg.addItem("Cuadro de Sheldon Cooper", 2.6F, false, "En la placa pone:\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\n¡Porras, me he perdido!");
         
         // initialise room exits
         recibidor.setExit("north", pasillo);
@@ -178,6 +178,12 @@ public class Game
             case DROP:
                 dropItem(command);
                 break;
+            case LOOK_CLOSELY:
+                lookItemOnRoom(command);
+                break;
+            case EXAMINE:
+                lookItemOnInventory(command);
+                break;
             }
 
         return wantToQuit;
@@ -226,7 +232,7 @@ public class Game
     
     /**
      * El jugador intenta coger un objeto de la habitacion. Se le indica 
-     * el nombre de ese objeto.
+     * el ID de ese objeto.
      * 
      * @param command Los comandos introducidos, el primero es 'take'
      */
@@ -236,14 +242,32 @@ public class Game
     
     /**
      * El jugador intenta dejar un objeto en la habitacion. Se le indica 
-     * el nombre de ese objeto.
+     * el ID de ese objeto.
      * 
      * @param command Los comandos introducidos, el primero es 'drop'
      */
     private void dropItem(Command command){
         player.dropItem(secondWord(command));
     }
-
+    
+    /**
+     * El jugador intenta observar un objeto de la habitacion. 
+     * Se le indica el ID de ese objeto
+     * 
+     */
+    private void lookItemOnRoom(Command command){
+        player.lookItemOnRoom(secondWord(command));
+    }
+    
+    /**
+     * El jugador intenta observar un objeto de su inventario. 
+     * Se le indica el ID de ese objeto
+     * 
+     */
+    private void lookItemOnInventory(Command command){
+        player.lookItemOnInventory(secondWord(command));
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

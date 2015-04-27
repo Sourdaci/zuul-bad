@@ -59,8 +59,8 @@ public class Room
      * @param peso Peso del objeto
      * @param collect Si el objeto puede cogerse o no
      */
-    public void addItem(String descripcion, float peso, boolean collect){
-        objetos.add(new CollectableItem(descripcion, peso, collect));
+    public void addItem(String descripcion, float peso, boolean collect, String detalle){
+        objetos.add(new CollectableItem(descripcion, peso, collect, detalle));
     }
     
     /**
@@ -95,6 +95,32 @@ public class Room
      */
     public void addItemToRoom(CollectableItem item){
         objetos.add(item);
+    }
+    
+    /**
+     * El jugador intenta observar un objeto de la habitacion
+     * 
+     * @param item ID del objeto que quieres ver de la habitacion
+     */
+    public void lookItemOnRoom(String item){
+        if (objetos.size() > 0){
+            if (item != null){
+                try{
+                    CollectableItem obj = takeItem(Integer.parseInt(item));
+                    if (obj == null){
+                        System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
+                    }else{
+                        System.out.println(obj.getDetails());
+                    }
+                }catch (Exception ex){
+                    System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
+                }
+            }else{
+                System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
+            }
+        }else{
+            System.out.println(GameText.ROOM_WITHOUT_OBJECTS.getText());
+        }
     }
     
     /**
