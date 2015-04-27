@@ -68,7 +68,7 @@ public class Game
         dormPadres.addItem("Espada de Juego de Tronos", 12.3F, false, "Numero 482. ¡Solo se han hecho 8000 de este modelo!");
         servPadres.addItem("Papel higienico Deluxe 4 capas", 0.04F, true, "Es como acariciar una nube");
         dormGreg.addItem("Batman contra 'El tio del Monopoly'", 0.08F, true, "Controvertido numero 922, Batman pierde al poker por no tener suficientes fondos");
-        dormGreg.addItem("Cuadro de Sheldon Cooper", 2.6F, false, "En la placa pone...\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\n¡Porras, me he perdido!");
+        dormGreg.addItem("Cuadro de Sheldon Cooper", 2.6F, false, "En la placa pone:\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\n¡Porras, me he perdido!");
         
         // initialise room exits
         recibidor.setExit("north", pasillo);

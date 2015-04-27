@@ -103,19 +103,23 @@ public class Room
      * @param item ID del objeto que quieres ver de la habitacion
      */
     public void lookItemOnRoom(String item){
-        if (item != null){
-            try{
-                CollectableItem obj = takeItem(Integer.parseInt(item));
-                if (obj == null){
-                    System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
-                }else{
-                    System.out.println(obj.getDetails());
+        if (objetos.size() > 0){
+            if (item != null){
+                try{
+                    CollectableItem obj = takeItem(Integer.parseInt(item));
+                    if (obj == null){
+                        System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
+                    }else{
+                        System.out.println(obj.getDetails());
+                    }
+                }catch (Exception ex){
+                    System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
                 }
-            }catch (Exception ex){
-                System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
+            }else{
+                System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
             }
         }else{
-            System.out.println(GameText.PICKING_OBJECT_WITHOUT_OBJECT.getText());
+            System.out.println(GameText.ROOM_WITHOUT_OBJECTS.getText());
         }
     }
     

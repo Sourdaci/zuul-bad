@@ -171,9 +171,10 @@ public class Player
                 try{
                     int indice = Integer.parseInt(item);
                     CollectableItem obj = null;
-                    for (int i=0; i < objetos.size() && obj != null; i++){
-                        if(objetos.get(i).getID() == indice){
-                            obj = objetos.get(i);
+                    for (int i=0; i < objetos.size() && obj == null; i++){
+                        obj = objetos.get(i);
+                        if(obj.getID() != indice){
+                            obj = null;
                         }
                     }
                     if (obj == null){
