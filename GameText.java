@@ -39,7 +39,10 @@ public enum GameText{
     WELCOME_MESSAGE_PART3 ("Escribe '" + Option.HELP.getCommandOrder() + "' si andas perdido"),
     UNRECOGNIZED_COMMAND ("Te quedas en el sitio aguantando"),
     GAME_HELP ("Necesitas encontrar un servicio en condiciones\nen casa de tu colega Greg urgentemente.\n"),
-    QUIT_WITH_WORDS ("No te rindas, aun puedes llegar...");
+    QUIT_WITH_WORDS ("No te rindas, aun puedes llegar..."),
+    
+    // Generic
+    WEIGHT_UNIT ("Kg");
     
     
     private String text;

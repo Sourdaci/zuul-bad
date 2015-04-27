@@ -83,7 +83,7 @@ public class Player
             for (CollectableItem item : objetos){
                 System.out.println(item);
             }
-            System.out.println("-> " + GameText.INVENTORY_LOAD.getText() + ": " + calcularCarga() + " / " + cargaMax + " Kg");
+            System.out.println("-> " + GameText.INVENTORY_LOAD.getText() + ": " + calcularCarga() + " / " + cargaMax + " " + GameText.WEIGHT_UNIT.getText());
         }else{
             System.out.println(GameText.INVENTORY_IS_EMPTY.getText());
         }

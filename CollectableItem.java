@@ -72,6 +72,6 @@ public class CollectableItem
      */
     @Override
     public String toString(){
-        return String.format(">> (id %3d) %s, %f Kg", iD, descripcion, peso);
+        return String.format(">> (id %3d) %s, %f %s", iD, descripcion, peso, GameText.WEIGHT_UNIT.getText());
     }
 }
