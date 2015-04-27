@@ -43,6 +43,18 @@ public class CommandWords
         }
         System.out.println(cadena);
     }
+    
+    /**
+     * Muestra por pantalla todos los comandos disponibles en el juego. 
+     * Cada comando lleva una descripcion.
+     */
+    public void showAllDetailed(){
+        String cadena = GameText.AVAILABLE_COMMANDS.getText() + ":\n";
+        for (Option valor : validCommands.values()){
+            cadena += valor.getDetailedOrder() + "\n";
+        }
+        System.out.println(cadena);
+    }
 
     /**
      * Check whether a given String is a valid command word. 

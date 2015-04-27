@@ -62,4 +62,11 @@ public class Parser
     public void getValidCommandWords(){
         commands.showAll();
     }
+    
+    /**
+     * Pide al objeto CommandWords con el que trabaja que muestre una ayuda detallada de los comandos disponibles
+     */
+    public void getDetailedCommandWords(){
+        commands.showAllDetailed();
+    }
 }

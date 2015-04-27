@@ -184,6 +184,9 @@ public class Game
             case EXAMINE:
                 lookItemOnInventory(command);
                 break;
+            case AUX:
+                printDetailedHelp();
+                break;
             }
 
         return wantToQuit;
@@ -200,6 +203,15 @@ public class Game
     {
         System.out.println(GameText.GAME_HELP.getText());
         parser.getValidCommandWords();
+    }
+    
+    /**
+     * Print out lots of help information.
+     */
+    private void printDetailedHelp() 
+    {
+        System.out.println(GameText.GAME_HELP.getText());
+        parser.getDetailedCommandWords();
     }
 
     /**
