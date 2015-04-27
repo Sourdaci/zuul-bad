@@ -41,6 +41,9 @@ public enum GameText{
     GAME_HELP ("Necesitas encontrar un servicio en condiciones\nen casa de tu colega Greg urgentemente.\n"),
     QUIT_WITH_WORDS ("No te rindas, aun puedes llegar..."),
     
+    // CollectableItem
+    DESCRIPTION_UNAVAILABLE ("No hay detalles ampliables sobre el objeto"),
+    
     // Generic
     WEIGHT_UNIT ("Kg");
     

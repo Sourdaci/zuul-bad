@@ -59,8 +59,8 @@ public class Room
      * @param peso Peso del objeto
      * @param collect Si el objeto puede cogerse o no
      */
-    public void addItem(String descripcion, float peso, boolean collect){
-        objetos.add(new CollectableItem(descripcion, peso, collect));
+    public void addItem(String descripcion, float peso, boolean collect, String detalle){
+        objetos.add(new CollectableItem(descripcion, peso, collect, detalle));
     }
     
     /**
