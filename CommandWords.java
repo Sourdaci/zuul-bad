@@ -33,8 +33,13 @@ public class CommandWords
      */
     public void showAll(){
         String cadena = GameText.AVAILABLE_COMMANDS.getText() + ":";
+        int contador = 50;
         for (String valor : validCommands.keySet()){
             cadena += " " + valor;
+            if (cadena.length() > contador){
+                cadena += "\n";
+                contador += 50;
+            }
         }
         System.out.println(cadena);
     }
