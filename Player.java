@@ -40,8 +40,14 @@ public class Player
             if (nextRoom == null) {
                 System.out.println(GameText.DIRECTION_INVALID.getText());
             }else{
-                lastRoom.push(currentRoom);
-                currentRoom = nextRoom;
+                Room teleport = nextRoom.getTeleportRoom();
+                if(teleport != null){
+                    lastRoom.clear();
+                    currentRoom = teleport;
+                }else{
+                    lastRoom.push(currentRoom);
+                    currentRoom = nextRoom;
+                }
             }
         }
     }

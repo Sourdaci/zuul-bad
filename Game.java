@@ -38,22 +38,30 @@ public class Game
     {
         Room recibidor, pasillo, dormServicio, salaEstar, barSecreto, biblioteca, cocina, comedor, 
             servEmpleados, pasilloTrasero, dormPadres, servPadres, dormGreg, servGreg;
+            
+        Room cueva, descampado, bosque, barranco;
       
+        // Creando la mazmorra
+        cueva = new Room("Cueva abrupta\nHay un fuerte olor a humedades", null, null);
+        descampado = new Room("Entrada de la cueva\nHay algunos huesos mordisqueados", null, null);
+        bosque = new Room("Entrada a un bosque ennegrecido\nSolo de pensar en entrar se te pone la piel de gallina", null, null);
+        barranco = new Room("Un barranco bastante profundo\nUna caida significa una muerte segura", null, null);
+            
         // create the rooms
-        recibidor = new Room("Entrada de la Casa");
-        pasillo = new Room("Pasillo Delantero");
-        dormServicio = new Room("Habitaciones de los Empleados");
-        salaEstar = new Room("Salon");
-        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...");
-        biblioteca = new Room("Biblioteca. Muchos libros");
-        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE");
-        comedor = new Room("Comedor. Estan preparando la mesa para cenar");
-        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho");
-        pasilloTrasero = new Room("Pasillo Trasero");
-        dormPadres = new Room("Dormitorio de los padres de Greg");
-        servPadres = new Room("Servicio de los padres de Greg");
-        dormGreg = new Room("Dormitorio de Greg");
-        servGreg = new Room("Servicio de Greg");
+        recibidor = new Room("Entrada de la Casa", null, null);
+        pasillo = new Room("Pasillo Delantero", null, null);
+        dormServicio = new Room("Habitaciones de los Empleados", null, null);
+        salaEstar = new Room("Salon", null, null);
+        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...", null, null);
+        biblioteca = new Room("Biblioteca. Muchos libros", null, null);
+        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE", null, null);
+        comedor = new Room("Comedor. Estan preparando la mesa para cenar", null, null);
+        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho", null, null);
+        pasilloTrasero = new Room("Pasillo Trasero", null, null);
+        dormPadres = new Room("Dormitorio de los padres de Greg", null, null);
+        servPadres = new Room("Servicio de los padres de Greg", null, null);
+        dormGreg = new Room("Dormitorio de Greg", null, null);
+        servGreg = new Room("Servicio de Greg", cueva, "Al cerrar la puerta todo se oscurece\nTe sientes aliviado, hasta ver que estas en un lugar desconocido");
         
         // add objects to rooms
         dormServicio.addItem("Bolsa de 'Oregano'", 0.1F, false, "Huele igual que la habitacion del conserje del instituto");
