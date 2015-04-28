@@ -20,6 +20,8 @@ public class Room
     private String description;
     private HashMap<String, Room> salidasDisponibles;
     private ArrayList<CollectableItem> objetos;
+    private Room teleportRoom;
+    private String teleportString;
 
     /**
      * Create a room described "description". Initially, it has
@@ -27,11 +29,13 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description, Room teleport, String message) 
     {
         this.description = description;
         salidasDisponibles = new HashMap<String, Room>();
         objetos = new ArrayList<CollectableItem>();
+        teleportRoom = teleport;
+        teleportString = message;
     }
     
     /**
@@ -136,6 +140,18 @@ public class Room
             salidas += (" " + posible);
         }
         return salidas;
+    }
+    
+    /**
+     * Indica al jugador si la habitacion lleva a otra sin cruzar puertas (Teletransporte)
+     * 
+     * @return Room de teletransporte, null si NO hay teletransporte
+     */
+    public Room getTeleportRoom(){
+        if(teleportRoom != null){
+            System.out.println(teleportString);
+        }
+        return teleportRoom;
     }
     
     /**

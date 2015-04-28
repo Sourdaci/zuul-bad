@@ -38,24 +38,67 @@ public class Game
     {
         Room recibidor, pasillo, dormServicio, salaEstar, barSecreto, biblioteca, cocina, comedor, 
             servEmpleados, pasilloTrasero, dormPadres, servPadres, dormGreg, servGreg;
-      
-        // create the rooms
-        recibidor = new Room("Entrada de la Casa");
-        pasillo = new Room("Pasillo Delantero");
-        dormServicio = new Room("Habitaciones de los Empleados");
-        salaEstar = new Room("Salon");
-        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...");
-        biblioteca = new Room("Biblioteca. Muchos libros");
-        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE");
-        comedor = new Room("Comedor. Estan preparando la mesa para cenar");
-        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho");
-        pasilloTrasero = new Room("Pasillo Trasero");
-        dormPadres = new Room("Dormitorio de los padres de Greg");
-        servPadres = new Room("Servicio de los padres de Greg");
-        dormGreg = new Room("Dormitorio de Greg");
-        servGreg = new Room("Servicio de Greg");
+            
+        Room cueva, descampado, bosque, barranco, lindeBosque, caminoTierra, puente, laguna, 
+            caminoEmpedrado, pasaje, fondoBarranco, riachuelo, cavidad, gruta, caminoMonte, 
+            rutaEscarpada, refugio, portal;
+            
+        Room entradaPueblo, posada, calle, casucha, casa, huerto, pozo;
         
-        // add objects to rooms
+        // Creando la mazmorra
+        cueva = new Room("Cueva abrupta\nHay un fuerte olor a humedades", null, null);
+        descampado = new Room("Entrada de la cueva\nHay algunos huesos mordisqueados", null, null);
+        bosque = new Room("Entrada a un bosque ennegrecido\nSolo de pensar en entrar se te pone la piel de gallina", null, null);
+        barranco = new Room("Un barranco bastante profundo\nUna caida significa una muerte segura", null, null);
+        lindeBosque = new Room("Lateral del bosque ennegrecido\nSigue siendo terrorifico", null, null);
+        caminoTierra = new Room("Camino de tierra\nAncho y en cuesta", null, null);
+        puente = new Room("Un firme puente de madera\nAunque los tablones crujen si los pisoteas", null, null);
+        laguna = new Room("Laguna de aguas cristalinas\nTan cristalinas que podrias ver a un pez echando la quiniela", null, null);
+        caminoEmpedrado = new Room("Camino burdamente adoquinado\nTe recuerda a la plaza del pueblo", null, null);
+        pasaje = new Room("Pasaje angosto. Muy angosto.\nEsta plagado de charquitos", null, null);
+        fondoBarranco = new Room("Fondo del barranco\nEl riachuelo parece alimentar al pozo del pueblo", null, null);
+        riachuelo = new Room("Rio muy poco profundo. Se pierde en la lejania y en una pared fracturada\nSu lecho tiene un brillo especial", null, null);
+        cavidad = new Room("Oquedad en una pared pedregosa", null, null);
+        gruta = new Room("Una cueva debilmente iluminada por la luz que se refleja en las paredes", null, null);
+        caminoMonte = new Room("Camino que conecta Midgard y el Monte del Destino", null, null);
+        rutaEscarpada = new Room("Senda estrecha\nOcasionalmente caen piedrecitas\nNo es apta para gente con vertigo", null, null);
+        refugio = new Room("Una casa tallada en la piedra y bien decorada\nMuy limpia para no tener puertas ni ventanas", null, null);
+        
+        // Creando la casa
+        recibidor = new Room("Entrada de la Casa", null, null);
+        pasillo = new Room("Pasillo Delantero", null, null);
+        dormServicio = new Room("Habitaciones de los Empleados", null, null);
+        salaEstar = new Room("Salon", null, null);
+        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...", null, null);
+        biblioteca = new Room("Biblioteca. Muchos libros", null, null);
+        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE", null, null);
+        comedor = new Room("Comedor. Estan preparando la mesa para cenar", null, null);
+        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho", null, null);
+        pasilloTrasero = new Room("Pasillo Trasero", null, null);
+        dormPadres = new Room("Dormitorio de los padres de Greg", null, null);
+        servPadres = new Room("Servicio de los padres de Greg", null, null);
+        dormGreg = new Room("Dormitorio de Greg", null, null);
+        servGreg = new Room("Servicio de Greg", cueva, "Al cerrar la puerta todo se oscurece\n" + 
+                "Te sientes aliviado, hasta ver que estas en un lugar desconocido\n" + 
+                "Al menos ya no necesitas ir al servicio, y tu ropa interior esta impoluta");
+        
+        // Creando el pueblo
+        entradaPueblo = new Room("La entrada a un pueblecito\nEn el desvencijado cartel cuesta leer 'Midgard'", null, null);
+        posada = new Room("Una posada abandonada llamada 'El burro escarchador'\nEs imposible acceder, la puerta ni se inmuta", null, null);
+        calle = new Room("La unica calle del pueblo\nMires donde mires, solo hay desolacion", null, null);
+        casucha = new Room("Una casa derruida, asolada por el paso del tiempo\nY por un meteorito", null, null);
+        casa = new Room("El unico edificio en condiciones del pueblo\nEl interior esta misticamente iluminado", null, null);
+        huerto = new Room("Este huerto es el sustento de Vivi\nPuedes distinguir lechugas, zanahorias, tomacco, athelas...", null, null);
+        pozo = new Room("Pozo. Con su cubo, cuerda, y poleas\nPuede usarse como un ascensor impulsado por biceps", null, null);
+        
+        // Final del juego
+        portal = new Room("Portal de vuelta", dormGreg, "Una luz cegadora inunda tu mirada. Al desaparecer, oyes una puerta cerrarse detras tuyo\n" + 
+                "Greg esta tirado en su cama. Te mira con gesto de ligera impaciencia y cachondeo\n" + 
+                "'Ya era hora, hombre... Espero que te hayas lavado las manos, nos estan esperando'" + 
+                "Estas flipando. Todo esta como debe ser. Nunca entenderas que ha ocurrido" + 
+                "CONGRATULEISIONS, has salido vivo y con la mente relativamente sana!!!!");
+        
+        // Objetos de la casa
         dormServicio.addItem("Bolsa de 'Oregano'", 0.1F, false, "Huele igual que la habitacion del conserje del instituto");
         dormServicio.addItem("Poster de Jay y Bob el Silencioso", 0.05F, false, "Esas gabardinas, ese cinturon de Batman... que estilo");
         barSecreto.addItem("Tamiz Molecular", 0.01F, false, "Hay residuos blancos. ¿Habran hecho magdalenas?");
@@ -70,35 +113,99 @@ public class Game
         dormGreg.addItem("Batman contra 'El tio del Monopoly'", 0.08F, true, "Controvertido numero 922, Batman pierde al poker por no tener suficientes fondos");
         dormGreg.addItem("Cuadro de Sheldon Cooper", 2.6F, false, "En la placa pone:\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\n¡Porras, me he perdido!");
         
-        // initialise room exits
-        recibidor.setExit("north", pasillo);
-        pasillo.setExit("north", comedor);
-        pasillo.setExit("east", salaEstar);
-        pasillo.setExit("south", recibidor);
-        pasillo.setExit("west", dormServicio);
-        dormServicio.setExit("north", cocina);
-        dormServicio.setExit("east", pasillo);
-        salaEstar.setExit("north", biblioteca);
-        salaEstar.setExit("southeast", barSecreto);
-        salaEstar.setExit("west", pasillo);
-        barSecreto.setExit("northwest", salaEstar);
-        biblioteca.setExit("south", salaEstar);
-        cocina.setExit("north", servEmpleados);
-        cocina.setExit("east", comedor);
-        cocina.setExit("south", dormServicio);
-        comedor.setExit("north", pasilloTrasero);
-        comedor.setExit("south", pasillo);
-        comedor.setExit("west", cocina);
-        servEmpleados.setExit("south", cocina);
-        pasilloTrasero.setExit("north", dormGreg);
-        pasilloTrasero.setExit("east", dormPadres);
-        pasilloTrasero.setExit("south", comedor);
-        dormPadres.setExit("south", servPadres);
-        dormPadres.setExit("west", pasilloTrasero);
-        servPadres.setExit("north", dormPadres);
-        dormGreg.setExit("south", pasilloTrasero);
-        dormGreg.setExit("west", servGreg);
-        servGreg.setExit("east", dormGreg);
+        // Objetos de la mazmorra
+        barranco.addItem("Chapa metalica oxidada", 0.09F, false, "Es una matricula de California que pone 'OUTATIME'");
+        laguna.addItem("Una caja con enseres raros", 16.9F, false, "Destacan las botellas de ron 'BlackPearl' y el LP de 'Saca el whisky Cheli'");
+        riachuelo.addItem("Pepitas de oro", 0.02F, true, null);
+        gruta.addItem("La vara de la verdad", 3.1F, true, "Da el derecho de gobernar el universo");
+        rutaEscarpada.addItem("Cartelon indicador", 34.2F, false, "Lo unico legible es... 'Highway to hell'... Que cachondo el tio....");
+        
+        // Objetos del pueblo
+        casucha.addItem("Rara roca de aspecto extraterrestre", 0.11F, false, "¿Es un... ¡Nokia 3210 fosilizado!?");
+        huerto.addItem("Espantapajaros con un colador por sombrero", 9.54F, false, "Hay un hueco en el pecho que dice 'Insertar corazon aqui'");
+        
+        // Salidas de la casa
+        recibidor.setExit("norte", pasillo);
+        pasillo.setExit("norte", comedor);
+        pasillo.setExit("este", salaEstar);
+        pasillo.setExit("sur", recibidor);
+        pasillo.setExit("oeste", dormServicio);
+        dormServicio.setExit("norte", cocina);
+        dormServicio.setExit("este", pasillo);
+        salaEstar.setExit("norte", biblioteca);
+        salaEstar.setExit("sureste", barSecreto);
+        salaEstar.setExit("oeste", pasillo);
+        barSecreto.setExit("noroeste", salaEstar);
+        biblioteca.setExit("sur", salaEstar);
+        cocina.setExit("norte", servEmpleados);
+        cocina.setExit("este", comedor);
+        cocina.setExit("sur", dormServicio);
+        comedor.setExit("norte", pasilloTrasero);
+        comedor.setExit("sur", pasillo);
+        comedor.setExit("oeste", cocina);
+        servEmpleados.setExit("sur", cocina);
+        pasilloTrasero.setExit("norte", dormGreg);
+        pasilloTrasero.setExit("este", dormPadres);
+        pasilloTrasero.setExit("sur", comedor);
+        dormPadres.setExit("sur", servPadres);
+        dormPadres.setExit("oeste", pasilloTrasero);
+        servPadres.setExit("norte", dormPadres);
+        dormGreg.setExit("sur", pasilloTrasero);
+        dormGreg.setExit("oeste", servGreg);
+        servGreg.setExit("este", dormGreg);
+        
+        // Salidas de la mazmorra
+        cueva.setExit("norte", descampado);
+        descampado.setExit("sur", cueva);
+        descampado.setExit("oeste", bosque);
+        descampado.setExit("noroeste", lindeBosque);
+        descampado.setExit("norte", caminoTierra);
+        descampado.setExit("este", barranco);
+        bosque.setExit("este", descampado);
+        bosque.setExit("norte", lindeBosque);
+        lindeBosque.setExit("norte", laguna);
+        lindeBosque.setExit("este", descampado);
+        lindeBosque.setExit("sur", bosque);
+        barranco.setExit("oeste", descampado);
+        caminoTierra.setExit("sur", descampado);
+        caminoTierra.setExit("oeste", laguna);
+        caminoTierra.setExit("norte", puente);
+        laguna.setExit("este", caminoTierra);
+        laguna.setExit("sur", lindeBosque);
+        puente.setExit("este", caminoEmpedrado);
+        puente.setExit("sur", caminoTierra);
+        caminoEmpedrado.setExit("oeste", puente);
+        caminoEmpedrado.setExit("este", entradaPueblo);
+        pasaje.setExit("arriba", pozo);
+        pasaje.setExit("sur", fondoBarranco);
+        fondoBarranco.setExit("norte", pasaje);
+        fondoBarranco.setExit("este", cavidad);
+        fondoBarranco.setExit("cauce", riachuelo);
+        riachuelo.setExit("barranco", fondoBarranco);
+        cavidad.setExit("oeste", fondoBarranco);
+        cavidad.setExit("este", gruta);
+        gruta.setExit("oeste", cavidad);
+        caminoMonte.setExit("oeste", calle);
+        caminoMonte.setExit("norte", rutaEscarpada);
+        rutaEscarpada.setExit("sur", caminoMonte);
+        rutaEscarpada.setExit("oeste", refugio);
+        refugio.setExit("este", rutaEscarpada);
+        
+        // Salidas del pueblo
+        entradaPueblo.setExit("oeste", caminoEmpedrado);
+        entradaPueblo.setExit("este", calle);
+        calle.setExit("oeste", entradaPueblo);
+        calle.setExit("norte", posada);
+        calle.setExit("noreste", casucha);
+        calle.setExit("este", caminoMonte);
+        calle.setExit("sureste", casa);
+        posada.setExit("sur", calle);
+        casucha.setExit("suroeste", calle);
+        casa.setExit("noroeste", calle);
+        huerto.setExit("norte", casa);
+        huerto.setExit("esquina", pozo);
+        pozo.setExit("norte", huerto);
+        pozo.setExit("abajo", pasaje);
         
         // Set initial room
         startRoom = recibidor;
