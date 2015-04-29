@@ -14,6 +14,7 @@ public enum GameText{
     YOU_ARE_IN_PLACE ("Estas en"),
     ROOM_WITHOUT_OBJECTS ("Esta habitacion no tiene objetos analizables"),
     NOT_INTERESTING_OBJECTS ("No ves objetos que llamen la atencion"),
+    NOT_AVAILABLE_NPC ("No hay personajes con los que interactuar"),
     
     // Player
     DIRECTION_NOT_INDICATED ("Si no indicas donde, no te vas a mover"),
@@ -41,6 +42,10 @@ public enum GameText{
     
     // CollectableItem
     DESCRIPTION_UNAVAILABLE ("No hay detalles ampliables sobre el objeto"),
+    
+    // ActiveNPC
+    NPC_ASK_FOR_OBJECT ("Si me traes lo que busco te ayudare:"),
+    NPC_GETS_OBJECT ("¡Oh, vaya, lo tienes! ¡Genial!"),
     
     // Generic
     PICKING_INEXISTENT_OBJECT ("Ese objeto no existe"),

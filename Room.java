@@ -22,7 +22,8 @@ public class Room
     private ArrayList<CollectableItem> objetos;
     private Room teleportRoom;
     private String teleportString;
-
+    private ArrayList<PassiveNPC> pasivos;
+    private ArrayList<ActiveNPC> activos;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -36,6 +37,8 @@ public class Room
         objetos = new ArrayList<CollectableItem>();
         teleportRoom = teleport;
         teleportString = message;
+        pasivos = new ArrayList<PassiveNPC>();
+        activos = new ArrayList<ActiveNPC>();
     }
     
     /**
@@ -127,6 +130,18 @@ public class Room
         }
     }
     
+    public void addPassiveNPC(PassiveNPC pasivo){
+        pasivos.add(pasivo);
+    }
+    
+    public void addActiveNPC(ActiveNPC activo){
+        activos.add(activo);
+    }
+    
+    public void removeActiveNPC(ActiveNPC activo){
+        activos.remove(activo);
+    }
+    
     /**
      * Return a description of the room's exits.
      * For example: "Exits: north east west"
@@ -176,6 +191,16 @@ public class Room
             }
         }else{
             descripcion += GameText.NOT_INTERESTING_OBJECTS.getText() + "\n";
+        }
+        if(activos.size() != 0 || pasivos.size() != 0){
+            for(PassiveNPC tio : pasivos){
+                descripcion += tio.toString() + "\n";
+            }
+            for(ActiveNPC tio : activos){
+                descripcion += tio.toString() + "\n";
+            }
+        }else{
+            descripcion += GameText.NOT_AVAILABLE_NPC.getText() + "\n";
         }
         descripcion += getExitString();
         return descripcion;

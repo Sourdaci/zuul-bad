@@ -207,6 +207,11 @@ public class Game
         pozo.setExit("norte", huerto);
         pozo.setExit("abajo", pasaje);
         
+        // PNJ Pasivos
+        recibidor.addPassiveNPC(new PassiveNPC("Mayordomo Jeffrey", "Bienvenido a la mansion Banks", "Caballero, le ruego no obstaculice la entrada"));
+        casa.addActiveNPC(new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
+            "¿A que me conservo en forma? Anda, sueltame el biceps antes de que te enamores"));
+        
         // Set initial room
         startRoom = recibidor;
     }
