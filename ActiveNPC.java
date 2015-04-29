@@ -12,7 +12,7 @@ public class ActiveNPC
     private String nombre;
     private String frase, fraseAtaque;
     private boolean pelear, objetoEncontrado;
-    private int vida;
+    private int vida, vidaRestante;
     private int ataque;
     private int defensa;
     private CollectableItem buscado;
@@ -36,6 +36,7 @@ public class ActiveNPC
         fraseObjeto = null;
         objetoEncontrado = false;
         vida = -1;
+        vidaRestante = -1;
         ataque = -1;
         defensa = -1;
         direccion = null;
@@ -46,6 +47,7 @@ public class ActiveNPC
     public void setAtributos(int pv, int pa, int pd){
         pelear = true;
         vida = pv;
+        vidaRestante = pv;
         ataque = pa;
         defensa = pd;
     }
@@ -86,6 +88,10 @@ public class ActiveNPC
     }
     
     public int getVitalidad(){
+        return vidaRestante;
+    }
+    
+    public int getVitalidadTotal(){
         return vida;
     }
     
@@ -99,6 +105,10 @@ public class ActiveNPC
     
     public int getID(){
         return iD;
+    }
+    
+    public void setVidaRestante(int num){
+        vidaRestante = num;
     }
     
     @Override

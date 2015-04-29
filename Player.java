@@ -13,15 +13,18 @@ public class Player
     private Stack<Room> lastRoom;
     private ArrayList<CollectableItem> objetos;
     private float cargaMax;
+    private int vida, vidaRestante;
     
     /**
      * Constructor for objects of class Player
      */
-    public Player(Room startRoom, float carga){
+    public Player(Room startRoom, float carga, int pv){
         currentRoom = startRoom;
         lastRoom = new Stack<Room>();
         objetos = new ArrayList<CollectableItem>();
         cargaMax = carga;
+        vida = pv;
+        vidaRestante = pv;
     }
     
     /**
@@ -220,6 +223,18 @@ public class Player
         }else{
             System.out.println(GameText.ROOM_WITHOUT_NPC.getText());
         }
+    }
+    
+    public void setVidaRestante(int num){
+        vidaRestante = num;
+    }
+    
+    public int getVitalidad(){
+        return vidaRestante;
+    }
+    
+    public int getVitalidadTotal(){
+        return vida;
     }
     
     public boolean enInventario(CollectableItem item){
