@@ -100,6 +100,9 @@ public class Game
         dormGreg.setExit("west", servGreg);
         servGreg.setExit("east", dormGreg);
         
+        // PNJ Pasivos
+        recibidor.addPassiveNPC(new PassiveNPC("Mayordomo Jeffrey", "Bienvenido a la mansion Banks", "Caballero, le ruego no obstaculice la entrada"));
+        
         // Set initial room
         startRoom = recibidor;
     }
