@@ -24,13 +24,14 @@ public class Room
     private String teleportString;
     private ArrayList<PassiveNPC> pasivos;
     private ArrayList<ActiveNPC> activos;
+    private boolean endGame;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, Room teleport, String message) 
+    public Room(String description, Room teleport, String message, boolean end) 
     {
         this.description = description;
         salidasDisponibles = new HashMap<String, Room>();
@@ -39,6 +40,7 @@ public class Room
         teleportString = message;
         pasivos = new ArrayList<PassiveNPC>();
         activos = new ArrayList<ActiveNPC>();
+        endGame = end;
     }
     
     /**

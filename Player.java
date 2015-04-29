@@ -14,17 +14,20 @@ public class Player
     private ArrayList<CollectableItem> objetos;
     private float cargaMax;
     private int vida, vidaRestante;
+    private int ataque, defensa;
     
     /**
      * Constructor for objects of class Player
      */
-    public Player(Room startRoom, float carga, int pv){
+    public Player(Room startRoom, float carga, int pv, int atk, int def){
         currentRoom = startRoom;
         lastRoom = new Stack<Room>();
         objetos = new ArrayList<CollectableItem>();
         cargaMax = carga;
         vida = pv;
         vidaRestante = pv;
+        ataque = atk;
+        defensa = def;
     }
     
     /**
@@ -235,6 +238,14 @@ public class Player
     
     public int getVitalidadTotal(){
         return vida;
+    }
+    
+    public int getAtaque(){
+        return ataque;
+    }
+    
+    public int getDefensa(){
+        return defensa;
     }
     
     public boolean enInventario(CollectableItem item){
