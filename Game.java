@@ -115,6 +115,8 @@ public class Game
         
         // Objetos de la mazmorra
         barranco.addItem("Chapa metalica oxidada", 0.09F, false, "Es una matricula de California que pone 'OUTATIME'");
+        CollectableItem flauta = new CollectableItem("Pokeflauta", 0.06F, true, "Sientes la tentacion de tocarla y de echar la siesta");
+        lindeBosque.addItemToRoom(flauta);
         laguna.addItem("Una caja con enseres raros", 16.9F, false, "Destacan las botellas de ron 'BlackPearl' y el LP de 'Saca el whisky Cheli'");
         riachuelo.addItem("Pepitas de oro", 0.02F, true, null);
         gruta.addItem("La vara de la verdad", 3.1F, true, "Da el derecho de gobernar el universo");
@@ -209,8 +211,14 @@ public class Game
         
         // PNJ Pasivos
         recibidor.addPassiveNPC(new PassiveNPC("Mayordomo Jeffrey", "Bienvenido a la mansion Banks", "Caballero, le ruego no obstaculice la entrada"));
-        casa.addActiveNPC(new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
-            "¿A que me conservo en forma? Anda, sueltame el biceps antes de que te enamores"));
+        
+        // PNJ Activos
+        ActiveNPC vivi = new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
+            "¿A que me conservo en forma? Anda, sueltame el biceps antes de que te enamores");
+        vivi.setObjeto(flauta, "Encontraras un arma mistica que solo tu puedes usar en algun " + 
+            "lugar del fondo del barranco\nLlegaras alli por mi pozo", casa, "sur", huerto);
+        casa.addActiveNPC(vivi);
+            
         
         // Set initial room
         startRoom = recibidor;
@@ -298,6 +306,9 @@ public class Game
                 break;
             case AUX:
                 printDetailedHelp();
+                break;
+            case TALK:
+                talkWithNPC(command);
                 break;
             }
 
@@ -390,6 +401,10 @@ public class Game
      */
     private void lookItemOnInventory(Command command){
         player.lookItemOnInventory(secondWord(command));
+    }
+    
+    public void talkWithNPC(Command command){
+        player.talkWith(secondWord(command));
     }
     
     /** 

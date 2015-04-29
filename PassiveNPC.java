@@ -36,6 +36,10 @@ public class PassiveNPC
         return false;
     }
     
+    public int getID(){
+        return iD;
+    }
+    
     @Override
     public String toString(){
         return String.format(">> (id %3d) %s", iD, nombre);

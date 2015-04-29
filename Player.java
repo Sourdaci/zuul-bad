@@ -199,6 +199,29 @@ public class Player
         }
     }
     
+    public void talkWith(String idNPC){
+        if(currentRoom.availableNPC()){
+            try{
+                int id = Integer.parseInt(idNPC);
+                ActiveNPC activo = currentRoom.getActiveNPC(id);
+                if(activo == null){
+                    PassiveNPC pasivo = currentRoom.getPassiveNPC(id);
+                    if(pasivo == null){
+                        System.out.println(GameText.NPC_ID_INVALID.getText());
+                    }else{
+                        pasivo.hablar();
+                    }
+                }else{
+                        activo.hablar(this);
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.NPC_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.ROOM_WITHOUT_NPC.getText());
+        }
+    }
+    
     public boolean enInventario(CollectableItem item){
         return objetos.contains(item);
     }

@@ -30,6 +30,9 @@ public enum GameText{
     DROPPING_INEXISTENT_OBJECT ("Intentas dejar un objeto que no tienes"),
     DROPPING_OBJECT_SUCCESSFULLY ("Dejas en la habitacion"),
     DROPPING_OBJECT_WITHOUT_OBJECT ("Soltar... ¿que? No has dicho que quieres soltar"),
+    NPC_ID_INVALID ("El personaje con el que quieres hablar no existe"),
+    NPC_ID_NOT_NUMBER ("El ID del personaje es un numero"),
+    ROOM_WITHOUT_NPC ("En esta zona no hay personajes con los que hablar"),
     
     // Game
     GOODBYE_MESSAGE ("Gracias por jugar. Hasta la proxima"),

@@ -62,13 +62,17 @@ public class ActiveNPC
         if(buscado != null){
             System.out.println(frase);
             if(!objetoEncontrado){
-                frase = GameText.NPC_ASK_FOR_OBJECT.getText() + "\n" + buscado.getDescripcion();
+                if(!frase.contains(GameText.NPC_ASK_FOR_OBJECT.getText())){
+                    frase = GameText.NPC_ASK_FOR_OBJECT.getText() + ": " + buscado.getDescripcion();
+                    System.out.println(frase);
+                }
                 if(player.enInventario(buscado)){
                     System.out.println(GameText.NPC_GETS_OBJECT.getText());
                     frase = fraseObjeto;
                     objetoEncontrado = true;
                     player.entregarObjetoNPC(buscado);
                     origen.setExit(direccion, destino);
+                    System.out.println(frase);
                 }
             }
         }else{
@@ -91,6 +95,10 @@ public class ActiveNPC
     
     public int getDefensa(){
         return defensa;
+    }
+    
+    public int getID(){
+        return iD;
     }
     
     @Override

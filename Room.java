@@ -142,6 +142,30 @@ public class Room
         activos.remove(activo);
     }
     
+    public boolean availableNPC(){
+        return(!activos.isEmpty() || !pasivos.isEmpty());
+    }
+    
+    public ActiveNPC getActiveNPC(int id){
+        ActiveNPC personaje = null;
+        for(int i=0; i<activos.size() && personaje == null; i++){
+            if(activos.get(i).getID() == id){
+                personaje = activos.get(i);
+            }
+        }
+        return personaje;
+    }
+    
+    public PassiveNPC getPassiveNPC(int id){
+        PassiveNPC personaje = null;
+        for(int i=0; i< pasivos.size() && personaje == null; i++){
+            if(pasivos.get(i).getID() == id){
+                personaje = pasivos.get(i);
+            }
+        }
+        return personaje;
+    }
+    
     /**
      * Return a description of the room's exits.
      * For example: "Exits: north east west"
