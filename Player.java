@@ -193,6 +193,14 @@ public class Player
         }
     }
     
+    public boolean enInventario(CollectableItem item){
+        return objetos.contains(item);
+    }
+    
+    public void entregarObjetoNPC(CollectableItem item){
+        objetos.remove(item);
+    }
+    
     /**
      * Calcula el peso de los objetos que lleva el jugador en el inventario
      */

@@ -43,6 +43,10 @@ public enum GameText{
     // CollectableItem
     DESCRIPTION_UNAVAILABLE ("No hay detalles ampliables sobre el objeto"),
     
+    // ActiveNPC
+    NPC_ASK_FOR_OBJECT ("Si me traes lo que busco te ayudare:"),
+    NPC_GETS_OBJECT ("¡Oh, vaya, lo tienes! ¡Genial!"),
+    
     // Generic
     PICKING_INEXISTENT_OBJECT ("Ese objeto no existe"),
     OBJECT_ID_NOT_NUMBER ("El id del objeto es un numero"),

@@ -11,12 +11,15 @@ public class ActiveNPC
     private int iD;
     private String nombre;
     private String frase, fraseAtaque;
-    private boolean pelear;
+    private boolean pelear, objetoEncontrado;
     private int vida;
     private int ataque;
     private int defensa;
     private CollectableItem buscado;
     private String fraseObjeto;
+    private String direccion;
+    private Room origen;
+    private Room destino;
 
     /**
      * Constructor for objects of class ActiveNPC
@@ -31,6 +34,13 @@ public class ActiveNPC
         pelear = false;
         buscado = null;
         fraseObjeto = null;
+        objetoEncontrado = false;
+        vida = -1;
+        ataque = -1;
+        defensa = -1;
+        direccion = null;
+        origen = null;
+        destino = null;
     }
 
     public void setAtributos(int pv, int pa, int pd){
@@ -40,18 +50,47 @@ public class ActiveNPC
         defensa = pd;
     }
     
-    public void setObjeto(CollectableItem item, String encontrado){
+    public void setObjeto(CollectableItem item, String encontrado, Room origen, String direccion, Room destino){
         buscado = item;
         fraseObjeto = encontrado;
+        this.origen = origen;
+        this.direccion = direccion;
+        this.destino = destino;
     }
     
-    public void hablar(){
-        System.out.println(frase);
+    public void hablar(Player player){
+        if(buscado != null){
+            System.out.println(frase);
+            if(!objetoEncontrado){
+                frase = GameText.NPC_ASK_FOR_OBJECT.getText() + "\n" + buscado.getDescripcion();
+                if(player.enInventario(buscado)){
+                    System.out.println(GameText.NPC_GETS_OBJECT.getText());
+                    frase = fraseObjeto;
+                    objetoEncontrado = true;
+                    player.entregarObjetoNPC(buscado);
+                    origen.setExit(direccion, destino);
+                }
+            }
+        }else{
+            System.out.println(frase);
+        }
     }
     
     public boolean pelea(){
         System.out.println(fraseAtaque);
         return pelear;
+    }
+    
+    public int getVitalidad(){
+        return vida;
+    }
+    
+    public int getAtaque(){
+        return ataque;
+    }
+    
+    public int getDefensa(){
+        return defensa;
     }
     
     @Override
