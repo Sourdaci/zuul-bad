@@ -218,7 +218,7 @@ public class Player
                         pasivo.hablar();
                     }
                 }else{
-                        activo.hablar(this);
+                    activo.hablar(this);
                 }
             }catch (Exception ex){
                 System.out.println(GameText.NPC_ID_NOT_NUMBER.getText());
@@ -226,6 +226,34 @@ public class Player
         }else{
             System.out.println(GameText.ROOM_WITHOUT_NPC.getText());
         }
+    }
+    
+    public ActiveNPC battle(String idNPC){
+        ActiveNPC activo = null;
+        if(currentRoom.availableNPC()){
+            try{
+                int id = Integer.parseInt(idNPC);
+                activo = currentRoom.getActiveNPC(id);
+                if(activo == null){
+                    PassiveNPC pasivo = currentRoom.getPassiveNPC(id);
+                    if(pasivo == null){
+                        System.out.println(GameText.NPC_ID_ATTACK_INVALID.getText());
+                    }else{
+                        pasivo.pelea();
+                    }
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.NPC_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.ROOM_WITHOUT_NPC.getText());
+        }
+        if(activo != null){
+            if(!activo.pelea()){
+                activo = null;
+            }
+        }
+        return activo;
     }
     
     public void setVidaRestante(int num){
@@ -246,6 +274,10 @@ public class Player
     
     public int getDefensa(){
         return defensa;
+    }
+    
+    public void enemigoDerrotado(ActiveNPC enemigo){
+        currentRoom.removeActiveNPC(enemigo);
     }
     
     public boolean enInventario(CollectableItem item){

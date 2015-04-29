@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -20,6 +21,7 @@ public class Game
     private Parser parser;
     private Player player;
     private Room startRoom;
+    private boolean finished;
         
     /**
      * Create the game and initialise its internal map.
@@ -28,7 +30,8 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        player = new Player(startRoom, 0.15F, 100, 20, 15);
+        player = new Player(startRoom, 6F, 100, 20, 15);
+        finished = false;
     }
 
     /**
@@ -218,6 +221,7 @@ public class Game
         vivi.setObjeto(flauta, "Encontraras un arma mistica que solo tu puedes usar en algun " + 
             "lugar del fondo del barranco\nLlegaras alli por mi pozo", casa, "sur", huerto);
         casa.addActiveNPC(vivi);
+        
             
         
         // Set initial room
@@ -234,7 +238,6 @@ public class Game
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
                 
-        boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
@@ -312,6 +315,9 @@ public class Game
                 break;
             case TALK:
                 talkWithNPC(command);
+                break;
+            case FIGHT:
+                battle(command);
                 break;
             }
 
@@ -406,8 +412,93 @@ public class Game
         player.lookItemOnInventory(secondWord(command));
     }
     
-    public void talkWithNPC(Command command){
+    private void talkWithNPC(Command command){
         player.talkWith(secondWord(command));
+    }
+    
+    private void battle(Command command){
+        ActiveNPC enemigo = player.battle(secondWord(command));
+        if(enemigo != null){
+            battleWithNPC(enemigo);
+        }
+    }
+    
+    private void battleWithNPC(ActiveNPC enemigo){
+        Random dado = new Random();
+        while(player.getVitalidad() > 0 && enemigo.getVitalidad() > 0){
+            int tirada = dado.nextInt(20) + 1;
+            int ataquePlayer = player.getAtaque();
+            int defensaNPC = enemigo.getDefensa();
+            int resultado = 0;
+            switch (tirada){
+                case 1:
+                    System.out.println(GameText.PLAYER_EPIC_FAIL.getText());
+                    break;
+                case 20:
+                    System.out.println(GameText.PLAYER_CRITICAL_ATTACK.getText());
+                    resultado = (ataquePlayer * 2 + tirada) - defensaNPC;
+                    if(resultado < 1){
+                        System.out.println(GameText.PLAYER_CANT_DAMAGE_FOE.getText());
+                    }else{
+                        System.out.println(GameText.PLAYER_DO_DAMAGE.getText() + ": " + resultado);
+                        enemigo.setVidaRestante(enemigo.getVitalidad() - resultado);
+                    }
+                    break;
+                default:
+                    resultado = ataquePlayer - defensaNPC + tirada;
+                    if(resultado < 1){
+                        System.out.println(GameText.PLAYER_CANT_DAMAGE_FOE.getText());
+                    }else{
+                        System.out.println(GameText.PLAYER_DO_DAMAGE.getText() + ": " + resultado);
+                        enemigo.setVidaRestante(enemigo.getVitalidad() - resultado);
+                    }
+                    break;
+            }
+            if(enemigo.getVitalidad() > 0){
+                tirada = dado.nextInt(20) + 1;
+                int ataqueNPC = enemigo.getAtaque();
+                int defensaPlayer = player.getDefensa();
+                switch (tirada){
+                    case 1:
+                        System.out.println(GameText.FOE_EPIC_FAIL.getText());
+                        break;
+                    case 20:
+                        System.out.println(GameText.FOE_CRITICAL_ATTACK.getText());
+                        resultado = (ataqueNPC * 2 + tirada) - defensaPlayer;
+                        if(resultado < 1){
+                            System.out.println(GameText.FOE_CANT_DAMAGE_FOE.getText());
+                        }else{
+                            System.out.println(GameText.FOE_DO_DAMAGE.getText() + ": " + resultado);
+                            player.setVidaRestante(enemigo.getVitalidad() - resultado);
+                        }
+                        break;
+                    default:
+                        resultado = ataqueNPC - defensaPlayer + tirada;
+                        if(resultado < 1){
+                            System.out.println(GameText.FOE_CANT_DAMAGE_FOE.getText());
+                        }else{
+                            System.out.println(GameText.FOE_DO_DAMAGE.getText() + ": " + resultado);
+                            player.setVidaRestante(enemigo.getVitalidad() - resultado);
+                        }
+                        break;
+                }
+            }
+        }
+        if(player.getVitalidad() < 1){
+            String cadena = enemigo.getVictoria();
+            if(cadena != null){
+                System.out.println(cadena);
+            }
+            System.out.println(GameText.PLAYER_LOSE_GAME.getText());
+            finished = true;
+        }else{
+            String cadena = enemigo.getDerrota();
+            if(cadena != null){
+                System.out.println(cadena);
+            }
+            System.out.println(GameText.PLAYER_WINS_BATTLE.getText() + ": " + enemigo.getNombre());
+            player.enemigoDerrotado(enemigo);
+        }
     }
     
     /** 

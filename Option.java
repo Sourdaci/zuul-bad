@@ -20,6 +20,7 @@ public enum Option
     LOOK_CLOSELY ("observar", "Examina un objeto de la zona. Hay que indicarlo"), 
     EXAMINE ("examinar", "Examina un objeto del Inventario. Hay que indicarlo"), 
     TALK ("hablar", "Habla con un personaje de la zona. Hay que indicarlo"),
+    FIGHT ("atacar", "Pelea con un personaje de la zona. Hay que indicarlo"),
     UNKNOWN ("Desconocido", null);
     
     private final String orden;

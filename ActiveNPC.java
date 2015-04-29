@@ -20,6 +20,7 @@ public class ActiveNPC
     private String direccion;
     private Room origen;
     private Room destino;
+    private String victoria, derrota;
 
     /**
      * Constructor for objects of class ActiveNPC
@@ -44,12 +45,14 @@ public class ActiveNPC
         destino = null;
     }
 
-    public void setAtributos(int pv, int pa, int pd){
+    public void setAtributos(int pv, int pa, int pd, String victoria, String derrota){
         pelear = true;
         vida = pv;
         vidaRestante = pv;
         ataque = pa;
         defensa = pd;
+        this.victoria = victoria;
+        this.derrota = derrota;
     }
     
     public void setObjeto(CollectableItem item, String encontrado, Room origen, String direccion, Room destino){
@@ -82,6 +85,10 @@ public class ActiveNPC
         }
     }
     
+    public String getNombre(){
+        return nombre;
+    }
+    
     public boolean pelea(){
         System.out.println(fraseAtaque);
         return pelear;
@@ -105,6 +112,14 @@ public class ActiveNPC
     
     public int getID(){
         return iD;
+    }
+    
+    public String getVictoria(){
+        return victoria;
+    }
+    
+    public String getDerrota(){
+        return derrota;
     }
     
     public void setVidaRestante(int num){
