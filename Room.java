@@ -195,6 +195,10 @@ public class Room
         return teleportRoom;
     }
     
+    public boolean endGame(){
+        return endGame;
+    }
+    
     /**
      * @return The description of the room.
      */

@@ -256,6 +256,10 @@ public class Player
         objetos.remove(item);
     }
     
+    public boolean roomEndsGame(){
+        return currentRoom.endGame();
+    }
+    
     /**
      * Calcula el peso de los objetos que lleva el jugador en el inventario
      */

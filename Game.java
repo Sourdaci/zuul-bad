@@ -238,6 +238,9 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            if(!finished){
+                finished = player.roomEndsGame();
+            }
         }
         System.out.println(GameText.GOODBYE_MESSAGE.getText());
     }
