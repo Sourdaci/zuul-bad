@@ -58,7 +58,7 @@ public enum GameText{
     DESCRIPTION_UNAVAILABLE ("No hay detalles ampliables sobre el objeto"),
     
     // ActiveNPC
-    NPC_ASK_FOR_OBJECT ("Si me traes lo que busco te ayudare:"),
+    NPC_ASK_FOR_OBJECT ("Si me traes lo que busco te ayudare"),
     NPC_GETS_OBJECT ("¡Oh, vaya, lo tienes! ¡Genial!"),
     
     // Generic

@@ -21,6 +21,7 @@ public class ActiveNPC
     private Room origen;
     private Room destino;
     private String victoria, derrota;
+    boolean abrirAlMorir, abrirSiObjeto;
 
     /**
      * Constructor for objects of class ActiveNPC
@@ -43,6 +44,8 @@ public class ActiveNPC
         direccion = null;
         origen = null;
         destino = null;
+        abrirAlMorir = false;
+        abrirSiObjeto = false;
     }
 
     public void setAtributos(int pv, int pa, int pd, String victoria, String derrota){
@@ -55,16 +58,21 @@ public class ActiveNPC
         this.derrota = derrota;
     }
     
-    public void setObjeto(CollectableItem item, String encontrado, Room origen, String direccion, Room destino){
-        buscado = item;
-        fraseObjeto = encontrado;
+    public void setAbrirPuerta(Room origen, String direccion, Room destino, boolean muerte, boolean recibe){
         this.origen = origen;
         this.direccion = direccion;
         this.destino = destino;
+        abrirAlMorir = muerte;
+        abrirSiObjeto = recibe;
+    }
+    
+    public void setObjeto(CollectableItem item, String encontrado){
+        buscado = item;
+        fraseObjeto = encontrado;
     }
     
     public void hablar(Player player){
-        if(buscado != null){
+        if(abrirSiObjeto){
             System.out.println(frase);
             if(!objetoEncontrado){
                 if(!frase.contains(GameText.NPC_ASK_FOR_OBJECT.getText())){
@@ -120,6 +128,12 @@ public class ActiveNPC
     
     public String getDerrota(){
         return derrota;
+    }
+    
+    public void abrirPuerta(){
+        if(abrirAlMorir){
+            origen.setExit(direccion, destino);
+        }
     }
     
     public void setVidaRestante(int num){

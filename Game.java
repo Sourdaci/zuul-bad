@@ -21,7 +21,7 @@ public class Game
     private Parser parser;
     private Player player;
     private Room startRoom;
-    private boolean finished;
+    private boolean playerDead;
         
     /**
      * Create the game and initialise its internal map.
@@ -31,7 +31,7 @@ public class Game
         createRooms();
         parser = new Parser();
         player = new Player(startRoom, 6F, 100, 20, 15);
-        finished = false;
+        playerDead = false;
     }
 
     /**
@@ -218,9 +218,16 @@ public class Game
         // PNJ Activos
         ActiveNPC vivi = new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
             "¿A que me conservo en forma? Anda, sueltame el biceps antes de que te enamores");
-        vivi.setObjeto(flauta, "Encontraras un arma mistica que solo tu puedes usar en algun " + 
-            "lugar del fondo del barranco\nLlegaras alli por mi pozo", casa, "sur", huerto);
+        vivi.setObjeto(flauta, "Encontraras un arma mistica que solo tu puedes usar en\n" + 
+            "algun lugar del fondo del barranco\nLlegaras alli por mi pozo");
+        vivi.setAbrirPuerta(casa, "sur", huerto, false, true);
         casa.addActiveNPC(vivi);
+        ActiveNPC ganondorf = new ActiveNPC("Ganondorf", "Adelante, elegido, te estoy esperando", "¡Ha llegado tu final");
+        ganondorf.setAtributos(500, 70, 59, "Ahora nadie podra detenerme....\nLo ultimo que oyes antes de hundirte en las sombras\n" + 
+            "son los desgarradores gritos de dolor de Greg al otro lado del portal", "¡¡¡Naaaaaaarrrrggghhhhh!!!\n" + 
+            "Ves como tu rival se desintegra envuelto en llamas verdes retorciendose de dolor");
+        ganondorf.setAbrirPuerta(refugio, "oeste", portal, true, false);
+        refugio.addActiveNPC(ganondorf);
         
             
         
@@ -237,12 +244,16 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+        
+        boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
             if(!finished){
                 finished = player.roomEndsGame();
+            }
+            if(playerDead){
+                finished = true;
             }
         }
         System.out.println(GameText.GOODBYE_MESSAGE.getText());
@@ -469,7 +480,7 @@ public class Game
                             System.out.println(GameText.FOE_CANT_DAMAGE_FOE.getText());
                         }else{
                             System.out.println(GameText.FOE_DO_DAMAGE.getText() + ": " + resultado);
-                            player.setVidaRestante(enemigo.getVitalidad() - resultado);
+                            player.setVidaRestante(player.getVitalidad() - resultado);
                         }
                         break;
                     default:
@@ -478,7 +489,7 @@ public class Game
                             System.out.println(GameText.FOE_CANT_DAMAGE_FOE.getText());
                         }else{
                             System.out.println(GameText.FOE_DO_DAMAGE.getText() + ": " + resultado);
-                            player.setVidaRestante(enemigo.getVitalidad() - resultado);
+                            player.setVidaRestante(player.getVitalidad() - resultado);
                         }
                         break;
                 }
@@ -490,13 +501,14 @@ public class Game
                 System.out.println(cadena);
             }
             System.out.println(GameText.PLAYER_LOSE_GAME.getText());
-            finished = true;
+            playerDead = true;
         }else{
             String cadena = enemigo.getDerrota();
             if(cadena != null){
                 System.out.println(cadena);
             }
             System.out.println(GameText.PLAYER_WINS_BATTLE.getText() + ": " + enemigo.getNombre());
+            enemigo.abrirPuerta();
             player.enemigoDerrotado(enemigo);
         }
     }
