@@ -122,7 +122,7 @@ public class Game
         lindeBosque.addItemToRoom(flauta);
         laguna.addItem("Una caja con enseres raros", 16.9F, false, "Destacan las botellas de ron 'BlackPearl' y el LP de 'Saca el whisky Cheli'");
         riachuelo.addItem("Pepitas de oro", 0.02F, true, null);
-        gruta.addEquipment("La vara de la verdad", "Da el derecho de gobernar el universo", 90, 37, true);
+        gruta.addEquipment("La vara de la verdad", "Da el derecho de gobernar el universo", 96, 67, true);
         rutaEscarpada.addItem("Cartelon indicador", 34.2F, false, "Lo unico legible es... 'Highway to hell'... Que cachondo el tio....");
         
         // Objetos del pueblo
@@ -223,10 +223,10 @@ public class Game
         vivi.setAbrirPuerta(casa, "sur", huerto, false, true);
         casa.addActiveNPC(vivi);
         ActiveNPC ganondorf = new ActiveNPC("Ganondorf", "Adelante, elegido, te estoy esperando", "¡Ha llegado tu final");
-        ganondorf.setAtributos(500, 70, 59, "Ahora nadie podra detenerme....\nLo ultimo que oyes antes de hundirte en las sombras\n" + 
+        ganondorf.setAtributos(300, 90, 59, "Ahora nadie podra detenerme....\nLo ultimo que oyes antes de hundirte en las sombras\n" + 
             "son los desgarradores gritos de dolor de Greg al otro lado del portal", "¡¡¡Naaaaaaarrrrggghhhhh!!!\n" + 
             "Ves como tu rival se desintegra envuelto en llamas verdes retorciendose de dolor");
-        ganondorf.setAbrirPuerta(refugio, "oeste", portal, true, false);
+        ganondorf.setAbrirPuerta(refugio, "portal", portal, true, false);
         refugio.addActiveNPC(ganondorf);
         
             
@@ -391,7 +391,9 @@ public class Game
     private void goRoom(Command command) 
     {
         player.goRoom(secondWord(command));
-        player.lookRoom();
+        if(!player.roomEndsGame()){
+            player.lookRoom();
+        }
     }
     
     /**

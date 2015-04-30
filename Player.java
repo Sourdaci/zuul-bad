@@ -17,6 +17,7 @@ public class Player
     private int ataque, defensa;
     private Equipment arma;
     private Equipment armadura;
+    private boolean roomEndedGame;
     
     /**
      * Constructor for objects of class Player
@@ -32,6 +33,7 @@ public class Player
         defensa = def;
         arma = null;
         armadura = null;
+        roomEndedGame = false;
     }
     
     /**
@@ -52,6 +54,7 @@ public class Player
             }else{
                 Room teleport = nextRoom.getTeleportRoom();
                 if(teleport != null){
+                    roomEndedGame = nextRoom.endGame();
                     lastRoom.clear();
                     currentRoom = teleport;
                 }else{
@@ -395,7 +398,7 @@ public class Player
     }
     
     public boolean roomEndsGame(){
-        return currentRoom.endGame();
+        return roomEndedGame;
     }
     
     /**
