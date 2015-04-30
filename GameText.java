@@ -41,6 +41,9 @@ public enum GameText{
     ARMOR_ALREADY_EQUIPPED ("Ya tienes una armadura equipada. Debes quitartela antes"),
     EQUIPMENT_ID_NOT_NUMBER("El ID del equipo es un numero"),
     PICKING_EQUIPMENT_WITHOUT_EQUIPMENT ("Equipar... ¿que? No has dicho que quieres equipar"),
+    EQUIPMENT_ID_NOT_FOUND ("No tienes el equipo que intentas dejar"),
+    DROP_EQUIPMENT_SUCCESSFUL ("Dejas en la zona"),
+    DROP_EQUIPMENT_WITHOUT_EQUIPMENT ("Quitar... ¿que? No has dicho que quieres quitar"),
     
     
     

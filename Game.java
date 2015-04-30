@@ -330,6 +330,12 @@ public class Game
             case FIGHT:
                 battle(command);
                 break;
+            case EQUIP:
+                takeEquip(command);
+                break;
+            case UNEQUIP:
+                dropEquip(command);
+                break;
             }
 
         return wantToQuit;
@@ -511,6 +517,14 @@ public class Game
             enemigo.abrirPuerta();
             player.enemigoDerrotado(enemigo);
         }
+    }
+    
+    private void takeEquip(Command command){
+        player.takeEquipment(secondWord(command));
+    }
+    
+    private void dropEquip(Command command){
+        player.dropEquipment(secondWord(command));
     }
     
     /** 

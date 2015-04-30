@@ -312,6 +312,7 @@ public class Player
                         }else{
                             arma = obj;
                             System.out.println(GameText.EQUIPMENT_SUCCESSFUL.getText() + ": " + obj);
+                            currentRoom.deleteEquipment(obj);
                         }
                     }else{
                         if(armadura != null){
@@ -319,6 +320,7 @@ public class Player
                         }else{
                             armadura = obj;
                             System.out.println(GameText.EQUIPMENT_SUCCESSFUL.getText() + ": " + obj);
+                            currentRoom.deleteEquipment(obj);
                         }
                     }
                 }
@@ -327,6 +329,38 @@ public class Player
             }
         }else{
             System.out.println(GameText.PICKING_EQUIPMENT_WITHOUT_EQUIPMENT.getText());
+        }
+    }
+    
+    public void dropEquipment(String item){
+        if (item != null){
+            try{
+                int id = Integer.parseInt(item);
+                boolean borrado = false;
+                if(arma != null){
+                    if (arma.getID() == id){
+                        System.out.println(GameText.DROP_EQUIPMENT_SUCCESSFUL.getText() + ": " + arma);
+                        currentRoom.addEquipment(arma);
+                        arma = null;
+                        borrado = true;
+                    }
+                }
+                if(!borrado && armadura != null){
+                    if(armadura.getID() == id){
+                        System.out.println(GameText.DROP_EQUIPMENT_SUCCESSFUL.getText() + ": " + armadura);
+                        currentRoom.addEquipment(armadura);
+                        armadura = null;
+                        borrado = true;
+                    }
+                }
+                if(!borrado){
+                    System.out.println(GameText.EQUIPMENT_ID_NOT_FOUND.getText());
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.EQUIPMENT_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.DROP_EQUIPMENT_WITHOUT_EQUIPMENT.getText());
         }
     }
     

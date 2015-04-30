@@ -21,6 +21,8 @@ public enum Option
     EXAMINE ("examinar", "Examina un objeto del Inventario. Hay que indicarlo"), 
     TALK ("hablar", "Habla con un personaje de la zona. Hay que indicarlo"),
     FIGHT ("atacar", "Pelea con un personaje de la zona. Hay que indicarlo"),
+    EQUIP ("equipar", "Te intentas poner un equipo de la zona. Hay que indicarlo"),
+    UNEQUIP ("quitar", "Intentas dejar una equipacion en la zona. Hay que indicarla"),
     UNKNOWN ("Desconocido", null);
     
     private final String orden;
