@@ -122,7 +122,7 @@ public class Game
         lindeBosque.addItemToRoom(flauta);
         laguna.addItem("Una caja con enseres raros", 16.9F, false, "Destacan las botellas de ron 'BlackPearl' y el LP de 'Saca el whisky Cheli'");
         riachuelo.addItem("Pepitas de oro", 0.02F, true, null);
-        gruta.addItem("La vara de la verdad", 3.1F, true, "Da el derecho de gobernar el universo");
+        gruta.addEquipment("La vara de la verdad", "Da el derecho de gobernar el universo", 90, 37, true);
         rutaEscarpada.addItem("Cartelon indicador", 34.2F, false, "Lo unico legible es... 'Highway to hell'... Que cachondo el tio....");
         
         // Objetos del pueblo
@@ -330,6 +330,12 @@ public class Game
             case FIGHT:
                 battle(command);
                 break;
+            case EQUIP:
+                takeEquip(command);
+                break;
+            case UNEQUIP:
+                dropEquip(command);
+                break;
             }
 
         return wantToQuit;
@@ -511,6 +517,14 @@ public class Game
             enemigo.abrirPuerta();
             player.enemigoDerrotado(enemigo);
         }
+    }
+    
+    private void takeEquip(Command command){
+        player.takeEquipment(secondWord(command));
+    }
+    
+    private void dropEquip(Command command){
+        player.dropEquipment(secondWord(command));
     }
     
     /** 

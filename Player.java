@@ -15,6 +15,8 @@ public class Player
     private float cargaMax;
     private int vida, vidaRestante;
     private int ataque, defensa;
+    private Equipment arma;
+    private Equipment armadura;
     
     /**
      * Constructor for objects of class Player
@@ -28,6 +30,8 @@ public class Player
         vidaRestante = pv;
         ataque = atk;
         defensa = def;
+        arma = null;
+        armadura = null;
     }
     
     /**
@@ -269,11 +273,95 @@ public class Player
     }
     
     public int getAtaque(){
-        return ataque;
+        int cantidad = ataque;
+        if(arma != null){
+            cantidad += arma.getBonoAtaque();
+        }
+        if(armadura != null){
+            cantidad += armadura.getBonoAtaque();
+        }
+        return cantidad;
     }
     
     public int getDefensa(){
-        return defensa;
+        int cantidad = defensa;
+        if(arma != null){
+            cantidad += arma.getBonoDefensa();
+        }
+        if(armadura != null){
+            cantidad += armadura.getBonoDefensa();
+        }
+        return cantidad;
+    }
+    
+    /**
+     * El jugador intenta coger un equipo de la zona
+     * 
+     * @param item ID del equipo que quieres coger de la zona
+     */
+    public void takeEquipment(String item){
+        if (item != null){
+            try{
+                Equipment obj = currentRoom.takeEquipment(Integer.parseInt(item));
+                if (obj == null){
+                    System.out.println(GameText.PICKING_INEXISTENT_EQUIPMENT.getText());
+                }else{
+                    if(obj.esArma()){
+                        if(arma != null){
+                            System.out.println(GameText.WEAPON_ALREADY_EQUIPPED.getText());
+                        }else{
+                            arma = obj;
+                            System.out.println(GameText.EQUIPMENT_SUCCESSFUL.getText() + ": " + obj);
+                            currentRoom.deleteEquipment(obj);
+                        }
+                    }else{
+                        if(armadura != null){
+                            System.out.println(GameText.ARMOR_ALREADY_EQUIPPED.getText());
+                        }else{
+                            armadura = obj;
+                            System.out.println(GameText.EQUIPMENT_SUCCESSFUL.getText() + ": " + obj);
+                            currentRoom.deleteEquipment(obj);
+                        }
+                    }
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.EQUIPMENT_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.PICKING_EQUIPMENT_WITHOUT_EQUIPMENT.getText());
+        }
+    }
+    
+    public void dropEquipment(String item){
+        if (item != null){
+            try{
+                int id = Integer.parseInt(item);
+                boolean borrado = false;
+                if(arma != null){
+                    if (arma.getID() == id){
+                        System.out.println(GameText.DROP_EQUIPMENT_SUCCESSFUL.getText() + ": " + arma);
+                        currentRoom.addEquipment(arma);
+                        arma = null;
+                        borrado = true;
+                    }
+                }
+                if(!borrado && armadura != null){
+                    if(armadura.getID() == id){
+                        System.out.println(GameText.DROP_EQUIPMENT_SUCCESSFUL.getText() + ": " + armadura);
+                        currentRoom.addEquipment(armadura);
+                        armadura = null;
+                        borrado = true;
+                    }
+                }
+                if(!borrado){
+                    System.out.println(GameText.EQUIPMENT_ID_NOT_FOUND.getText());
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.EQUIPMENT_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.DROP_EQUIPMENT_WITHOUT_EQUIPMENT.getText());
+        }
     }
     
     public void enemigoDerrotado(ActiveNPC enemigo){

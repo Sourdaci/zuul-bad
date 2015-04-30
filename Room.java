@@ -25,6 +25,7 @@ public class Room
     private ArrayList<PassiveNPC> pasivos;
     private ArrayList<ActiveNPC> activos;
     private boolean endGame;
+    private ArrayList<Equipment> equipoTirado;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -41,6 +42,7 @@ public class Room
         pasivos = new ArrayList<PassiveNPC>();
         activos = new ArrayList<ActiveNPC>();
         endGame = end;
+        equipoTirado = new ArrayList<Equipment>();
     }
     
     /**
@@ -70,6 +72,28 @@ public class Room
      */
     public void addItem(String descripcion, float peso, boolean collect, String detalle){
         objetos.add(new CollectableItem(descripcion, peso, collect, detalle));
+    }
+    
+    public void addEquipment(Equipment cosa){
+        equipoTirado.add(cosa);
+    }
+    
+    public void addEquipment(String nom, String desc, int at, int def, boolean tipo){
+        equipoTirado.add(new Equipment(nom, desc, at, def, tipo));
+    }
+    
+    public void deleteEquipment(Equipment gear){
+        equipoTirado.remove(gear);
+    }
+    
+    public Equipment takeEquipment(int equip){
+        Equipment gear = null;
+        for (int i=0; i<equipoTirado.size(); i++){
+            if(equipoTirado.get(i).getID() == equip){
+                gear = equipoTirado.get(i);
+            }
+        }
+        return gear;
     }
     
     /**
@@ -215,6 +239,7 @@ public class Room
      */
     public String getLongDescription(){
         String descripcion = (GameText.YOU_ARE_IN_PLACE.getText() + ": " + description + "\n");
+        
         if (objetos.size() != 0){
             for(CollectableItem item : objetos){
                 descripcion += item.toString() + "\n";
@@ -222,6 +247,15 @@ public class Room
         }else{
             descripcion += GameText.NOT_INTERESTING_OBJECTS.getText() + "\n";
         }
+        
+        if(equipoTirado.size() != 0){
+            for(Equipment gear : equipoTirado){
+                descripcion += gear.toString() + "\n";
+            }
+        }else{
+            descripcion += GameText.EQUIPMENT_NOT_AVAILABLE.getText();
+        }
+        
         if(activos.size() != 0 || pasivos.size() != 0){
             for(PassiveNPC tio : pasivos){
                 descripcion += tio.toString() + "\n";
@@ -232,6 +266,7 @@ public class Room
         }else{
             descripcion += GameText.NOT_AVAILABLE_NPC.getText() + "\n";
         }
+        
         descripcion += getExitString();
         return descripcion;
     }
