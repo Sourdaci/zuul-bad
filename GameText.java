@@ -19,7 +19,7 @@ public enum GameText{
     
     // Player
     DIRECTION_NOT_INDICATED ("Si no indicas donde, no te vas a mover"),
-    DIRECTION_INVALID ("No atraviesas paredes ni abres ventanas, listo..."),
+    DIRECTION_INVALID ("No puedes ir por donde pretendes..."),
     WHEN_PLAYER_EATS ("Con las necesidades que tienes, comer puede esperar"),
     WHEN_CANT_GO_BACK ("No puedes volver atras..."),
     INVENTORY_HEADER ("Objetos en el inventario"),
@@ -35,6 +35,14 @@ public enum GameText{
     NPC_ID_ATTACK_INVALID ("El personaje al que quieres atacar no existe"),
     NPC_ID_NOT_NUMBER ("El ID del personaje es un numero"),
     ROOM_WITHOUT_NPC ("En esta zona no hay personajes con los que hablar"),
+    PICKING_INEXISTENT_EQUIPMENT ("Esa equipacion no existe"),
+    WEAPON_ALREADY_EQUIPPED ("Ya tienes un arma equipada. Debes quitartela antes"),
+    EQUIPMENT_SUCCESSFUL ("Has equipado"),
+    ARMOR_ALREADY_EQUIPPED ("Ya tienes una armadura equipada. Debes quitartela antes"),
+    EQUIPMENT_ID_NOT_NUMBER("El ID del equipo es un numero"),
+    PICKING_EQUIPMENT_WITHOUT_EQUIPMENT ("Equipar... ¿que? No has dicho que quieres equipar"),
+    
+    
     
     // Game
     GOODBYE_MESSAGE ("Gracias por jugar. Hasta la proxima"),
