@@ -122,7 +122,7 @@ public class Game
         lindeBosque.addItemToRoom(flauta);
         laguna.addItem("Una caja con enseres raros", 16.9F, false, "Destacan las botellas de ron 'BlackPearl' y el LP de 'Saca el whisky Cheli'");
         riachuelo.addItem("Pepitas de oro", 0.02F, true, null);
-        gruta.addItem("La vara de la verdad", 3.1F, true, "Da el derecho de gobernar el universo");
+        //gruta.addItem("La vara de la verdad", 3.1F, true, "Da el derecho de gobernar el universo");
         rutaEscarpada.addItem("Cartelon indicador", 34.2F, false, "Lo unico legible es... 'Highway to hell'... Que cachondo el tio....");
         
         // Objetos del pueblo
