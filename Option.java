@@ -7,18 +7,20 @@
  */
 public enum Option
 {
-    GO ("ir", "Para moverse a otra habitacion. Hay que indicar la puerta"), 
+    GO ("ir", "Para moverse a otra zona. Hay que indicar la ruta"), 
     QUIT ("salir", "Para abandonar el juego"), 
     HELP ("ayuda", "Muestra la ayuda del juego"), 
     AUX ("auxilio", "Muestra esta pantalla"),
-    LOOK ("ver", "Obtiene una descripcion de la habitacion"), 
+    LOOK ("ver", "Obtiene una descripcion de la zona"), 
     EAT ("comer", "El personaje come algo"), 
-    BACK ("atras", "Vuelve a la habitacion anterior"), 
+    BACK ("atras", "Vuelve a la zona anterior"), 
     ITEMS ("objetos", "Visualiza los objetos que llevas en el Inventario"), 
-    TAKE ("coger", "Coge un objeto de la habitacion. Hay que indicarlol"), 
-    DROP ("soltar", "Deja un objeto del inventario en la habitacion. Hay que indicarlo"), 
-    LOOK_CLOSELY ("observar", "Examina un objeto de la habitacion. Hay que indicarlo"), 
+    TAKE ("coger", "Coge un objeto de la zona. Hay que indicarlo"), 
+    DROP ("soltar", "Deja un objeto del inventario en la zona. Hay que indicarlo"), 
+    LOOK_CLOSELY ("observar", "Examina un objeto de la zona. Hay que indicarlo"), 
     EXAMINE ("examinar", "Examina un objeto del Inventario. Hay que indicarlo"), 
+    TALK ("hablar", "Habla con un personaje de la zona. Hay que indicarlo"),
+    FIGHT ("atacar", "Pelea con un personaje de la zona. Hay que indicarlo"),
     UNKNOWN ("Desconocido", null);
     
     private final String orden;

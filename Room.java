@@ -24,13 +24,14 @@ public class Room
     private String teleportString;
     private ArrayList<PassiveNPC> pasivos;
     private ArrayList<ActiveNPC> activos;
+    private boolean endGame;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, Room teleport, String message) 
+    public Room(String description, Room teleport, String message, boolean end) 
     {
         this.description = description;
         salidasDisponibles = new HashMap<String, Room>();
@@ -39,6 +40,7 @@ public class Room
         teleportString = message;
         pasivos = new ArrayList<PassiveNPC>();
         activos = new ArrayList<ActiveNPC>();
+        endGame = end;
     }
     
     /**
@@ -142,6 +144,30 @@ public class Room
         activos.remove(activo);
     }
     
+    public boolean availableNPC(){
+        return(!activos.isEmpty() || !pasivos.isEmpty());
+    }
+    
+    public ActiveNPC getActiveNPC(int id){
+        ActiveNPC personaje = null;
+        for(int i=0; i<activos.size() && personaje == null; i++){
+            if(activos.get(i).getID() == id){
+                personaje = activos.get(i);
+            }
+        }
+        return personaje;
+    }
+    
+    public PassiveNPC getPassiveNPC(int id){
+        PassiveNPC personaje = null;
+        for(int i=0; i< pasivos.size() && personaje == null; i++){
+            if(pasivos.get(i).getID() == id){
+                personaje = pasivos.get(i);
+            }
+        }
+        return personaje;
+    }
+    
     /**
      * Return a description of the room's exits.
      * For example: "Exits: north east west"
@@ -167,6 +193,10 @@ public class Room
             System.out.println(teleportString);
         }
         return teleportRoom;
+    }
+    
+    public boolean endGame(){
+        return endGame;
     }
     
     /**

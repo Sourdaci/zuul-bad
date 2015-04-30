@@ -31,9 +31,12 @@ public class PassiveNPC
         System.out.println(frase);
     }
     
-    public boolean pelea(){
+    public void pelea(){
         System.out.println(fraseAtaque);
-        return false;
+    }
+    
+    public int getID(){
+        return iD;
     }
     
     @Override

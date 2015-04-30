@@ -12,7 +12,7 @@ public class ActiveNPC
     private String nombre;
     private String frase, fraseAtaque;
     private boolean pelear, objetoEncontrado;
-    private int vida;
+    private int vida, vidaRestante;
     private int ataque;
     private int defensa;
     private CollectableItem buscado;
@@ -20,6 +20,8 @@ public class ActiveNPC
     private String direccion;
     private Room origen;
     private Room destino;
+    private String victoria, derrota;
+    boolean abrirAlMorir, abrirSiObjeto;
 
     /**
      * Constructor for objects of class ActiveNPC
@@ -36,44 +38,63 @@ public class ActiveNPC
         fraseObjeto = null;
         objetoEncontrado = false;
         vida = -1;
+        vidaRestante = -1;
         ataque = -1;
         defensa = -1;
         direccion = null;
         origen = null;
         destino = null;
+        abrirAlMorir = false;
+        abrirSiObjeto = false;
     }
 
-    public void setAtributos(int pv, int pa, int pd){
+    public void setAtributos(int pv, int pa, int pd, String victoria, String derrota){
         pelear = true;
         vida = pv;
+        vidaRestante = pv;
         ataque = pa;
         defensa = pd;
+        this.victoria = victoria;
+        this.derrota = derrota;
     }
     
-    public void setObjeto(CollectableItem item, String encontrado, Room origen, String direccion, Room destino){
-        buscado = item;
-        fraseObjeto = encontrado;
+    public void setAbrirPuerta(Room origen, String direccion, Room destino, boolean muerte, boolean recibe){
         this.origen = origen;
         this.direccion = direccion;
         this.destino = destino;
+        abrirAlMorir = muerte;
+        abrirSiObjeto = recibe;
+    }
+    
+    public void setObjeto(CollectableItem item, String encontrado){
+        buscado = item;
+        fraseObjeto = encontrado;
     }
     
     public void hablar(Player player){
-        if(buscado != null){
+        if(abrirSiObjeto){
             System.out.println(frase);
             if(!objetoEncontrado){
-                frase = GameText.NPC_ASK_FOR_OBJECT.getText() + "\n" + buscado.getDescripcion();
+                if(!frase.contains(GameText.NPC_ASK_FOR_OBJECT.getText())){
+                    frase = GameText.NPC_ASK_FOR_OBJECT.getText() + ": " + buscado.getDescripcion();
+                    System.out.println(frase);
+                }
                 if(player.enInventario(buscado)){
                     System.out.println(GameText.NPC_GETS_OBJECT.getText());
                     frase = fraseObjeto;
                     objetoEncontrado = true;
                     player.entregarObjetoNPC(buscado);
                     origen.setExit(direccion, destino);
+                    System.out.println(frase);
                 }
             }
         }else{
             System.out.println(frase);
         }
+    }
+    
+    public String getNombre(){
+        return nombre;
     }
     
     public boolean pelea(){
@@ -82,6 +103,10 @@ public class ActiveNPC
     }
     
     public int getVitalidad(){
+        return vidaRestante;
+    }
+    
+    public int getVitalidadTotal(){
         return vida;
     }
     
@@ -91,6 +116,28 @@ public class ActiveNPC
     
     public int getDefensa(){
         return defensa;
+    }
+    
+    public int getID(){
+        return iD;
+    }
+    
+    public String getVictoria(){
+        return victoria;
+    }
+    
+    public String getDerrota(){
+        return derrota;
+    }
+    
+    public void abrirPuerta(){
+        if(abrirAlMorir){
+            origen.setExit(direccion, destino);
+        }
+    }
+    
+    public void setVidaRestante(int num){
+        vidaRestante = num;
     }
     
     @Override

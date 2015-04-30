@@ -13,15 +13,21 @@ public class Player
     private Stack<Room> lastRoom;
     private ArrayList<CollectableItem> objetos;
     private float cargaMax;
+    private int vida, vidaRestante;
+    private int ataque, defensa;
     
     /**
      * Constructor for objects of class Player
      */
-    public Player(Room startRoom, float carga){
+    public Player(Room startRoom, float carga, int pv, int atk, int def){
         currentRoom = startRoom;
         lastRoom = new Stack<Room>();
         objetos = new ArrayList<CollectableItem>();
         cargaMax = carga;
+        vida = pv;
+        vidaRestante = pv;
+        ataque = atk;
+        defensa = def;
     }
     
     /**
@@ -199,12 +205,91 @@ public class Player
         }
     }
     
+    public void talkWith(String idNPC){
+        if(currentRoom.availableNPC()){
+            try{
+                int id = Integer.parseInt(idNPC);
+                ActiveNPC activo = currentRoom.getActiveNPC(id);
+                if(activo == null){
+                    PassiveNPC pasivo = currentRoom.getPassiveNPC(id);
+                    if(pasivo == null){
+                        System.out.println(GameText.NPC_ID_INVALID.getText());
+                    }else{
+                        pasivo.hablar();
+                    }
+                }else{
+                    activo.hablar(this);
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.NPC_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.ROOM_WITHOUT_NPC.getText());
+        }
+    }
+    
+    public ActiveNPC battle(String idNPC){
+        ActiveNPC activo = null;
+        if(currentRoom.availableNPC()){
+            try{
+                int id = Integer.parseInt(idNPC);
+                activo = currentRoom.getActiveNPC(id);
+                if(activo == null){
+                    PassiveNPC pasivo = currentRoom.getPassiveNPC(id);
+                    if(pasivo == null){
+                        System.out.println(GameText.NPC_ID_ATTACK_INVALID.getText());
+                    }else{
+                        pasivo.pelea();
+                    }
+                }
+            }catch (Exception ex){
+                System.out.println(GameText.NPC_ID_NOT_NUMBER.getText());
+            }
+        }else{
+            System.out.println(GameText.ROOM_WITHOUT_NPC.getText());
+        }
+        if(activo != null){
+            if(!activo.pelea()){
+                activo = null;
+            }
+        }
+        return activo;
+    }
+    
+    public void setVidaRestante(int num){
+        vidaRestante = num;
+    }
+    
+    public int getVitalidad(){
+        return vidaRestante;
+    }
+    
+    public int getVitalidadTotal(){
+        return vida;
+    }
+    
+    public int getAtaque(){
+        return ataque;
+    }
+    
+    public int getDefensa(){
+        return defensa;
+    }
+    
+    public void enemigoDerrotado(ActiveNPC enemigo){
+        currentRoom.removeActiveNPC(enemigo);
+    }
+    
     public boolean enInventario(CollectableItem item){
         return objetos.contains(item);
     }
     
     public void entregarObjetoNPC(CollectableItem item){
         objetos.remove(item);
+    }
+    
+    public boolean roomEndsGame(){
+        return currentRoom.endGame();
     }
     
     /**

@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -20,6 +21,7 @@ public class Game
     private Parser parser;
     private Player player;
     private Room startRoom;
+    private boolean playerDead;
         
     /**
      * Create the game and initialise its internal map.
@@ -28,7 +30,8 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        player = new Player(startRoom, 0.15F);
+        player = new Player(startRoom, 6F, 100, 20, 15);
+        playerDead = false;
     }
 
     /**
@@ -46,57 +49,57 @@ public class Game
         Room entradaPueblo, posada, calle, casucha, casa, huerto, pozo;
         
         // Creando la mazmorra
-        cueva = new Room("Cueva abrupta\nHay un fuerte olor a humedades", null, null);
-        descampado = new Room("Entrada de la cueva\nHay algunos huesos mordisqueados", null, null);
-        bosque = new Room("Entrada a un bosque ennegrecido\nSolo de pensar en entrar se te pone la piel de gallina", null, null);
-        barranco = new Room("Un barranco bastante profundo\nUna caida significa una muerte segura", null, null);
-        lindeBosque = new Room("Lateral del bosque ennegrecido\nSigue siendo terrorifico", null, null);
-        caminoTierra = new Room("Camino de tierra\nAncho y en cuesta", null, null);
-        puente = new Room("Un firme puente de madera\nAunque los tablones crujen si los pisoteas", null, null);
-        laguna = new Room("Laguna de aguas cristalinas\nTan cristalinas que podrias ver a un pez echando la quiniela", null, null);
-        caminoEmpedrado = new Room("Camino burdamente adoquinado\nTe recuerda a la plaza del pueblo", null, null);
-        pasaje = new Room("Pasaje angosto. Muy angosto.\nEsta plagado de charquitos", null, null);
-        fondoBarranco = new Room("Fondo del barranco\nEl riachuelo parece alimentar al pozo del pueblo", null, null);
-        riachuelo = new Room("Rio muy poco profundo. Se pierde en la lejania y en una pared fracturada\nSu lecho tiene un brillo especial", null, null);
-        cavidad = new Room("Oquedad en una pared pedregosa", null, null);
-        gruta = new Room("Una cueva debilmente iluminada por la luz que se refleja en las paredes", null, null);
-        caminoMonte = new Room("Camino que conecta Midgard y el Monte del Destino", null, null);
-        rutaEscarpada = new Room("Senda estrecha\nOcasionalmente caen piedrecitas\nNo es apta para gente con vertigo", null, null);
-        refugio = new Room("Una casa tallada en la piedra y bien decorada\nMuy limpia para no tener puertas ni ventanas", null, null);
+        cueva = new Room("Cueva abrupta\nHay un fuerte olor a humedades", null, null, false);
+        descampado = new Room("Entrada de la cueva\nHay algunos huesos mordisqueados", null, null, false);
+        bosque = new Room("Entrada a un bosque ennegrecido\nSolo de pensar en entrar se te pone la piel de gallina", null, null, false);
+        barranco = new Room("Un barranco bastante profundo\nUna caida significa una muerte segura", null, null, false);
+        lindeBosque = new Room("Lateral del bosque ennegrecido\nSigue siendo terrorifico", null, null, false);
+        caminoTierra = new Room("Camino de tierra\nAncho y en cuesta", null, null, false);
+        puente = new Room("Un firme puente de madera\nAunque los tablones crujen si los pisoteas", null, null, false);
+        laguna = new Room("Laguna de aguas cristalinas\nTan cristalinas que podrias ver a un pez echando la quiniela", null, null, false);
+        caminoEmpedrado = new Room("Camino burdamente adoquinado\nTe recuerda a la plaza del pueblo", null, null, false);
+        pasaje = new Room("Pasaje angosto. Muy angosto.\nEsta plagado de charquitos", null, null, false);
+        fondoBarranco = new Room("Fondo del barranco\nEl riachuelo parece alimentar al pozo del pueblo", null, null, false);
+        riachuelo = new Room("Rio muy poco profundo. Se pierde en la lejania y en una pared fracturada\nSu lecho tiene un brillo especial", null, null, false);
+        cavidad = new Room("Oquedad en una pared pedregosa", null, null, false);
+        gruta = new Room("Una cueva debilmente iluminada por la luz que se refleja en las paredes", null, null, false);
+        caminoMonte = new Room("Camino que conecta Midgard y el Monte del Destino", null, null, false);
+        rutaEscarpada = new Room("Senda estrecha\nOcasionalmente caen piedrecitas\nNo es apta para gente con vertigo", null, null, false);
+        refugio = new Room("Una casa tallada en la piedra y bien decorada\nMuy limpia para no tener puertas ni ventanas", null, null, false);
         
         // Creando la casa
-        recibidor = new Room("Entrada de la Casa", null, null);
-        pasillo = new Room("Pasillo Delantero", null, null);
-        dormServicio = new Room("Habitaciones de los Empleados", null, null);
-        salaEstar = new Room("Salon", null, null);
-        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...", null, null);
-        biblioteca = new Room("Biblioteca. Muchos libros", null, null);
-        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE", null, null);
-        comedor = new Room("Comedor. Estan preparando la mesa para cenar", null, null);
-        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho", null, null);
-        pasilloTrasero = new Room("Pasillo Trasero", null, null);
-        dormPadres = new Room("Dormitorio de los padres de Greg", null, null);
-        servPadres = new Room("Servicio de los padres de Greg", null, null);
-        dormGreg = new Room("Dormitorio de Greg", null, null);
+        recibidor = new Room("Entrada de la Casa", null, null, false);
+        pasillo = new Room("Pasillo Delantero", null, null, false);
+        dormServicio = new Room("Habitaciones de los Empleados", null, null, false);
+        salaEstar = new Room("Salon", null, null, false);
+        barSecreto = new Room("Bar oculto de los padres de Greg.\nHay MUCHO alcohol aqui...", null, null, false);
+        biblioteca = new Room("Biblioteca. Muchos libros", null, null, false);
+        cocina = new Room("Cocina. La cena huele bien...\nPero la naturaleza te llama IMPERIOSAMENTE", null, null, false);
+        comedor = new Room("Comedor. Estan preparando la mesa para cenar", null, null, false);
+        servEmpleados = new Room("'Aliviaderos' de los Empleados. Huele a muerto. Y mucho", null, null, false);
+        pasilloTrasero = new Room("Pasillo Trasero", null, null, false);
+        dormPadres = new Room("Dormitorio de los padres de Greg", null, null, false);
+        servPadres = new Room("Servicio de los padres de Greg", null, null, false);
+        dormGreg = new Room("Dormitorio de Greg", null, null, false);
         servGreg = new Room("Servicio de Greg", cueva, "Al cerrar la puerta todo se oscurece\n" + 
                 "Te sientes aliviado, hasta ver que estas en un lugar desconocido\n" + 
-                "Al menos ya no necesitas ir al servicio, y tu ropa interior esta impoluta");
+                "Al menos ya no necesitas ir al servicio, y tu ropa interior esta impoluta", false);
         
         // Creando el pueblo
-        entradaPueblo = new Room("La entrada a un pueblecito\nEn el desvencijado cartel cuesta leer 'Midgard'", null, null);
-        posada = new Room("Una posada abandonada llamada 'El burro escarchador'\nEs imposible acceder, la puerta ni se inmuta", null, null);
-        calle = new Room("La unica calle del pueblo\nMires donde mires, solo hay desolacion", null, null);
-        casucha = new Room("Una casa derruida, asolada por el paso del tiempo\nY por un meteorito", null, null);
-        casa = new Room("El unico edificio en condiciones del pueblo\nEl interior esta misticamente iluminado", null, null);
-        huerto = new Room("Este huerto es el sustento de Vivi\nPuedes distinguir lechugas, zanahorias, tomacco, athelas...", null, null);
-        pozo = new Room("Pozo. Con su cubo, cuerda, y poleas\nPuede usarse como un ascensor impulsado por biceps", null, null);
+        entradaPueblo = new Room("La entrada a un pueblecito\nEn el desvencijado cartel cuesta leer 'Midgard'", null, null, false);
+        posada = new Room("Una posada abandonada llamada 'El burro escarchador'\nEs imposible acceder, la puerta ni se inmuta", null, null, false);
+        calle = new Room("La unica calle del pueblo\nMires donde mires, solo hay desolacion", null, null, false);
+        casucha = new Room("Una casa derruida, asolada por el paso del tiempo\nY por un meteorito", null, null, false);
+        casa = new Room("El unico edificio en condiciones del pueblo\nEl interior esta misticamente iluminado", null, null, false);
+        huerto = new Room("Este huerto es el sustento de Vivi\nPuedes distinguir lechugas, zanahorias, tomacco, athelas...", null, null, false);
+        pozo = new Room("Pozo. Con su cubo, cuerda, y poleas\nPuede usarse como un ascensor impulsado por biceps", null, null, false);
         
         // Final del juego
         portal = new Room("Portal de vuelta", dormGreg, "Una luz cegadora inunda tu mirada. Al desaparecer, oyes una puerta cerrarse detras tuyo\n" + 
                 "Greg esta tirado en su cama. Te mira con gesto de ligera impaciencia y cachondeo\n" + 
                 "'Ya era hora, hombre... Espero que te hayas lavado las manos, nos estan esperando'" + 
                 "Estas flipando. Todo esta como debe ser. Nunca entenderas que ha ocurrido" + 
-                "CONGRATULEISIONS, has salido vivo y con la mente relativamente sana!!!!");
+                "CONGRATULEISIONS, has salido vivo y con la mente relativamente sana!!!!", true);
         
         // Objetos de la casa
         dormServicio.addItem("Bolsa de 'Oregano'", 0.1F, false, "Huele igual que la habitacion del conserje del instituto");
@@ -115,6 +118,8 @@ public class Game
         
         // Objetos de la mazmorra
         barranco.addItem("Chapa metalica oxidada", 0.09F, false, "Es una matricula de California que pone 'OUTATIME'");
+        CollectableItem flauta = new CollectableItem("Pokeflauta", 0.06F, true, "Sientes la tentacion de tocarla y de echar la siesta");
+        lindeBosque.addItemToRoom(flauta);
         laguna.addItem("Una caja con enseres raros", 16.9F, false, "Destacan las botellas de ron 'BlackPearl' y el LP de 'Saca el whisky Cheli'");
         riachuelo.addItem("Pepitas de oro", 0.02F, true, null);
         gruta.addItem("La vara de la verdad", 3.1F, true, "Da el derecho de gobernar el universo");
@@ -209,8 +214,22 @@ public class Game
         
         // PNJ Pasivos
         recibidor.addPassiveNPC(new PassiveNPC("Mayordomo Jeffrey", "Bienvenido a la mansion Banks", "Caballero, le ruego no obstaculice la entrada"));
-        casa.addActiveNPC(new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
-            "¿A que me conservo en forma? Anda, sueltame el biceps antes de que te enamores"));
+        
+        // PNJ Activos
+        ActiveNPC vivi = new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
+            "¿A que me conservo en forma? Anda, sueltame el biceps antes de que te enamores");
+        vivi.setObjeto(flauta, "Encontraras un arma mistica que solo tu puedes usar en\n" + 
+            "algun lugar del fondo del barranco\nLlegaras alli por mi pozo");
+        vivi.setAbrirPuerta(casa, "sur", huerto, false, true);
+        casa.addActiveNPC(vivi);
+        ActiveNPC ganondorf = new ActiveNPC("Ganondorf", "Adelante, elegido, te estoy esperando", "¡Ha llegado tu final");
+        ganondorf.setAtributos(500, 70, 59, "Ahora nadie podra detenerme....\nLo ultimo que oyes antes de hundirte en las sombras\n" + 
+            "son los desgarradores gritos de dolor de Greg al otro lado del portal", "¡¡¡Naaaaaaarrrrggghhhhh!!!\n" + 
+            "Ves como tu rival se desintegra envuelto en llamas verdes retorciendose de dolor");
+        ganondorf.setAbrirPuerta(refugio, "oeste", portal, true, false);
+        refugio.addActiveNPC(ganondorf);
+        
+            
         
         // Set initial room
         startRoom = recibidor;
@@ -225,11 +244,17 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+        
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            if(!finished){
+                finished = player.roomEndsGame();
+            }
+            if(playerDead){
+                finished = true;
+            }
         }
         System.out.println(GameText.GOODBYE_MESSAGE.getText());
     }
@@ -298,6 +323,12 @@ public class Game
                 break;
             case AUX:
                 printDetailedHelp();
+                break;
+            case TALK:
+                talkWithNPC(command);
+                break;
+            case FIGHT:
+                battle(command);
                 break;
             }
 
@@ -390,6 +421,96 @@ public class Game
      */
     private void lookItemOnInventory(Command command){
         player.lookItemOnInventory(secondWord(command));
+    }
+    
+    private void talkWithNPC(Command command){
+        player.talkWith(secondWord(command));
+    }
+    
+    private void battle(Command command){
+        ActiveNPC enemigo = player.battle(secondWord(command));
+        if(enemigo != null){
+            battleWithNPC(enemigo);
+        }
+    }
+    
+    private void battleWithNPC(ActiveNPC enemigo){
+        Random dado = new Random();
+        while(player.getVitalidad() > 0 && enemigo.getVitalidad() > 0){
+            int tirada = dado.nextInt(20) + 1;
+            int ataquePlayer = player.getAtaque();
+            int defensaNPC = enemigo.getDefensa();
+            int resultado = 0;
+            switch (tirada){
+                case 1:
+                    System.out.println(GameText.PLAYER_EPIC_FAIL.getText());
+                    break;
+                case 20:
+                    System.out.println(GameText.PLAYER_CRITICAL_ATTACK.getText());
+                    resultado = (ataquePlayer * 2 + tirada) - defensaNPC;
+                    if(resultado < 1){
+                        System.out.println(GameText.PLAYER_CANT_DAMAGE_FOE.getText());
+                    }else{
+                        System.out.println(GameText.PLAYER_DO_DAMAGE.getText() + ": " + resultado);
+                        enemigo.setVidaRestante(enemigo.getVitalidad() - resultado);
+                    }
+                    break;
+                default:
+                    resultado = ataquePlayer - defensaNPC + tirada;
+                    if(resultado < 1){
+                        System.out.println(GameText.PLAYER_CANT_DAMAGE_FOE.getText());
+                    }else{
+                        System.out.println(GameText.PLAYER_DO_DAMAGE.getText() + ": " + resultado);
+                        enemigo.setVidaRestante(enemigo.getVitalidad() - resultado);
+                    }
+                    break;
+            }
+            if(enemigo.getVitalidad() > 0){
+                tirada = dado.nextInt(20) + 1;
+                int ataqueNPC = enemigo.getAtaque();
+                int defensaPlayer = player.getDefensa();
+                switch (tirada){
+                    case 1:
+                        System.out.println(GameText.FOE_EPIC_FAIL.getText());
+                        break;
+                    case 20:
+                        System.out.println(GameText.FOE_CRITICAL_ATTACK.getText());
+                        resultado = (ataqueNPC * 2 + tirada) - defensaPlayer;
+                        if(resultado < 1){
+                            System.out.println(GameText.FOE_CANT_DAMAGE_FOE.getText());
+                        }else{
+                            System.out.println(GameText.FOE_DO_DAMAGE.getText() + ": " + resultado);
+                            player.setVidaRestante(player.getVitalidad() - resultado);
+                        }
+                        break;
+                    default:
+                        resultado = ataqueNPC - defensaPlayer + tirada;
+                        if(resultado < 1){
+                            System.out.println(GameText.FOE_CANT_DAMAGE_FOE.getText());
+                        }else{
+                            System.out.println(GameText.FOE_DO_DAMAGE.getText() + ": " + resultado);
+                            player.setVidaRestante(player.getVitalidad() - resultado);
+                        }
+                        break;
+                }
+            }
+        }
+        if(player.getVitalidad() < 1){
+            String cadena = enemigo.getVictoria();
+            if(cadena != null){
+                System.out.println(cadena);
+            }
+            System.out.println(GameText.PLAYER_LOSE_GAME.getText());
+            playerDead = true;
+        }else{
+            String cadena = enemigo.getDerrota();
+            if(cadena != null){
+                System.out.println(cadena);
+            }
+            System.out.println(GameText.PLAYER_WINS_BATTLE.getText() + ": " + enemigo.getNombre());
+            enemigo.abrirPuerta();
+            player.enemigoDerrotado(enemigo);
+        }
     }
     
     /** 
