@@ -51,7 +51,17 @@ public class Equipment
         return tipoEquipo;
     }
     
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
     public String toString(){
-        return String.format(">> (id %3d) %s", iD, descripcion);
+        String cadena;
+        if(tipoEquipo){
+            cadena = GameText.EQUIPMENT_IS_WEAPON.getText();
+        }else{
+            cadena = GameText.EQUIPMENT_IS_ARMOR.getText();
+        }
+        return String.format(">> (%s id %3d) %s", cadena, iD, descripcion);
     }
 }

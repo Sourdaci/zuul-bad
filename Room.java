@@ -74,7 +74,6 @@ public class Room
         objetos.add(new CollectableItem(descripcion, peso, collect, detalle));
     }
     
-    
     public void addEquipment(Equipment cosa){
         equipoTirado.add(cosa);
     }
@@ -240,6 +239,7 @@ public class Room
      */
     public String getLongDescription(){
         String descripcion = (GameText.YOU_ARE_IN_PLACE.getText() + ": " + description + "\n");
+        
         if (objetos.size() != 0){
             for(CollectableItem item : objetos){
                 descripcion += item.toString() + "\n";
@@ -247,6 +247,15 @@ public class Room
         }else{
             descripcion += GameText.NOT_INTERESTING_OBJECTS.getText() + "\n";
         }
+        
+        if(equipoTirado.size() != 0){
+            for(Equipment gear : equipoTirado){
+                descripcion += gear.toString() + "\n";
+            }
+        }else{
+            descripcion += GameText.EQUIPMENT_NOT_AVAILABLE.getText();
+        }
+        
         if(activos.size() != 0 || pasivos.size() != 0){
             for(PassiveNPC tio : pasivos){
                 descripcion += tio.toString() + "\n";
@@ -257,6 +266,7 @@ public class Room
         }else{
             descripcion += GameText.NOT_AVAILABLE_NPC.getText() + "\n";
         }
+        
         descripcion += getExitString();
         return descripcion;
     }
