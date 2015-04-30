@@ -35,6 +35,10 @@ public class Equipment
         }
     }
 
+    public int getID(){
+        return iD;
+    }
+    
     public int getBonoAtaque(){
         return bonoAtaque;
     }

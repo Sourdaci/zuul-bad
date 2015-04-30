@@ -25,6 +25,7 @@ public class Room
     private ArrayList<PassiveNPC> pasivos;
     private ArrayList<ActiveNPC> activos;
     private boolean endGame;
+    private ArrayList<Equipment> equipoTirado;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -41,6 +42,7 @@ public class Room
         pasivos = new ArrayList<PassiveNPC>();
         activos = new ArrayList<ActiveNPC>();
         endGame = end;
+        equipoTirado = new ArrayList<Equipment>();
     }
     
     /**
@@ -70,6 +72,29 @@ public class Room
      */
     public void addItem(String descripcion, float peso, boolean collect, String detalle){
         objetos.add(new CollectableItem(descripcion, peso, collect, detalle));
+    }
+    
+    
+    public void addEquipment(Equipment cosa){
+        equipoTirado.add(cosa);
+    }
+    
+    public void addEquipment(String nom, String desc, int at, int def, boolean tipo){
+        equipoTirado.add(new Equipment(nom, desc, at, def, tipo));
+    }
+    
+    public void deleteEquipment(Equipment gear){
+        equipoTirado.remove(gear);
+    }
+    
+    public Equipment takeEquipment(int equip){
+        Equipment gear = null;
+        for (int i=0; i<equipoTirado.size(); i++){
+            if(equipoTirado.get(i).getID() == equip){
+                gear = equipoTirado.get(i);
+            }
+        }
+        return gear;
     }
     
     /**
