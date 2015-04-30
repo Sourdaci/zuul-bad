@@ -366,17 +366,20 @@ public class Player
     
     public void getStatus(){
         System.out.println(GameText.STATUS_VIT.getText() + ": " + vidaRestante + "/" + vida);
-        listItems();
+        System.out.println(GameText.STATUS_ATTACK.getText() + ": " + getAtaque() + ", " + GameText.STATUS_DEFFENSE.getText() + ": " + getDefensa());
         if(arma != null){
             System.out.println(arma);
+            System.out.println("\t" + arma.getDescripcion());
         }else{
             System.out.println(GameText.STATUS_NOT_WEAPON.getText());
         }
         if(armadura != null){
             System.out.println(armadura);
+            System.out.println("\t" + armadura.getDescripcion());
         }else{
             System.out.println(GameText.STATUS_NOT_ARMOR.getText());
         }
+        listItems();
     }
     
     public void enemigoDerrotado(ActiveNPC enemigo){

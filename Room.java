@@ -253,7 +253,7 @@ public class Room
                 descripcion += gear.toString() + "\n";
             }
         }else{
-            descripcion += GameText.EQUIPMENT_NOT_AVAILABLE.getText();
+            descripcion += GameText.EQUIPMENT_NOT_AVAILABLE.getText() + "\n";
         }
         
         if(activos.size() != 0 || pasivos.size() != 0){

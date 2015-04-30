@@ -336,6 +336,9 @@ public class Game
             case UNEQUIP:
                 dropEquip(command);
                 break;
+            case STATUS:
+                player.getStatus();
+                break;
             }
 
         return wantToQuit;

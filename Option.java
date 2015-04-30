@@ -23,6 +23,7 @@ public enum Option
     FIGHT ("atacar", "Pelea con un personaje de la zona. Hay que indicarlo"),
     EQUIP ("equipar", "Te intentas poner un equipo de la zona. Hay que indicarlo"),
     UNEQUIP ("quitar", "Intentas dejar una equipacion en la zona. Hay que indicarla"),
+    STATUS ("estado", "Muestra vida, inventario y equipo del jugador"),
     UNKNOWN ("Desconocido", null);
     
     private final String orden;

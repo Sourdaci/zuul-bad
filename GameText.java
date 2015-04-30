@@ -45,6 +45,8 @@ public enum GameText{
     DROP_EQUIPMENT_SUCCESSFUL ("Dejas en la zona"),
     DROP_EQUIPMENT_WITHOUT_EQUIPMENT ("Quitar... ¿que? No has dicho que quieres quitar"),
     STATUS_VIT ("Vitalidad"),
+    STATUS_ATTACK ("Ataque"),
+    STATUS_DEFFENSE ("Defensa"),
     STATUS_NOT_WEAPON ("No llevas arma equipada"),
     STATUS_NOT_ARMOR("No llevas armadura equipada"),
     

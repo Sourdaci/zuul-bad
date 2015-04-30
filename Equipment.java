@@ -62,6 +62,6 @@ public class Equipment
         }else{
             cadena = GameText.EQUIPMENT_IS_ARMOR.getText();
         }
-        return String.format(">> (%s id %3d) %s", cadena, iD, descripcion);
+        return String.format(">> (%s id %3d) %s", cadena, iD, nombre);
     }
 }
