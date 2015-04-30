@@ -364,6 +364,21 @@ public class Player
         }
     }
     
+    public void getStatus(){
+        System.out.println(GameText.STATUS_VIT.getText() + ": " + vidaRestante + "/" + vida);
+        listItems();
+        if(arma != null){
+            System.out.println(arma);
+        }else{
+            System.out.println(GameText.STATUS_NOT_WEAPON.getText());
+        }
+        if(armadura != null){
+            System.out.println(armadura);
+        }else{
+            System.out.println(GameText.STATUS_NOT_ARMOR.getText());
+        }
+    }
+    
     public void enemigoDerrotado(ActiveNPC enemigo){
         currentRoom.removeActiveNPC(enemigo);
     }
