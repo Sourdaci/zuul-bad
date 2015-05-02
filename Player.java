@@ -1,5 +1,5 @@
 import java.util.Stack;
-import java.util.ArrayList;
+import java.util.HashMap;
 /**
  * Write a description of class Player here.
  * 
@@ -11,7 +11,7 @@ public class Player
     // instance variables - replace the example below with your own
     private Room currentRoom;
     private Stack<Room> lastRoom;
-    private ArrayList<CollectableItem> objetos;
+    private HashMap<Integer, CollectableItem> objetos;
     private float cargaMax;
     private int vida, vidaRestante;
     private int ataque, defensa;
@@ -31,7 +31,7 @@ public class Player
     public Player(Room startRoom, float carga, int pv, int atk, int def){
         currentRoom = startRoom;
         lastRoom = new Stack<Room>();
-        objetos = new ArrayList<CollectableItem>();
+        objetos = new HashMap<Integer, CollectableItem>();
         cargaMax = carga;
         vida = pv;
         vidaRestante = pv;
@@ -105,7 +105,7 @@ public class Player
     public void listItems(){
         if(objetos.size() > 0){
             System.out.println(GameText.INVENTORY_HEADER.getText() + ":");
-            for (CollectableItem item : objetos){
+            for (CollectableItem item : objetos.values()){
                 System.out.println(item);
             }
             System.out.println("-> " + GameText.INVENTORY_LOAD.getText() + ": " + calcularCarga() + " / " + cargaMax + " " + GameText.WEIGHT_UNIT.getText());
@@ -130,7 +130,7 @@ public class Player
                         if(calcularCarga() + obj.getPeso() > cargaMax){
                             System.out.println(GameText.PICKING_OBJECT_AND_OVERWEIGHT.getText());
                         }else{
-                            objetos.add(obj);
+                            objetos.put(obj.getID(), obj);
                             System.out.println(GameText.PICKING_OBJECT_SUCCESSFULLY.getText() + " " + obj.toString());
                             currentRoom.deleteItem(obj);
                         }
@@ -156,17 +156,13 @@ public class Player
             CollectableItem obj = null;
             try{
                 int id = Integer.parseInt(item);
-                for (int i=0; i < objetos.size() && obj == null; i++){
-                    if(id == objetos.get(i).getID()){
-                        obj = objetos.get(i);
-                    }
-                }
+                obj = objetos.get(id);
                 if(obj == null){
                     System.out.println(GameText.DROPPING_INEXISTENT_OBJECT.getText());
                 }else{
                     System.out.println(GameText.DROPPING_OBJECT_SUCCESSFULLY.getText() + " " + obj.toString());
                     currentRoom.addItemToRoom(obj);
-                    objetos.remove(obj);
+                    objetos.remove(obj.getID());
                 }
             }catch (Exception ex){
                 System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
@@ -195,13 +191,7 @@ public class Player
             if (item != null){
                 try{
                     int indice = Integer.parseInt(item);
-                    CollectableItem obj = null;
-                    for (int i=0; i < objetos.size() && obj == null; i++){
-                        obj = objetos.get(i);
-                        if(obj.getID() != indice){
-                            obj = null;
-                        }
-                    }
+                    CollectableItem obj = objetos.get(indice);
                     if (obj == null){
                         System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
                     }else{
@@ -378,6 +368,11 @@ public class Player
         }
     }
     
+    /**
+     * El jugador intenta dejar un objeto en la zona
+     * 
+     * @param item ID del equipo que quieres dejar en la zona
+     */
     public void dropEquipment(String item){
         if (item != null){
             try{
@@ -410,6 +405,9 @@ public class Player
         }
     }
     
+    /**
+     * Muestra por pantalla el estado del jugador (atributos, objetos y equipo)
+     */
     public void getStatus(){
         System.out.println(GameText.STATUS_VIT.getText() + ": " + vidaRestante + "/" + vida);
         System.out.println(GameText.STATUS_ATTACK.getText() + ": " + getAtaque() + ", " + GameText.STATUS_DEFFENSE.getText() + ": " + getDefensa());
@@ -428,18 +426,30 @@ public class Player
         listItems();
     }
     
+    /**
+     * Le dice a la zona en la que se encuentra el jugador que elimine al enemigo que ha derrotado
+     */
     public void enemigoDerrotado(ActiveNPC enemigo){
         currentRoom.removeActiveNPC(enemigo);
     }
     
+    /**
+     * Se le pregunta al jugador si tiene un objeto concreto en el inventario
+     */
     public boolean enInventario(CollectableItem item){
-        return objetos.contains(item);
+        return objetos.containsValue(item);
     }
     
+    /**
+     * Se le entrega a un NPC el objeto indicado
+     */
     public void entregarObjetoNPC(CollectableItem item){
-        objetos.remove(item);
+        objetos.remove(item.getID());
     }
     
+    /**
+     * Indica al juego si la habitacion actual finaliza la partida
+     */
     public boolean roomEndsGame(){
         return roomEndedGame;
     }
@@ -449,7 +459,7 @@ public class Player
      */
     private float calcularCarga(){
         float carga = 0;
-        for (CollectableItem item : objetos){
+        for (CollectableItem item : objetos.values()){
             carga += item.getPeso();
         }
         return carga;
