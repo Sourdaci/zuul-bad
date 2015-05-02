@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 /**
@@ -19,13 +18,13 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> salidasDisponibles;
-    private ArrayList<CollectableItem> objetos;
+    private HashMap<Integer, CollectableItem> objetos;
     private Room teleportRoom;
     private String teleportString;
-    private ArrayList<PassiveNPC> pasivos;
-    private ArrayList<ActiveNPC> activos;
+    private HashMap<Integer, PassiveNPC> pasivos;
+    private HashMap<Integer, ActiveNPC> activos;
     private boolean endGame;
-    private ArrayList<Equipment> equipoTirado;
+    private HashMap<Integer, Equipment> equipoTirado;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -40,13 +39,13 @@ public class Room
     {
         this.description = description;
         salidasDisponibles = new HashMap<String, Room>();
-        objetos = new ArrayList<CollectableItem>();
+        objetos = new HashMap<Integer, CollectableItem>();
         teleportRoom = teleport;
         teleportString = message;
-        pasivos = new ArrayList<PassiveNPC>();
-        activos = new ArrayList<ActiveNPC>();
+        pasivos = new HashMap<Integer, PassiveNPC>();
+        activos = new HashMap<Integer, ActiveNPC>();
         endGame = end;
-        equipoTirado = new ArrayList<Equipment>();
+        equipoTirado = new HashMap<Integer, Equipment>();
     }
     
     /**
@@ -76,7 +75,8 @@ public class Room
      * @param detalle Descripcion del objeto
      */
     public void addItem(String descripcion, float peso, boolean collect, String detalle){
-        objetos.add(new CollectableItem(descripcion, peso, collect, detalle));
+        CollectableItem nuevo = new CollectableItem(descripcion, peso, collect, detalle);
+        objetos.put(nuevo.getID(), nuevo);
     }
     
     /**
@@ -85,7 +85,7 @@ public class Room
      * @param cosa El objeto Equipment a dejar en esta zona
      */
     public void addEquipment(Equipment cosa){
-        equipoTirado.add(cosa);
+        equipoTirado.put(cosa.getID(), cosa);
     }
     
     /**
@@ -98,7 +98,8 @@ public class Room
      * @param tipo Indica si es arma o no (armadura)
      */
     public void addEquipment(String nom, String desc, int at, int def, boolean tipo){
-        equipoTirado.add(new Equipment(nom, desc, at, def, tipo));
+        Equipment cosa = new Equipment(nom, desc, at, def, tipo);
+        equipoTirado.put(cosa.getID(), cosa);
     }
     
     /**
@@ -107,7 +108,7 @@ public class Room
      * @param gear Objeto de equipo a quitar de la zona
      */
     public void deleteEquipment(Equipment gear){
-        equipoTirado.remove(gear);
+        equipoTirado.remove(gear.getID());
     }
     
     /**
@@ -117,13 +118,7 @@ public class Room
      * @return La pieza de equipo, null si no existe
      */
     public Equipment takeEquipment(int equip){
-        Equipment gear = null;
-        for (int i=0; i<equipoTirado.size(); i++){
-            if(equipoTirado.get(i).getID() == equip){
-                gear = equipoTirado.get(i);
-            }
-        }
-        return gear;
+        return equipoTirado.get(equip);
     }
     
     /**
@@ -133,13 +128,7 @@ public class Room
      * @return El objeto si existe, null si NO existe
      */
     public CollectableItem takeItem(int item){
-        CollectableItem obj = null;
-        for (int i=0; i < objetos.size() && obj == null; i++){
-            if(item == objetos.get(i).getID()){
-                obj = objetos.get(i);
-            }
-        }
-        return obj;
+        return objetos.get(item);
     }
     
     /**
@@ -148,7 +137,7 @@ public class Room
      * @param item El objeto CollectableItem que debe borrar de la zona
      */
     public void deleteItem(CollectableItem item){
-        objetos.remove(item);
+        objetos.remove(item.getID());
     }
     
     /**
@@ -157,7 +146,7 @@ public class Room
      * @param item El objeto CollectableItem que se deja en la zona
      */
     public void addItemToRoom(CollectableItem item){
-        objetos.add(item);
+        objetos.put(item.getID(), item);
     }
     
     /**
@@ -192,7 +181,7 @@ public class Room
      * @param pasivo El NPC pasivo a introducir en la zona
      */
     public void addPassiveNPC(PassiveNPC pasivo){
-        pasivos.add(pasivo);
+        pasivos.put(pasivo.getID(), pasivo);
     }
     
     /**
@@ -201,14 +190,14 @@ public class Room
      * @param activo El NPC activo a introducir en la zona
      */
     public void addActiveNPC(ActiveNPC activo){
-        activos.add(activo);
+        activos.put(activo.getID(), activo);
     }
     
     /**
      * Indica a la zona que hay que eliminar un NPC activo
      */
     public void removeActiveNPC(ActiveNPC activo){
-        activos.remove(activo);
+        activos.remove(activo.getID());
     }
     
     /**
@@ -227,13 +216,7 @@ public class Room
      * @return El NPC buscado, null si no existe
      */
     public ActiveNPC getActiveNPC(int id){
-        ActiveNPC personaje = null;
-        for(int i=0; i<activos.size() && personaje == null; i++){
-            if(activos.get(i).getID() == id){
-                personaje = activos.get(i);
-            }
-        }
-        return personaje;
+        return activos.get(id);
     }
     
     /**
@@ -243,13 +226,7 @@ public class Room
      * @return El NPC buscado, null si no existe
      */
     public PassiveNPC getPassiveNPC(int id){
-        PassiveNPC personaje = null;
-        for(int i=0; i< pasivos.size() && personaje == null; i++){
-            if(pasivos.get(i).getID() == id){
-                personaje = pasivos.get(i);
-            }
-        }
-        return personaje;
+        return pasivos.get(id);
     }
     
     /**
@@ -305,7 +282,7 @@ public class Room
         String descripcion = (GameText.YOU_ARE_IN_PLACE.getText() + ": " + description + "\n");
         
         if (objetos.size() != 0){
-            for(CollectableItem item : objetos){
+            for(CollectableItem item : objetos.values()){
                 descripcion += item.toString() + "\n";
             }
         }else{
@@ -313,7 +290,7 @@ public class Room
         }
         
         if(equipoTirado.size() != 0){
-            for(Equipment gear : equipoTirado){
+            for(Equipment gear : equipoTirado.values()){
                 descripcion += gear.toString() + "\n";
             }
         }else{
@@ -321,10 +298,10 @@ public class Room
         }
         
         if(activos.size() != 0 || pasivos.size() != 0){
-            for(PassiveNPC tio : pasivos){
+            for(PassiveNPC tio : pasivos.values()){
                 descripcion += tio.toString() + "\n";
             }
-            for(ActiveNPC tio : activos){
+            for(ActiveNPC tio : activos.values()){
                 descripcion += tio.toString() + "\n";
             }
         }else{
