@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class Equipment here.
+ * Equipo del juego: World Of Greg
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Sourdaci
+ * @version 2015-04-30 01
  */
 public class Equipment
 {
@@ -18,7 +18,13 @@ public class Equipment
     
 
     /**
-     * Constructor for objects of class Equipment
+     * Crea un equipo para el jugador del juego
+     * 
+     * @param nombre Nombre del equipo
+     * @param desc Descripcion del equipo
+     * @param at Ataque que proporciona el equipo
+     * @param def Defensa que proporciona el equipo
+     * @param tipo true si es arma, false si es armadura
      */
     public Equipment(String nombre, String desc, int at, int def, boolean tipo)
     {
@@ -35,26 +41,56 @@ public class Equipment
         }
     }
 
+    /**
+     * Devuelve el ID del equipo
+     * 
+     * @return ID
+     */
     public int getID(){
         return iD;
     }
     
+    /**
+     * Devuelve el bono de ataque que proporciona el equipo
+     * 
+     * @return Ataque del equipo
+     */
     public int getBonoAtaque(){
         return bonoAtaque;
     }
     
+    /**
+     * Devuelve el bono de defensa que proporciona el equipo
+     * 
+     * @return Defensa del equipo
+     */
     public int getBonoDefensa(){
         return bonoDefensa;
     }
     
+    /**
+     * Indica si el equipo es un arma o no
+     * 
+     * @return true si es arma, false si es armadura
+     */
     public boolean esArma(){
         return tipoEquipo;
     }
     
+    /**
+     * Devuelve la descripcion del equipo
+     * 
+     * @return Descripcion
+     */
     public String getDescripcion(){
         return descripcion;
     }
     
+    /**
+     * Devuelve las caracteristicas del equipo en formato texto
+     * 
+     * @return Representacion textual del equipo
+     */
     public String toString(){
         String cadena;
         if(tipoEquipo){

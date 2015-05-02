@@ -10,6 +10,9 @@ public class WorldOfGreg
     // instance variables - replace the example below with your own
     private static Game juego;
 
+    /**
+     * Ejecuta el juego
+     */
     public static void main(String[] args){
         juego = new Game();
         System.out.println("DOS/4GW Professional Protected Mode Run-time Version 1.97");

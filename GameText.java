@@ -2,8 +2,8 @@
 /**
  * Enumeration class GameText - write a description of the enum class here
  * 
- * @author (your name here)
- * @version (version number or date here)
+ * @author Sourdaci
+ * @version 2015-04-30 06
  */
 public enum GameText{
     // CommandWords
@@ -90,10 +90,20 @@ public enum GameText{
     
     private String text;
     
+    /**
+     * Crea los dialogos predefinidos del juego
+     * 
+     * @param text Texto para el dialogo predefinido
+     */
     GameText(String text){
         this.text = text;
     }
     
+    /**
+     * Devuelve el dialogo predefinido del juego
+     * 
+     * @return Dialogo del juego
+     */
     public String getText(){
         return text;
     }

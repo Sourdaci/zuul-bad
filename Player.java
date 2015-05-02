@@ -3,8 +3,8 @@ import java.util.ArrayList;
 /**
  * Write a description of class Player here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Sourdaci
+ * @version 2015-04-30 10
  */
 public class Player
 {
@@ -20,7 +20,13 @@ public class Player
     private boolean roomEndedGame;
     
     /**
-     * Constructor for objects of class Player
+     * Crea un nuevo jugador para el juego
+     * 
+     * @param startRoom Zona del juego donde comienza el jugador
+     * @param carga Peso maximo que puede llevar el jugador
+     * @param pv Vida maxima del jugador
+     * @param atk Ataque base del jugador
+     * @param def Defensa base del jugador
      */
     public Player(Room startRoom, float carga, int pv, int atk, int def){
         currentRoom = startRoom;
@@ -37,7 +43,7 @@ public class Player
     }
     
     /**
-     * Mueve al jugador a una nueva habitacion
+     * Mueve al jugador a una nueva zona
      * 
      * @param direction Hacia que puerta/direccion se mueve el jugador
      */
@@ -66,7 +72,7 @@ public class Player
     }
     
     /**
-     * Indica al jugador que mire en la habitacion actual
+     * Indica al jugador que mire en la zona actual
      */
     public void lookRoom(){
         System.out.println(currentRoom.getLongDescription() + "\n");
@@ -109,9 +115,9 @@ public class Player
     }
     
     /**
-     * El jugador intenta coger un objeto de la habitacion
+     * El jugador intenta coger un objeto de la zona
      * 
-     * @param item ID del objeto que quieres coger de la habitacion
+     * @param item ID del objeto que quieres coger de la zona
      */
     public void takeItem(String item){
         if (item != null){
@@ -141,9 +147,9 @@ public class Player
     }
     
     /**
-     * El jugador intenta dejar un objeto en la habitacion
+     * El jugador intenta dejar un objeto en la zona
      * 
-     * @param item ID del objeto que intenta dejar en la habitacion
+     * @param item ID del objeto que intenta dejar en la zona
      */
     public void dropItem(String item){
         if (item != null){
@@ -171,9 +177,9 @@ public class Player
     }
     
     /**
-     * El jugador intenta observar un objeto de la habitacion
+     * El jugador intenta observar un objeto de la zona
      * 
-     * @param item ID del objeto que quieres ver de la habitacion
+     * @param item ID del objeto que quieres ver de la zona
      */
     public void lookItemOnRoom(String item){
         currentRoom.lookItemOnRoom(item);
@@ -212,6 +218,11 @@ public class Player
         }
     }
     
+    /**
+     * El jugador intenta hablar con un NPC de la zona
+     * 
+     * @param idNPC El ID del NPC con el que intenta hablar el jugador
+     */
     public void talkWith(String idNPC){
         if(currentRoom.availableNPC()){
             try{
@@ -235,6 +246,13 @@ public class Player
         }
     }
     
+    /**
+     * El jugador intenta entablar combate con un NPC activo de la zona
+     * Si el ID es de un NPC pasivo, no hay combate
+     * 
+     * @param idNPC El ID del NPC con el que se intenta combatir
+     * @return El ActiveNPC con el que combatir, null en cualquier otro caso
+     */
     public ActiveNPC battle(String idNPC){
         ActiveNPC activo = null;
         if(currentRoom.availableNPC()){
@@ -263,18 +281,38 @@ public class Player
         return activo;
     }
     
+    /**
+     * Cambia la salud restante del jugador
+     * 
+     * @param num La salud restante
+     */
     public void setVidaRestante(int num){
         vidaRestante = num;
     }
     
+    /**
+     * Devuelve la salud restante del jugador
+     * 
+     * @return Salud restante
+     */
     public int getVitalidad(){
         return vidaRestante;
     }
     
+    /**
+     * Devuelve la vida total del jugador
+     * 
+     * @return Vida total
+     */
     public int getVitalidadTotal(){
         return vida;
     }
     
+    /**
+     * Calcula el poder de ataque del jugador
+     * 
+     * @return Ataque del jugador
+     */
     public int getAtaque(){
         int cantidad = ataque;
         if(arma != null){
@@ -286,6 +324,11 @@ public class Player
         return cantidad;
     }
     
+    /**
+     * Calcula el poder defensivo del jugador
+     * 
+     * @return Defensa del jugador
+     */
     public int getDefensa(){
         int cantidad = defensa;
         if(arma != null){

@@ -2,8 +2,8 @@
 /**
  * Enumeration class Option - write a description of the enum class here
  * 
- * @author (your name here)
- * @version (version number or date here)
+ * @author Sourdaci
+ * @version 2015-04-30 06
  */
 public enum Option
 {
@@ -29,15 +29,31 @@ public enum Option
     private final String orden;
     private final String detalle;
     
+    /**
+     * Crea los comandos del juego
+     * 
+     * @param cadena Comando del juego
+     * @param descripcion Descripcion del comando
+     */
     Option (String cadena, String descripcion){
         orden = cadena;
         detalle = descripcion;
     }
     
+    /**
+     * Devuelve el comando almacenado
+     * 
+     * @return Comando del juego
+     */
     public String getCommandOrder(){
         return orden;
     }
     
+    /**
+     * Devuelve el comando detallado
+     * 
+     * @return Comando y su explicacion
+     */
     public String getDetailedOrder(){
         return "> " + orden + ": " + detalle;
     }

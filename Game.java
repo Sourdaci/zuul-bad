@@ -12,8 +12,8 @@ import java.util.Random;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.07.31
+ * @author  Michael Kölling and David J. Barnes, modified by Sourdaci
+ * @version 2015-04-30 18
  */
 
 public class Game 
@@ -272,6 +272,7 @@ public class Game
 
     /**
      * Given a command, process (that is: execute) the command.
+     * 
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
@@ -418,8 +419,8 @@ public class Game
     
     /**
      * El jugador intenta observar un objeto de la habitacion. 
-     * Se le indica el ID de ese objeto
      * 
+     * @param command Instruccion escrita por el jugador
      */
     private void lookItemOnRoom(Command command){
         player.lookItemOnRoom(secondWord(command));
@@ -427,17 +428,27 @@ public class Game
     
     /**
      * El jugador intenta observar un objeto de su inventario. 
-     * Se le indica el ID de ese objeto
      * 
+     * @param command Instruccion escrita por el jugador
      */
     private void lookItemOnInventory(Command command){
         player.lookItemOnInventory(secondWord(command));
     }
     
+    /**
+     * El jugador intenta hablar con un NPC de la zona en la que se encuentra
+     * 
+     * @param command Instruccion escrita por el jugador
+     */
     private void talkWithNPC(Command command){
         player.talkWith(secondWord(command));
     }
     
+    /**
+     * El jugador intenta combatir con un NPC de la zona en la que se encuentra
+     * 
+     * @param command Instruccion escrita por el jugador
+     */
     private void battle(Command command){
         ActiveNPC enemigo = player.battle(secondWord(command));
         if(enemigo != null){
@@ -445,6 +456,14 @@ public class Game
         }
     }
     
+    /**
+     * El jugador combate con un NPC activo. 
+     * El combate acaba cuando la salud de alguno sea inferior a 1 (considerado muerto).
+     * Si el jugador muere la partida acaba
+     * Si el NPC muere, se le pide que abra una puerta (si la tiene programada) y se elimina de la zona
+     * 
+     * @param enemigo El NPC con el que combatir
+     */
     private void battleWithNPC(ActiveNPC enemigo){
         Random dado = new Random();
         while(player.getVitalidad() > 0 && enemigo.getVitalidad() > 0){
@@ -524,10 +543,20 @@ public class Game
         }
     }
     
+    /**
+     * El jugador intenta coger un equipo de la zona
+     * 
+     * @param command Instruccion escrita por el jugador
+     */
     private void takeEquip(Command command){
         player.takeEquipment(secondWord(command));
     }
     
+    /**
+     * El jugador intenta dejar un equipo en la zona
+     * 
+     * @param command Instruccion escrita por el jugador
+     */
     private void dropEquip(Command command){
         player.dropEquipment(secondWord(command));
     }
@@ -535,6 +564,7 @@ public class Game
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
+     * 
      * @return true, if this command quits the game, false otherwise.
      */
     private boolean quit(Command command) 

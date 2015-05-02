@@ -2,8 +2,8 @@
 /**
  * Write a description of class CollectableItem here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Sourdaci
+ * @version 2015-04-30 07
  */
 public class CollectableItem
 {
@@ -20,6 +20,8 @@ public class CollectableItem
      * 
      * @param desc Descripcion del objeto
      * @param peso Peso del objeto
+     * @param collect Si el objeto se puede coger
+     * @param details Explicacion o detalles del objeto
      */
     public CollectableItem(String desc, float peso, boolean collect, String details)
     {
@@ -46,6 +48,8 @@ public class CollectableItem
     
     /**
      * Devuelve el ID del objeto
+     * 
+     * @return ID
      */
     public int getID(){
         return iD;
@@ -53,6 +57,8 @@ public class CollectableItem
     
     /**
      * Devuelve la descripcion del objeto
+     * 
+     * @return Descripcion del objeto
      */
     public String getDescripcion(){
         return descripcion;
@@ -61,6 +67,8 @@ public class CollectableItem
     /**
      * Devuelve los detalles del objeto
      * Utilizar cuando se examina un objeto
+     * 
+     * @return Detalles del objeto
      */
     public String getDetails(){
         String cadena = detalle;

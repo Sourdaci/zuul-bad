@@ -2,8 +2,8 @@
 /**
  * Write a description of class PassiveNPC here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Sourdaci
+ * @version 2015-04-28 02
  */
 public class PassiveNPC
 {
@@ -13,7 +13,12 @@ public class PassiveNPC
     private String frase, fraseAtaque;
 
     /**
-     * Constructor for objects of class PassiveNPC
+     * Crea NPC pasivos para el juego. 
+     * Son personajes que estan de relleno, pero pueden dar alguna pista
+     * 
+     * @param nombre Nombre del NPC
+     * @param frase Texto del NPC cuando se habla con el
+     * @param fraseAtaque Texto del NPC cuando se intenta combatir con el
      */
     public PassiveNPC(String nombre, String frase, String fraseAtaque)
     {
@@ -27,18 +32,33 @@ public class PassiveNPC
         }
     }
 
+    /**
+     * Indica que se quiere hablar con el NPC
+     */
     public void hablar(){
         System.out.println(frase);
     }
     
+    /**
+     * Indica que se quiere pelear con el NPC. 
+     * La operacion no tiene exito
+     */
     public void pelea(){
         System.out.println(fraseAtaque);
     }
     
+    /**
+     * Devuelve el ID del NPC
+     * 
+     * @return ID del NPC
+     */
     public int getID(){
         return iD;
     }
     
+    /**
+     * Representacion textual del NPC
+     */
     @Override
     public String toString(){
         return String.format(">> (id %3d) %s", iD, nombre);
