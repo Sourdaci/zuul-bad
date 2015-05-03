@@ -117,15 +117,18 @@ public class Game
         dormGreg.addItem("Cuadro de Sheldon Cooper", 2.6F, false, "En la placa pone:\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\n¡Porras, me he perdido!");
         
         // Objetos de la mazmorra
+        cueva.addEquipment("Costillar encordado", "Si lo agitas, oyes a las ratas alborotarse", 0, 1, false);
         barranco.addItem("Chapa metalica oxidada", 0.09F, false, "Es una matricula de California que pone 'OUTATIME'");
         CollectableItem flauta = new CollectableItem("Pokeflauta", 0.06F, true, "Sientes la tentacion de tocarla y de echar la siesta");
         lindeBosque.addItemToRoom(flauta);
+        caminoEmpedrado.addEquipment("Rama", "UN PALOOOOO!!!!!!!!!!!", 1, 0, true);
         laguna.addItem("Una caja con enseres raros", 16.9F, false, "Destacan las botellas de ron 'BlackPearl' y el LP de 'Saca el whisky Cheli'");
         riachuelo.addItem("Pepitas de oro", 0.02F, true, null);
         gruta.addEquipment("La vara de la verdad", "Da el derecho de gobernar el universo", 96, 67, true);
         rutaEscarpada.addItem("Cartelon indicador", 34.2F, false, "Lo unico legible es... 'Highway to hell'... Que cachondo el tio....");
         
         // Objetos del pueblo
+        posada.addEquipment("Coraza de cuero desgastado", "Ha visto dias mejores", 0, 7, false);
         casucha.addItem("Rara roca de aspecto extraterrestre", 0.11F, false, "¿Es un... ¡Nokia 3210 fosilizado!?");
         huerto.addItem("Espantapajaros con un colador por sombrero", 9.54F, false, "Hay un hueco en el pecho que dice 'Insertar corazon aqui'");
         
@@ -214,6 +217,11 @@ public class Game
         
         // PNJ Pasivos
         recibidor.addPassiveNPC(new PassiveNPC("Mayordomo Jeffrey", "Bienvenido a la mansion Banks", "Caballero, le ruego no obstaculice la entrada"));
+        dormServicio.addPassiveNPC(new PassiveNPC("Mayordomo tirado en la cama", "nnnnnmnnnnmnnn.....", ".....cinco minutos mas, mama....."));
+        cocina.addPassiveNPC(new PassiveNPC("Cocinero", "No molestes", "Toca las gambas y te toco con el cuchillo jamonero"));
+        cocina.addPassiveNPC(new PassiveNPC("Cocinera", "Estoy ocupada, chaval...", "Vete antes de que te convierta en un cochinillo al horno"));
+        cocina.addPassiveNPC(new PassiveNPC("Cocinero", "Por favor, espera fuera", "Si no estuvieran aqui los jefes te diria algo mas que\n:" + 
+            "Aparta esas zarpas del postre, rapaz"));
         
         // PNJ Activos
         ActiveNPC vivi = new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
@@ -222,6 +230,10 @@ public class Game
             "algun lugar del fondo del barranco\nLlegaras alli por mi pozo");
         vivi.setAbrirPuerta(casa, "sur", huerto, false, true);
         casa.addActiveNPC(vivi);
+        ActiveNPC rata = new ActiveNPC("Rata", "IIIIHH....", "IIIIHHHHHH!!!!!!");
+        rata.setAtributos(30, 20, 20, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........");
+        descampado.addActiveNPC(rata);
+        pasaje.addActiveNPC(rata);
         ActiveNPC ganondorf = new ActiveNPC("Ganondorf", "Adelante, elegido, te estoy esperando", "¡Ha llegado tu final");
         ganondorf.setAtributos(300, 90, 59, "Ahora nadie podra detenerme....\nLo ultimo que oyes antes de hundirte en las sombras\n" + 
             "son los desgarradores gritos de dolor de Greg al otro lado del portal", "¡¡¡Naaaaaaarrrrggghhhhh!!!\n" + 

@@ -54,9 +54,9 @@ public enum GameText{
     // Game
     GOODBYE_MESSAGE ("Gracias por jugar. Hasta la proxima"),
     WELCOME_MESSAGE_PART1 ("Estas en casa de tu amigo Greg. Quieres... no, NECESITAS ir al servicio"),
-    WELCOME_MESSAGE_PART2 ("No te ha dicho donde esta, solo que no entres en otro servicio de la casa"),
+    WELCOME_MESSAGE_PART2 ("No te ha dicho donde esta, solo que no uses otro servicio de la casa"),
     WELCOME_MESSAGE_PART3 ("Escribe '" + Option.HELP.getCommandOrder() + "' si andas perdido"),
-    UNRECOGNIZED_COMMAND ("Te quedas en el sitio aguantando"),
+    UNRECOGNIZED_COMMAND ("No haces nada. Prueba otra vez"),
     GAME_HELP ("Necesitas encontrar un servicio en condiciones\nen casa de tu colega Greg urgentemente.\n"),
     PLAYER_EPIC_FAIL ("¡Pifia! No atacas"),
     PLAYER_CRITICAL_ATTACK ("¡Critico! Este golpe deberia doler mucho"),
