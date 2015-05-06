@@ -21,7 +21,6 @@ public class Room
     private HashMap<Integer, CollectableItem> objetos;
     private Room teleportRoom;
     private String teleportString;
-    private HashMap<Integer, PassiveNPC> pasivos;
     private HashMap<Integer, ActiveNPC> activos;
     private boolean endGame;
     private HashMap<Integer, Equipment> equipoTirado;
@@ -42,7 +41,6 @@ public class Room
         objetos = new HashMap<Integer, CollectableItem>();
         teleportRoom = teleport;
         teleportString = message;
-        pasivos = new HashMap<Integer, PassiveNPC>();
         activos = new HashMap<Integer, ActiveNPC>();
         endGame = end;
         equipoTirado = new HashMap<Integer, Equipment>();
@@ -176,15 +174,6 @@ public class Room
     }
     
     /**
-     * Entrega a la zona un NPC pasivo
-     * 
-     * @param pasivo El NPC pasivo a introducir en la zona
-     */
-    public void addPassiveNPC(PassiveNPC pasivo){
-        pasivos.put(pasivo.getID(), pasivo);
-    }
-    
-    /**
      * Entrega a la zona un NPC activo
      * 
      * @param activo El NPC activo a introducir en la zona
@@ -206,7 +195,7 @@ public class Room
      * @return true si tiene NPC, false en caso contrario
      */
     public boolean availableNPC(){
-        return(!activos.isEmpty() || !pasivos.isEmpty());
+        return !activos.isEmpty();
     }
     
     /**
@@ -217,16 +206,6 @@ public class Room
      */
     public ActiveNPC getActiveNPC(int id){
         return activos.get(id);
-    }
-    
-    /**
-     * Pide a la zona que busque y entregue un NPC pasivo
-     * 
-     * @param id El ID del NPC a buscar
-     * @return El NPC buscado, null si no existe
-     */
-    public PassiveNPC getPassiveNPC(int id){
-        return pasivos.get(id);
     }
     
     /**
@@ -297,10 +276,7 @@ public class Room
             descripcion += GameText.EQUIPMENT_NOT_AVAILABLE.getText() + "\n";
         }
         
-        if(activos.size() != 0 || pasivos.size() != 0){
-            for(PassiveNPC tio : pasivos.values()){
-                descripcion += tio.toString() + "\n";
-            }
+        if(activos.size() != 0){
             for(ActiveNPC tio : activos.values()){
                 descripcion += tio.toString() + "\n";
             }

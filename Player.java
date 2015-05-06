@@ -219,12 +219,7 @@ public class Player
                 int id = Integer.parseInt(idNPC);
                 ActiveNPC activo = currentRoom.getActiveNPC(id);
                 if(activo == null){
-                    PassiveNPC pasivo = currentRoom.getPassiveNPC(id);
-                    if(pasivo == null){
-                        System.out.println(GameText.NPC_ID_INVALID.getText());
-                    }else{
-                        pasivo.hablar();
-                    }
+                    System.out.println(GameText.NPC_ID_INVALID.getText());
                 }else{
                     activo.hablar(this);
                 }
@@ -250,23 +245,15 @@ public class Player
                 int id = Integer.parseInt(idNPC);
                 activo = currentRoom.getActiveNPC(id);
                 if(activo == null){
-                    PassiveNPC pasivo = currentRoom.getPassiveNPC(id);
-                    if(pasivo == null){
-                        System.out.println(GameText.NPC_ID_ATTACK_INVALID.getText());
-                    }else{
-                        pasivo.pelea();
-                    }
+                    System.out.println(GameText.NPC_ID_ATTACK_INVALID.getText());
+                }else if(!activo.pelea()){
+                    activo = null;
                 }
             }catch (Exception ex){
                 System.out.println(GameText.NPC_ID_NOT_NUMBER.getText());
             }
         }else{
             System.out.println(GameText.ROOM_WITHOUT_NPC.getText());
-        }
-        if(activo != null){
-            if(!activo.pelea()){
-                activo = null;
-            }
         }
         return activo;
     }
