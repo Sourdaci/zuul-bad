@@ -215,15 +215,13 @@ public class Game
         pozo.setExit("norte", huerto);
         pozo.setExit("abajo", pasaje);
         
-        // PNJ Pasivos
-        recibidor.addPassiveNPC(new PassiveNPC("Mayordomo Jeffrey", "Bienvenido a la mansion Banks", "Caballero, le ruego no obstaculice la entrada"));
-        dormServicio.addPassiveNPC(new PassiveNPC("Mayordomo tirado en la cama", "nnnnnmnnnnmnnn.....", ".....cinco minutos mas, mama....."));
-        cocina.addPassiveNPC(new PassiveNPC("Cocinero", "No molestes", "Toca las gambas y te toco con el cuchillo jamonero"));
-        cocina.addPassiveNPC(new PassiveNPC("Cocinera", "Estoy ocupada, chaval...", "Vete antes de que te convierta en un cochinillo al horno"));
-        cocina.addPassiveNPC(new PassiveNPC("Cocinero", "Por favor, espera fuera", "Si no estuvieran aqui los jefes te diria algo mas que\n:" + 
-            "Aparta esas zarpas del postre, rapaz"));
-        
         // PNJ Activos
+        recibidor.addActiveNPC(new ActiveNPC("Mayordomo Jeffrey", "Bienvenido a la mansion Banks", "Caballero, le ruego no obstaculice la entrada"));
+        dormServicio.addActiveNPC(new ActiveNPC("Mayordomo tirado en la cama", "nnnnnmnnnnmnnn.....", ".....cinco minutos mas, mama....."));
+        cocina.addActiveNPC(new ActiveNPC("Cocinero", "No molestes", "Toca las gambas y te toco con el cuchillo jamonero"));
+        cocina.addActiveNPC(new ActiveNPC("Cocinera", "Estoy ocupada, chaval...", "Vete antes de que te convierta en un cochinillo al horno"));
+        cocina.addActiveNPC(new ActiveNPC("Cocinero", "Por favor, espera fuera", "Si no estuvieran aqui los jefes te diria algo mas que\n:" + 
+            "Aparta esas zarpas del postre, rapaz"));
         ActiveNPC vivi = new ActiveNPC("Vivi", "Soy Vivi, un anciano mago negro que mora aqui\nY tu eres aquel que derrotara al malvado brujo", 
             "¿A que me conservo en forma? Anda, sueltame el biceps antes de que te enamores");
         vivi.setObjeto(flauta, "Encontraras un arma mistica que solo tu puedes usar en\n" + 
@@ -242,8 +240,6 @@ public class Game
             "Ves como tu rival se desintegra envuelto en llamas verdes retorciendose de dolor");
         ganondorf.setAbrirPuerta(refugio, "portal", portal, true, false);
         refugio.addActiveNPC(ganondorf);
-        
-            
         
         // Set initial room
         startRoom = recibidor;

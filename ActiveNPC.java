@@ -7,7 +7,7 @@
  */
 public class ActiveNPC
 {
-    private static int currentID = 2;
+    private static int currentID = 1;
     private int iD;
     private String nombre;
     private String frase, fraseAtaque;
@@ -36,7 +36,10 @@ public class ActiveNPC
         this.frase = frase;
         this.fraseAtaque = fraseAtaque;
         iD = currentID;
-        currentID += 2;
+        currentID++;
+        if(currentID > 12 && currentID < 14){
+            currentID++;
+        }
         pelear = false;
         buscado = null;
         fraseObjeto = null;
@@ -107,8 +110,8 @@ public class ActiveNPC
      * @param player Jugador (para buscar el objeto en su inventario automaticamente)
      */
     public void hablar(Player player){
+        System.out.println(frase);
         if(abrirSiObjeto){
-            System.out.println(frase);
             if(!objetoEncontrado){
                 if(!frase.contains(GameText.NPC_ASK_FOR_OBJECT.getText())){
                     frase = GameText.NPC_ASK_FOR_OBJECT.getText() + ": " + buscado.getDescripcion();
@@ -123,8 +126,6 @@ public class ActiveNPC
                     System.out.println(frase);
                 }
             }
-        }else{
-            System.out.println(frase);
         }
     }
     
