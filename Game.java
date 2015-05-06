@@ -231,9 +231,11 @@ public class Game
         vivi.setAbrirPuerta(casa, "sur", huerto, false, true);
         casa.addActiveNPC(vivi);
         ActiveNPC rata = new ActiveNPC("Rata", "IIIIHH....", "IIIIHHHHHH!!!!!!");
-        rata.setAtributos(30, 20, 20, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........");
+        rata.setAtributos(25, 10, 10, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........");
         descampado.addActiveNPC(rata);
-        pasaje.addActiveNPC(rata);
+        ActiveNPC rata2 = new ActiveNPC("Rata", "IIIIHH....", "IIIIHHHHHH!!!!!!");
+        rata.setAtributos(25, 10, 10, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........");
+        pasaje.addActiveNPC(rata2);
         ActiveNPC ganondorf = new ActiveNPC("Ganondorf", "Adelante, elegido, te estoy esperando", "¡Ha llegado tu final");
         ganondorf.setAtributos(300, 90, 59, "Ahora nadie podra detenerme....\nLo ultimo que oyes antes de hundirte en las sombras\n" + 
             "son los desgarradores gritos de dolor de Greg al otro lado del portal", "¡¡¡Naaaaaaarrrrggghhhhh!!!\n" + 
