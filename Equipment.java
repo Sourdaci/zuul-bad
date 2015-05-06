@@ -5,17 +5,11 @@
  * @author Sourdaci
  * @version 2015-04-30 01
  */
-public class Equipment
+public class Equipment extends GameObject
 {
-    // instance variables - replace the example below with your own
-    private String nombre;
-    private String descripcion;
     private int bonoAtaque;
     private int bonoDefensa;
     private boolean tipoEquipo;
-    private static int currentID = 1;
-    private int iD;
-    
 
     /**
      * Crea un equipo para el jugador del juego
@@ -28,26 +22,10 @@ public class Equipment
      */
     public Equipment(String nombre, String desc, int at, int def, boolean tipo)
     {
-        this.nombre = nombre;
-        descripcion = desc;
+        super(nombre, desc);
         bonoAtaque = at;
         bonoDefensa = def;
         tipoEquipo = tipo;
-        iD = currentID;
-        currentID++;
-        // Manias persecutorias
-        if (currentID > 12 && currentID < 14){
-            currentID++;
-        }
-    }
-
-    /**
-     * Devuelve el ID del equipo
-     * 
-     * @return ID
-     */
-    public int getID(){
-        return iD;
     }
     
     /**
@@ -78,19 +56,11 @@ public class Equipment
     }
     
     /**
-     * Devuelve la descripcion del equipo
-     * 
-     * @return Descripcion
-     */
-    public String getDescripcion(){
-        return descripcion;
-    }
-    
-    /**
      * Devuelve las caracteristicas del equipo en formato texto
      * 
      * @return Representacion textual del equipo
      */
+    @Override
     public String toString(){
         String cadena;
         if(tipoEquipo){
@@ -98,6 +68,6 @@ public class Equipment
         }else{
             cadena = GameText.EQUIPMENT_IS_ARMOR.getText();
         }
-        return String.format(">> (%s id %3d) %s", cadena, iD, nombre);
+        return String.format(">> (%s id %3d) %s", cadena, getID(), getNombre());
     }
 }
