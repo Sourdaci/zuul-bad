@@ -114,7 +114,7 @@ public class ActiveNPC
         if(abrirSiObjeto){
             if(!objetoEncontrado){
                 if(!frase.contains(GameText.NPC_ASK_FOR_OBJECT.getText())){
-                    frase = GameText.NPC_ASK_FOR_OBJECT.getText() + ": " + buscado.getDescripcion();
+                    frase = GameText.NPC_ASK_FOR_OBJECT.getText() + ": " + buscado.getNombre();
                     System.out.println(frase);
                 }
                 if(player.enInventario(buscado)){

@@ -195,7 +195,7 @@ public class Player
                     if (obj == null){
                         System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
                     }else{
-                        System.out.println(obj.getDetails());
+                        System.out.println(obj.getDetalles());
                     }
                 }catch (Exception ex){
                     System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
@@ -400,13 +400,13 @@ public class Player
         System.out.println(GameText.STATUS_ATTACK.getText() + ": " + getAtaque() + ", " + GameText.STATUS_DEFFENSE.getText() + ": " + getDefensa());
         if(arma != null){
             System.out.println(arma);
-            System.out.println("\t" + arma.getDescripcion());
+            System.out.println("\t" + arma.getDetalles());
         }else{
             System.out.println(GameText.STATUS_NOT_WEAPON.getText());
         }
         if(armadura != null){
             System.out.println(armadura);
-            System.out.println("\t" + armadura.getDescripcion());
+            System.out.println("\t" + armadura.getDetalles());
         }else{
             System.out.println(GameText.STATUS_NOT_ARMOR.getText());
         }

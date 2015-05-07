@@ -160,7 +160,7 @@ public class Room
                     if (obj == null){
                         System.out.println(GameText.PICKING_INEXISTENT_OBJECT.getText());
                     }else{
-                        System.out.println(obj.getDetails());
+                        System.out.println(obj.getDetalles());
                     }
                 }catch (Exception ex){
                     System.out.println(GameText.OBJECT_ID_NOT_NUMBER.getText());
