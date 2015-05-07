@@ -114,7 +114,8 @@ public class Game
         dormPadres.addItem("Espada de Juego de Tronos", 12.3F, false, "Numero 482. ¡Solo se han hecho 8000 de este modelo!");
         servPadres.addItem("Papel higienico Deluxe 4 capas", 0.04F, true, "Es como acariciar una nube");
         dormGreg.addItem("Batman contra 'El tio del Monopoly'", 0.08F, true, "Controvertido numero 922, Batman pierde al poker por no tener suficientes fondos");
-        dormGreg.addItem("Cuadro de Sheldon Cooper", 2.6F, false, "En la placa pone:\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\nVe al norte... estas en un bosque\n¡Porras, me he perdido!");
+        dormGreg.addItem("Cuadro de Sheldon Cooper", 2.6F, false, "En la placa pone:\nVe al norte... estas en un bosque" + 
+                "Ve al norte... estas en un bosque\nVe al norte... estas en un bosque\n¡Ay que leche, me he perdido!");
         
         // Objetos de la mazmorra
         cueva.addEquipment("Costillar encordado", "Si lo agitas, oyes a las ratas alborotarse", 0, 1, false);
@@ -229,15 +230,21 @@ public class Game
         vivi.setAbrirPuerta(casa, "sur", huerto, false, true);
         casa.addActiveNPC(vivi);
         ActiveNPC rata = new ActiveNPC("Rata", "IIIIHH....", "IIIIHHHHHH!!!!!!");
-        rata.setAtributos(25, 10, 10, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........");
+        rata.setAtributos(25, 10, 10, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........", 5);
         descampado.addActiveNPC(rata);
         ActiveNPC rata2 = new ActiveNPC("Rata", "IIIIHH....", "IIIIHHHHHH!!!!!!");
-        rata.setAtributos(25, 10, 10, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........");
+        rata2.setAtributos(25, 10, 10, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........", 5);
         pasaje.addActiveNPC(rata2);
+        ActiveNPC rata3 = new ActiveNPC("Rata", "IIIIHH....", "IIIIHHHHHH!!!!!!");
+        rata3.setAtributos(25, 10, 10, "Oyes una voz que dice: Ahora nadie podra detenerme....", "IIIIIiiiiigh........", 5);
+        gruta.addActiveNPC(rata3);
+        ActiveNPC cachoRata = new ActiveNPC("Rata grandecica", "GRIIIIHHH.....", "GRRRAAAIIIIIIHHHHH!!!!!!!!!");
+        cachoRata.setAtributos(40, 15, 15, "Oyes una voz que dice: Ahora nadie podra detenerme....", "GRRriiii.......", 10);
+        rutaEscarpada.addActiveNPC(cachoRata);
         ActiveNPC ganondorf = new ActiveNPC("Ganondorf", "Adelante, elegido, te estoy esperando", "¡Ha llegado tu final");
         ganondorf.setAtributos(300, 90, 59, "Ahora nadie podra detenerme....\nLo ultimo que oyes antes de hundirte en las sombras\n" + 
             "son los desgarradores gritos de dolor de Greg al otro lado del portal", "¡¡¡Naaaaaaarrrrggghhhhh!!!\n" + 
-            "Ves como tu rival se desintegra envuelto en llamas verdes retorciendose de dolor");
+            "Ves como tu rival se desintegra envuelto en llamas verdes retorciendose de dolor", 19);
         ganondorf.setAbrirPuerta(refugio, "portal", portal, true, false);
         refugio.addActiveNPC(ganondorf);
         
@@ -549,6 +556,7 @@ public class Game
             }
             System.out.println(GameText.PLAYER_WINS_BATTLE.getText() + ": " + enemigo.getNombre());
             enemigo.abrirPuerta();
+            player.sumaEXP(enemigo.getExperienciaNPC());
             player.enemigoDerrotado(enemigo);
         }
     }

@@ -44,11 +44,13 @@ public enum GameText{
     EQUIPMENT_ID_NOT_FOUND ("No tienes el equipo que intentas dejar"),
     DROP_EQUIPMENT_SUCCESSFUL ("Dejas en la zona"),
     DROP_EQUIPMENT_WITHOUT_EQUIPMENT ("Quitar... ¿que? No has dicho que quieres quitar"),
+    PLAYER_SHOW_LEVEL ("Nivel actual del jugador"),
     STATUS_VIT ("Vitalidad"),
     STATUS_ATTACK ("Ataque"),
     STATUS_DEFFENSE ("Defensa"),
     STATUS_NOT_WEAPON ("No llevas arma equipada"),
     STATUS_NOT_ARMOR("No llevas armadura equipada"),
+    PLAYER_LEVEL_UP ("Has subido de nivel"),
     
     
     // Game

@@ -18,6 +18,7 @@ public class Player
     private Equipment arma;
     private Equipment armadura;
     private boolean roomEndedGame;
+    private int actualEXP, nextLevelEXP, level, levelStep;
     
     /**
      * Crea un nuevo jugador para el juego
@@ -40,6 +41,10 @@ public class Player
         arma = null;
         armadura = null;
         roomEndedGame = false;
+        actualEXP = 0;
+        nextLevelEXP = 10;
+        level = 1;
+        levelStep = 5;
     }
     
     /**
@@ -396,6 +401,7 @@ public class Player
      * Muestra por pantalla el estado del jugador (atributos, objetos y equipo)
      */
     public void getStatus(){
+        System.out.println(GameText.PLAYER_SHOW_LEVEL.getText() + ": " + level);
         System.out.println(GameText.STATUS_VIT.getText() + ": " + vidaRestante + "/" + vida);
         System.out.println(GameText.STATUS_ATTACK.getText() + ": " + getAtaque() + ", " + GameText.STATUS_DEFFENSE.getText() + ": " + getDefensa());
         if(arma != null){
@@ -439,6 +445,32 @@ public class Player
      */
     public boolean roomEndsGame(){
         return roomEndedGame;
+    }
+    
+    /**
+     * Aumenta la experiencia que tiene el jugador
+     * 
+     * @param cantidad El numero de puntos de experiencia que gana
+     */
+    public void sumaEXP(int cantidad){
+        actualEXP += cantidad;
+        subeNivel();
+    }
+    
+    /**
+     * Comprueba si el jugador tiene suficientes puntos de experiencia para subir de nivel
+     */
+    private void subeNivel(){
+        while(actualEXP >= nextLevelEXP){
+            level++;
+            ataque++;
+            defensa++;
+            vida += 10;
+            vidaRestante += 10;
+            actualEXP = nextLevelEXP - actualEXP;
+            nextLevelEXP += levelStep;
+            System.out.println(GameText.PLAYER_LEVEL_UP.getText() + ": " + level);
+        }
     }
     
     /**

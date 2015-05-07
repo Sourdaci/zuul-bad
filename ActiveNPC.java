@@ -15,6 +15,7 @@ public class ActiveNPC
     private int vida, vidaRestante;
     private int ataque;
     private int defensa;
+    private int exp;
     private CollectableItem buscado;
     private String fraseObjeto;
     private String direccion;
@@ -48,6 +49,7 @@ public class ActiveNPC
         vidaRestante = -1;
         ataque = -1;
         defensa = -1;
+        exp = 0;
         direccion = null;
         origen = null;
         destino = null;
@@ -64,7 +66,7 @@ public class ActiveNPC
      * @param victoria Texto del NPC si gana el combate
      * @param derrota Texto del NPC si pierde el combate
      */
-    public void setAtributos(int pv, int pa, int pd, String victoria, String derrota){
+    public void setAtributos(int pv, int pa, int pd, String victoria, String derrota, int exp){
         pelear = true;
         vida = pv;
         vidaRestante = pv;
@@ -72,6 +74,7 @@ public class ActiveNPC
         defensa = pd;
         this.victoria = victoria;
         this.derrota = derrota;
+        this.exp = exp;
     }
     
     /**
@@ -209,6 +212,15 @@ public class ActiveNPC
      */
     public String getDerrota(){
         return derrota;
+    }
+    
+    /**
+     * Entrega la experiencia de este NPC para el jugador
+     * 
+     * @return Experiencia del NPC, cero si no entrega experiencia
+     */
+    public int getExperienciaNPC(){
+        return exp;
     }
     
     /**
